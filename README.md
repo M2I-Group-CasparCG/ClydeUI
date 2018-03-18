@@ -1,4 +1,4 @@
-Projet : Interface CasperCG
+Projet : Interface CasparCG
 ===========================
 
 Fonctionnement
