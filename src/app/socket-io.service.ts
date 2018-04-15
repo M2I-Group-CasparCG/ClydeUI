@@ -48,4 +48,15 @@ export class SocketIoService {
     });
   }
 
+  /**
+   * State
+   */
+  state = () => {
+    return Observable.create((observer) => {
+      this.socket.on('state', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+
 }
