@@ -1,0 +1,11 @@
+<h3>
+  Select a CasparCG Server
+</h3>
+
+
+<select (change)="casparSelect($event)">
+  <option *ngFor="let caspar of caspars.values()" value="{{ caspar.id }}" [(ngModel)]="selectedCasparId">
+      {{ caspar.casparCommon.name }}
+  </option>
+</select>
+

@@ -12,6 +12,25 @@ export class SocketIoService {
    }
 
    /**
+    * Caspars
+    */
+  casparAdd = () => {
+    return Observable.create((observer) => {
+      this.socket.on('casparAdd', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+
+  casparDelete = () => {
+    return Observable.create((observer) => {
+      this.socket.on('casparDelete', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+
+   /**
    *  Producers
    */
   producerAdded = () => {

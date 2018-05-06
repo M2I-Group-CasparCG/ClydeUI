@@ -1,0 +1,22 @@
+<h3>
+  CasparCG servers list
+</h3>
+
+<ul>
+    <li *ngFor="let caspar of caspars.values()" class="input" id='input{{ caspar.id }}' attr.name="{{ caspar.id }}">
+        <ul >
+          <li>
+              {{ caspar.casparCommon.name }}
+          </li>
+          <li>
+              {{ caspar.casparCommon.ipAddr }}
+          </li>
+          <li (click)="casparEdit($event)" attr.name="{{ caspar.id }}">
+              Edit
+          </li>
+          <li (click)="casparDelete($event)" attr.name="{{ caspar.id }}">
+              Delete
+          </li>
+        </ul>
+      </li>
+    </ul>
