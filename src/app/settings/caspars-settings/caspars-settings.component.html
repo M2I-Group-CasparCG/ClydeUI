@@ -1,0 +1,12 @@
+<h3>
+  Caspars Settings
+</h3>
+
+<section class="left">
+    <clydeui-caspars-list  [caspars]="caspars" (delete)="casparDelete($event)"></clydeui-caspars-list>
+    <clydeui-caspar-add (add)="casparAdd($event)"></clydeui-caspar-add>
+</section>
+<section class="right">
+    <clydeui-io-config></clydeui-io-config>
+</section>
+

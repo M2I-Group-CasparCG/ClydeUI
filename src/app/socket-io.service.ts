@@ -22,6 +22,14 @@ export class SocketIoService {
     });
   }
 
+  casparEdit = () => {
+    return Observable.create((observer) => {
+      this.socket.on('casparEdit', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+
   casparDelete = () => {
     return Observable.create((observer) => {
       this.socket.on('casparDelete', (msg) => {
@@ -33,21 +41,61 @@ export class SocketIoService {
    /**
    *  Producers
    */
-  producerAdded = () => {
+  producerAdd = () => {
     return Observable.create((observer) => {
-      this.socket.on('producerAdded', (msg) => {
+      this.socket.on('producerAdd', (msg) => {
         observer.next(msg);
       });
     });
   }
 
-  producerRemoved = () => {
+  producerEdit = () => {
     return Observable.create((observer) => {
-      this.socket.on('producerRemoved', (msg) => {
+      this.socket.on('producerEdit', (msg) => {
+        console.log(msg);
         observer.next(msg);
       });
     });
   }
+
+  producerDelete = () => {
+    return Observable.create((observer) => {
+      this.socket.on('producerDelete', (msg) => {
+        console.log(msg);
+        observer.next(msg);
+      });
+    });
+  }
+
+     /**
+   *  Consumers
+   */
+  consumerAdd = () => {
+    return Observable.create((observer) => {
+      this.socket.on('consumerAdd', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+
+  consumerEdit = () => {
+    return Observable.create((observer) => {
+      this.socket.on('consumerEdit', (msg) => {
+        console.log(msg);
+        observer.next(msg);
+      });
+    });
+  }
+
+  consumerDelete = () => {
+    return Observable.create((observer) => {
+      this.socket.on('consumerDelete', (msg) => {
+        console.log(msg);
+        observer.next(msg);
+      });
+    });
+  }
+
 
   /**
    *  Channels

@@ -60,20 +60,75 @@ export class ApiCallService {
   /**
    * Producers
    */
-
-  getProducers() {
-    return this.http.get(apiUrl + '/caspars/1/producers');
-  }
-
   producerAdd (casparId, producerType, settings) {
     const body = settings;
     const url = `${apiUrl}/caspars/${casparId}/producers/${producerType}`;
     return this.http.post(url, body, httpOptions);
   }
+  producerGet(casparId, producerId) {
+    const url = `${apiUrl}/caspars/${casparId}/producers/${producerId}`;
+    return this.http.get(url);
+  }
+  producerGetAll(casparId) {
+    const url = `${apiUrl}/caspars/${casparId}/producers`;
+    return this.http.get(url);
+  }
+  producerStart(casparId, producerId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/producers/${producerId}/start`;
+    return this.http.post(url, body, httpOptions);
+  }
+  producerStop(casparId, producerId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/producers/${producerId}/stop`;
+    return this.http.post(url, body, httpOptions);
+  }
+  producerEdit(casparId, producerId, settings) {
+    const body = settings;
+    const url = `${apiUrl}/caspars/${casparId}/producers/${producerId}`;
+    return this.http.put(url, body, httpOptions);
+  }
+  producerDelete(casparId, producerId) {
+    const url = `${apiUrl}/caspars/${casparId}/producers/${producerId}`;
+    return this.http.delete(url, httpOptions);
+  }
 
   /**
-   * Consumer
+   * Consumers
    */
+
+  consumerAdd (casparId, consumerType, settings) {
+    const body = settings;
+    const url = `${apiUrl}/caspars/${casparId}/consumers/${consumerType}`;
+    return this.http.post(url, body, httpOptions);
+  }
+  consumerGet(casparId, consumerId) {
+    const url = `${apiUrl}/caspars/${casparId}/consumers/${consumerId}`;
+    return this.http.get(url);
+  }
+  consumerGetAll(casparId) {
+    const url = `${apiUrl}/caspars/${casparId}/consumers`;
+    return this.http.get(url);
+  }
+  consumerStart(casparId, consumerId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/consumers/${consumerId}/start`;
+    return this.http.post(url, body, httpOptions);
+  }
+  consumerStop(casparId, consumerId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/consumers/${consumerId}/stop`;
+    return this.http.post(url, body, httpOptions);
+  }
+  consumerEdit(casparId, consumerId, settings) {
+    const body = settings;
+    const url = `${apiUrl}/caspars/${casparId}/consumers/${consumerId}`;
+    return this.http.put(url, body, httpOptions);
+  }
+  consumerDelete(casparId, consumerId) {
+    const url = `${apiUrl}/caspars/${casparId}/consumers/${consumerId}`;
+    return this.http.delete(url, httpOptions);
+  }
 
   /**
    * Channel

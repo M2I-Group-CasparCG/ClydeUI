@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiCallService } from '../api-call.service';
-
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 class CasparForm {
   name: string;
@@ -22,18 +20,21 @@ class CasparSettings {
 })
 export class CasparAddComponent implements OnInit {
 
+  @Output() add: EventEmitter<any> = new EventEmitter();
+
   casparForm = new CasparForm();
 
+  constructor() { }
 
-  constructor( private _apiCallService: ApiCallService ) { }
-
-  ngOnInit() {
-
+  ngOnInit()  {
   }
 
-  casparAdd() {
+  formSubmit() {
 
     const settings = new CasparSettings();
+
+    // Form validation
+
     this.casparForm.errorMessage = '';
 
     settings.name = this.casparForm.name;
@@ -57,27 +58,9 @@ export class CasparAddComponent implements OnInit {
       this.casparForm.errorMessage = 'AMCP Port must be a valid number';
     }
 
+    // if from is valid
     if (this.casparForm.errorMessage === '') {
-      this._apiCallService.casparAdd(settings)
-        .subscribe(
-          data => {
-            switch (data['object']) {
-              case 'Caspar' : {
-                console.log('succes');
-              } break;
-              case 'message' : {
-                console.log(data['code']);
-                console.log(data['type']);
-                console.log(data['description']);
-              } break;
-              default : {
-                console.log('unkown response');
-              }
-            }
-          },
-          err => console.log(err),
-          () => console.log('')
-        );
+      this.add.emit(settings);
     }
   }
 }

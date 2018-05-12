@@ -20,22 +20,22 @@ export class SwitchBar2dComponent implements OnInit {
   ngOnInit() {
     this.ini();
 
-    this._socketIo.producerAdded()
-      .subscribe((msg: string) => {
-        const producer = JSON.parse(msg);
-        this.inputs.set(producer.id, producer);
-      });
+    // this._socketIo.producerAdded()
+    //   .subscribe((msg: string) => {
+    //     const producer = JSON.parse(msg);
+    //     this.inputs.set(producer.id, producer);
+    //   });
 
-    this._socketIo.producerRemoved()
-      .subscribe((msg: string) => {
-        this.inputs.delete(JSON.parse(msg));
-      });
+    // this._socketIo.producerRemoved()
+    //   .subscribe((msg: string) => {
+    //     this.inputs.delete(JSON.parse(msg));
+    //   });
 
-    this._socketIo.channelAdded()
-      .subscribe((msg: string) => {
-        const channel = JSON.parse(msg);
-        this.channels.set(channel.id, channel);
-      });
+    // this._socketIo.channelAdded()
+    //   .subscribe((msg: string) => {
+    //     const channel = JSON.parse(msg);
+    //     this.channels.set(channel.id, channel);
+    //   });
 
     this._socketIo.inputSwitched()
       .subscribe((msg: string) => {
@@ -57,28 +57,28 @@ export class SwitchBar2dComponent implements OnInit {
 
 
     // récupération des inputs
-    this._apiCallService.getProducers().subscribe(
-      data => {
-        this.result = data;
-        this.result.forEach(element => {
-          this.inputs.set(element[0], element[1]);
-        });
-      },
-      err => console.log(err),
-      () => console.log('done loading Caspars')
-    );
+    // this._apiCallService.producersGetAll().subscribe(
+    //   data => {
+    //     this.result = data;
+    //     this.result.forEach(element => {
+    //       this.inputs.set(element[0], element[1]);
+    //     });
+    //   },
+    //   err => console.log(err),
+    //   () => console.log('done loading Caspars')
+    // );
 
-    // récupération des outputs
-    this._apiCallService.getChannels().subscribe(
-      data => {
-        this.result = data;
-        this.result.forEach(element => {
-          this.channels.set(element[0], element[1]);
-        });
-      },
-      err => console.log(err),
-      () => console.log('done loading Caspars')
-    );
+    // // récupération des outputs
+    // this._apiCallService.getChannels().subscribe(
+    //   data => {
+    //     this.result = data;
+    //     this.result.forEach(element => {
+    //       this.channels.set(element[0], element[1]);
+    //     });
+    //   },
+    //   err => console.log(err),
+    //   () => console.log('done loading Caspars')
+    // );
 
   }
 

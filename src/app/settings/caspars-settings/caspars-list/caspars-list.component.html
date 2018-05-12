@@ -1,0 +1,28 @@
+<h3>
+  List
+</h3>
+
+<!-- List table of the caspars instances -->
+<table>
+  <tr>
+    <th> Name </th><th> IP Address </th><th> </th><th> </th>
+  </tr>
+  <tr *ngFor="let caspar of caspars.values()" class="input">
+    <td>
+        {{ caspar.casparCommon.name }}
+    </td>
+    <td>
+        {{ caspar.casparCommon.ipAddr }}
+    </td>
+    <td >
+      <button (click)="editSubmit(caspar.id)">
+        Edit
+      </button>
+    </td>
+    <td >
+      <button (click)="deleteSubmit(caspar.id)">
+        Delete
+      </button>
+    </td>
+  </tr>
+</table>

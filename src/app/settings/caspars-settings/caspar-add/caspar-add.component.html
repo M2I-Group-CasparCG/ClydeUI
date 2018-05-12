@@ -2,7 +2,7 @@
   Add a new CasparCG server
 </h3>
 
-<form (ngSubmit)="casparAdd()" #casparAddForm="ngForm">
+<form (ngSubmit)="formSubmit()" #casparAddForm="ngForm">
   <div>
     <label for="casparName">Name</label>
     <input id="casparName" name="name" [(ngModel)]="casparForm.name" required>
@@ -15,7 +15,10 @@
     <label for="amcpPort">AMCP Port</label>
     <input id="amcpPort" name="amcpPort" [(ngModel)]="casparForm.amcpPort" required>
   </div>
-  <button type="submit" [disabled]="casparAddForm.invalid">Connect</button>
+  <div>
+      <label></label>
+      <button type="submit" [disabled]="casparAddForm.invalid">Connect</button>
+  </div>
   <p>{{ casparForm.errorMessage }}</p>
 </form>
 

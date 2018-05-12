@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CasparsListComponent } from '../caspars-list/caspars-list.component';
+import { CasparsSettingsComponent } from '../settings/caspars-settings/caspars-settings.component';
 import { SocketIoService } from '../socket-io.service';
 import { ApiCallService } from '../api-call.service';
 import { Injectable } from '@angular/core';
@@ -12,12 +12,13 @@ import { Injectable } from '@angular/core';
 
 
 
-export class CasparSelectComponent extends CasparsListComponent implements OnInit {
+export class CasparSelectComponent extends CasparsSettingsComponent implements OnInit {
 
-  public selectedCasparId: Number;
-  @Output() selectedCasparIdChange: EventEmitter<any> = new EventEmitter();
+  public selectedCasparId;
+  @Output() select: EventEmitter<any> = new EventEmitter();
 
-  constructor( _apiCallService: ApiCallService,   _socketIo: SocketIoService) {
+
+  constructor( _apiCallService: ApiCallService, _socketIo: SocketIoService) {
     super(_apiCallService, _socketIo);
   }
 
@@ -25,9 +26,9 @@ export class CasparSelectComponent extends CasparsListComponent implements OnIni
     super.ngOnInit();
   }
 
-  casparSelect(event) {
+  selectSubmit(event) {
     this.selectedCasparId = event.target.value;
-    this.selectedCasparIdChange.emit(event.target.value);
+    this.select.emit(this.selectedCasparId);
   }
 
 }

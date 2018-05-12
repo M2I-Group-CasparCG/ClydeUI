@@ -1,0 +1,16 @@
+
+  <h3>
+    IO Config
+  </h3>
+<div class="select">
+  <clydeui-caspar-select (select)="setCasparId($event)"></clydeui-caspar-select>
+  {{ casparId }}
+</div>
+  <clydeui-producers-settings [casparId]="casparId" ></clydeui-producers-settings>
+  <clydeui-consumers-settings [casparId]="casparId"></clydeui-consumers-settings>
+
+
+
+
+
+

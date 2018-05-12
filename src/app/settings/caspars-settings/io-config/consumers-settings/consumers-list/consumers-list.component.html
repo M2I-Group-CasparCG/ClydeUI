@@ -1,0 +1,34 @@
+<table>
+    <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          type
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+    </tr>
+  <tr *ngFor="let consumer of consumers.values()" class="input" id='input{{ consumer.id }}' attr.name="{{ consumer.id }}">
+    <td>
+        {{ consumer.name }}
+    </td>
+    <td>
+        {{ consumer.type }}
+    </td>
+    <td >
+      <button (click)="editSubmit($event)" attr.name="{{ consumer.id }}">
+        Edit
+      </button>
+    </td>
+    <td >
+      <button (click)="deleteSubmit(consumer.id)" attr.name="{{ consumer.id }}">
+        Delete
+      </button>
+    </td>
+  </tr>
+</table>

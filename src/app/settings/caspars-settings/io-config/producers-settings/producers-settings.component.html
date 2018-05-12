@@ -1,0 +1,11 @@
+<h3>
+  Producers Management
+  {{casparId}}
+
+</h3>
+
+
+
+<clydeui-producers-list [producers]="producers" (delete)="producerDelete($event)"></clydeui-producers-list>
+
+<clydeui-producer-add (add)="producerAdd($event)" > </clydeui-producer-add>

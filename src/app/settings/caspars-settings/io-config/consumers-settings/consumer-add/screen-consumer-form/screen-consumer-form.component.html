@@ -1,0 +1,16 @@
+<form (ngSubmit)="formSubmit()" #producerAddForm="ngForm">
+    <div>
+      <label for="casparName">Name</label>
+      <input id="casparName" name="name" [(ngModel)]="consumerScreenForm.name" required>
+    </div>
+    <div>
+      <label for="url">Channel Id</label>
+      <input id="url" name="url" [(ngModel)]="consumerScreenForm.channelId" required>
+    </div>
+    <div>
+      <label></label>
+      <button type="submit">Add</button>
+    </div>
+
+    {{ consumerScreenForm.errorMessage }}
+  </form>
