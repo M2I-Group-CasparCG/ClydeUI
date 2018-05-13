@@ -21,6 +21,16 @@
         {{ consumer.type }}
     </td>
     <td >
+      <button (click)="startSubmit(consumer.id)" attr.name="{{ consumer.id }}">
+        Start
+      </button>
+    </td>
+    <td >
+      <button (click)="stopSubmit(consumer.id)" attr.name="{{ consumer.id }}">
+        Stop
+      </button>
+    </td>
+    <td >
       <button (click)="editSubmit($event)" attr.name="{{ consumer.id }}">
         Edit
       </button>
@@ -29,6 +39,10 @@
       <button (click)="deleteSubmit(consumer.id)" attr.name="{{ consumer.id }}">
         Delete
       </button>
+    </td>
+    <td *ngIf="consumer.type == 'FILE'">
+
+      {{recordInfo.get(consumer.filePath+consumer.fileName)}}
     </td>
   </tr>
 </table>

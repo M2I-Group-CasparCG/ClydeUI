@@ -4,7 +4,11 @@ class ConsumerStreamForm {
   type: string;
   name: string;
   channelId: Number;
-  url: string;
+  protocol: string;
+  host: string;
+  port: string;
+  pictureWidth: Number;
+  pictureHeight: Number;
   errorMessage: string;
   settings: Object;
 }
@@ -30,7 +34,10 @@ export class StreamConsumerFormComponent implements OnInit {
     const settings = new Object();
     settings['name'] = this.consumerStreamForm.name;
     settings['channelId'] = this.consumerStreamForm.channelId;
-    settings['url'] = this.consumerStreamForm.url;
+    settings['protocol'] = this.consumerStreamForm.protocol;
+    settings['host'] = this.consumerStreamForm.host;
+    settings['port'] = this.consumerStreamForm.port;
+    settings['pictureHeight'] = this.consumerStreamForm.pictureHeight;
 
     this.consumerStreamForm.settings = settings;
     this.submit.emit([this.consumerStreamForm.type, this.consumerStreamForm]);

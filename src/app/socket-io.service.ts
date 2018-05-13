@@ -52,7 +52,6 @@ export class SocketIoService {
   producerEdit = () => {
     return Observable.create((observer) => {
       this.socket.on('producerEdit', (msg) => {
-        console.log(msg);
         observer.next(msg);
       });
     });
@@ -61,7 +60,6 @@ export class SocketIoService {
   producerDelete = () => {
     return Observable.create((observer) => {
       this.socket.on('producerDelete', (msg) => {
-        console.log(msg);
         observer.next(msg);
       });
     });
@@ -81,7 +79,6 @@ export class SocketIoService {
   consumerEdit = () => {
     return Observable.create((observer) => {
       this.socket.on('consumerEdit', (msg) => {
-        console.log(msg);
         observer.next(msg);
       });
     });
@@ -90,7 +87,6 @@ export class SocketIoService {
   consumerDelete = () => {
     return Observable.create((observer) => {
       this.socket.on('consumerDelete', (msg) => {
-        console.log(msg);
         observer.next(msg);
       });
     });
@@ -121,6 +117,17 @@ export class SocketIoService {
   state = () => {
     return Observable.create((observer) => {
       this.socket.on('state', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+
+  /**
+   * State
+   */
+  recordInfo = () => {
+    return Observable.create((observer) => {
+      this.socket.on('recordInfo', (msg) => {
         observer.next(msg);
       });
     });

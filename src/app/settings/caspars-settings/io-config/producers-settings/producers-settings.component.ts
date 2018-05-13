@@ -113,7 +113,32 @@ export class ProducersSettingsComponent implements OnInit {
     this._apiCallService.producerDelete(this.casparId, producerId)
       .subscribe(
         data => {
-          console.log('succes');
+          console.log('data received from producerDelete API request');
+          console.log(JSON.stringify(data));
+        },
+        err => console.log(err),
+        () => console.log('')
+      );
+  }
+
+  producerStart(producerId) {
+    this._apiCallService.producerStart(this.casparId, producerId)
+    .subscribe(
+      data => {
+        console.log('data received from producerStart API request');
+        console.log(JSON.stringify(data));
+      },
+      err => console.log(err),
+      () => console.log('')
+    );
+  }
+
+  producerStop(producerId) {
+    this._apiCallService.producerStop(this.casparId, producerId)
+      .subscribe(
+        data => {
+          console.log('data received from producerStop API request');
+          console.log(JSON.stringify(data));
         },
         err => console.log(err),
         () => console.log('')

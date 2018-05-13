@@ -14,8 +14,8 @@ export class ProducersListComponent implements OnInit {
 
   @Output() delete: EventEmitter<any> = new EventEmitter();
   @Output() edit: EventEmitter<any> = new EventEmitter();
-
-
+  @Output() start: EventEmitter<any> = new EventEmitter();
+  @Output() stop: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -32,5 +32,14 @@ export class ProducersListComponent implements OnInit {
     this.delete.emit(producerId);
   }
 
+  startSubmit(producerId) {
+    console.log(producerId);
+    this.start.emit(producerId);
+  }
+
+  stopSubmit(producerId) {
+    console.log(producerId);
+    this.stop.emit(producerId);
+  }
 
 }

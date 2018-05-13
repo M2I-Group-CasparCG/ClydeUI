@@ -60,6 +60,8 @@ export class ConsumersSettingsComponent implements OnInit {
     this._apiCallService.consumerGetAll(this.casparId)
       .subscribe(
         data => {
+          console.log('data received from consumersGet API request');
+          console.log(JSON.stringify(data));
           this.consumers = new Map();
           let result;
           result = data;
@@ -82,6 +84,7 @@ export class ConsumersSettingsComponent implements OnInit {
     .subscribe(
       data => {
         console.log('data received from consumerAdd API request');
+        console.log(JSON.stringify(data));
         /**
          * TO DO : analyze the response and update the interface
          */
@@ -108,11 +111,36 @@ export class ConsumersSettingsComponent implements OnInit {
     this._apiCallService.consumerDelete(this.casparId, consumerId)
       .subscribe(
         data => {
-          console.log('succes');
+          console.log('data received from consumerDelete API request');
+          console.log(JSON.stringify(data));
         },
         err => console.log(err),
         () => console.log('')
       );
+  }
+
+  consumerStart(consumerId) {
+    this._apiCallService.consumerStart(this.casparId, consumerId)
+      .subscribe(
+        data => {
+          console.log('data received from consumerStart API request');
+          console.log(JSON.stringify(data));
+        },
+        err => console.log(err),
+        () => console.log('')
+      );
+  }
+
+  consumerStop(consumerId) {
+    this._apiCallService.consumerStop(this.casparId, consumerId)
+    .subscribe(
+      data => {
+        console.log('data received from consumerStop API request');
+        console.log(JSON.stringify(data));
+      },
+      err => console.log(err),
+      () => console.log('')
+    );
   }
 
 

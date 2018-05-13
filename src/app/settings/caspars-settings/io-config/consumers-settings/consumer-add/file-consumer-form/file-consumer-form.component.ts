@@ -4,7 +4,8 @@ class ConsumerFileForm {
   type: string;
   name: string;
   channelId: Number;
-  path: String;
+  fileName: String;
+  filePath: String;
   errorMessage: string;
   settings: Object;
 }
@@ -29,7 +30,8 @@ export class FileConsumerFormComponent implements OnInit {
     const settings = new Object();
     settings['name'] = this.consumerFileForm.name;
     settings['channelId'] = this.consumerFileForm.channelId;
-    settings['path'] = this.consumerFileForm.path;
+    settings['fileName'] = this.consumerFileForm.fileName;
+    settings['filePath'] = this.consumerFileForm.filePath;
 
     this.consumerFileForm.settings = settings;
     this.submit.emit([this.consumerFileForm.type, this.consumerFileForm]);

@@ -21,7 +21,17 @@
         {{ producer.type }}
     </td>
     <td >
-      <button (click)="editSubmit($event)" attr.name="{{ producer.id }}">
+      <button (click)="startSubmit(producer.id)" attr.name="{{ producer.id }}">
+        start
+      </button>
+    </td>
+    <td >
+      <button (click)="stopSubmit(producer.id)" attr.name="{{ producer.id }}">
+        stop
+      </button>
+    </td>
+    <td >
+      <button (click)="editSubmit(producer.id)" attr.name="{{ producer.id }}">
         Edit
       </button>
     </td>

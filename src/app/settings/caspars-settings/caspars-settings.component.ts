@@ -56,6 +56,7 @@ export class CasparsSettingsComponent implements OnInit {
     .subscribe(
       data => {
         console.log('data received from casparGet API request');
+        console.log(JSON.stringify(data));
         this.caspars = new Map();
         let result;
             result = data;
@@ -78,6 +79,7 @@ export class CasparsSettingsComponent implements OnInit {
         .subscribe(
           data => {
             console.log('data received from casparAdd API request');
+            console.log(JSON.stringify(data));
             /**
              * TO DO : analyze the response and update the interface
              */
@@ -110,6 +112,7 @@ export class CasparsSettingsComponent implements OnInit {
     .subscribe(
       data => {
         console.log('data received from casparDelete API request');
+        console.log(JSON.stringify(data));
         /**
          * TO DO : analyze the response and update the interface
          */
