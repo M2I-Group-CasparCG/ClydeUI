@@ -1,7 +1,53 @@
+
+
+.selectBtn{
+  display : block;
+}
+
+.bars {
+  display:  inline-block;
+}
 .bar{
-  color : rgb(30,30,30);
+  display : block;
+}
+.layerBtn{
+  vertical-align: top;
+  display : inline-block;
+}
+.layerBtn button{
+  display : block;
+  width : 100px;
+  height : 25px;
+  padding : 0px;
+}
+.layerBtn div{
+  display : inline-block;
+  margin-left : 20px;
+}
+.geometry{
+  display : inline-block;
+}
+.geometry label{
+  display: inline-block;
+  width : 100px;
+  text-align : right;
+}
+.geometry span{
+  display: inline-block;
+  width : 50px;
+}
+.bar .barLabel{
+  display: inline-block;
+  color :  rgb(210,210,210);
+  height : 50px;
+  width : 100px;
+  text-align : right;
+  line-height: 50px;
+  vertical-align : top;
+  margin-right : 20px;
 }
 .bar li{
+
   font-family : Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;
   display : inline-block;
   width : 50px;
@@ -16,6 +62,7 @@
   background-color: rgb(210,210,210);
 }
 .bar li div{
+  color : rgb(30,30,30);
   width : 100%;
   display : inline-block;
   line-height: normal;
@@ -30,4 +77,39 @@
 
 .bar .output.selected {
   background-color: green;
+}
+
+.bar .preview.selected {
+  opacity : 1;
+}
+.bar .preview{
+  opacity : 0.6;
+  background-color: green;
+}
+
+.bar .program.selected {
+  opacity : 1;
+}
+
+.bar .program{
+  opacity : 0.6;
+  background-color: red;
+}
+
+.bar .key.selected{
+  opacity : 1;
+
+}
+.bar .key{
+  opacity : 0.6;
+  background-color: rgb(100,100,200);
+}
+
+.autoBtn{
+  display : inline-block;
+  width : 70px;
+  height : 70px;
+  padding : 0px;
+  vertical-align: top;
+  margin : 20px;
 }

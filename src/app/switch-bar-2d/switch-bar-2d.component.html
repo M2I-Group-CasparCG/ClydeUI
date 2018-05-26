@@ -2,17 +2,128 @@
   switch-bar-2d works!
 </p>
 
-<ul class="bar">
-  <li *ngFor="let input of inputs.values()" class="input" (click)="inputClick($event)" id='input{{ input.id }}' attr.name="{{ input.id }}">
+<clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
+
+<!--MATRIX BAR -->
+<!-- <ul class="bar">
+  <li *ngFor="let producer of producers.values()" [class.selected]="producer.id==selectedProducer" class="input" (click)="channelSetInput(producer.id)">
     <div >
-        {{ input.name }}
+        {{ producer.name }}
     </div>
   </li>
 </ul>
 <ul class="bar">
-  <li *ngFor="let channel of channels.values()" class="output" id="channel{{ channel.id }}" (click)="channelClick($event)" attr.name="{{ channel.id }}">
+  <li *ngFor="let channel of channels.values()" [class.selected]="channel.id==selectedChannel" class="output" (click)="channelSelect(channel.id)">
       <div>
           {{ channel.name }}
       </div>
   </li>
-</ul>
+</ul> -->
+
+<!-- PGM / PVW BAR -->
+
+
+
+<!-- keys bars -->
+
+
+<div *ngFor="let layer of layers.values()" >
+
+  <ul class="bar">
+
+
+       <!-- single key -->
+      <div class="barLabel">{{layer.name}}</div>
+      <li *ngFor="let producer of producers.values()" [class.selected]="producer.id==layers.get(layer.id).selectedInput" class="key" (click)="layerSetInput(producer.id, layer.id)">
+        <div >
+          {{ producer.name }}
+        </div>
+      </li>
+
+      <div class="geometry">
+        <form #form="ngForm">
+          <div>
+          <label>Scale : </label><input type="range" min="0" max="2" step="0.01" (mouseup)="layerGeometry.scale=scale.value; layerGeometryUpdate(layer.id)" [value]="layer.scaleX" #scale/>
+          <span>{{scale.value}}</span>
+          <button (click)="layerGeometry.scale = layer.scaleX-geometryGap; layerGeometryUpdate(layer.id)">
+              -
+            </button>
+            <button (click)="layerGeometry.scale = layer.scaleX+geometryGap; layerGeometryUpdate(layer.id)">
+              +
+              </button>
+        </div>
+        <div>
+          <label>Horizontal : </label><input type="range" min="-1" max="1" step="0.01" (mouseup)="layerGeometry.horizontal=horizontal.value; layerGeometryUpdate(layer.id)" [value]="layer.posX" #horizontal/>
+          <span>{{horizontal.value}}</span>
+          <button (click)="layerGeometry.horizontal = layer.posX-geometryGap; layerGeometryUpdate(layer.id)">
+            <
+          </button>
+          <button (click)="layerGeometry.horizontal = layer.posX+geometryGap; layerGeometryUpdate(layer.id)">
+            >
+            </button>
+        </div>
+        <div>
+          <label>Vertical : </label><input type="range" min="-1" max="1" step="0.01" (mouseup)="layerGeometry.vertical=vertical.value; layerGeometryUpdate(layer.id)" [value]="layer.posY" #vertical/>
+          <span>{{vertical.value}}</span>
+          <button (click)="layerGeometry.vertical = layer.posY-geometryGap; layerGeometryUpdate(layer.id)">
+              ^
+          </button>
+          <button (click)="layerGeometry.vertical = layer.posY+geometryGap; layerGeometryUpdate(layer.id)">
+              ˇ
+          </button>
+        </div>
+        </form>
+      </div>
+      <div class="layerBtn">
+          <div>
+          <button (click)="layerStart(layer.id)">
+              ON
+            </button>
+            <button (click)="layerStop(layer.id)">
+              OFF
+            </button>
+          </div>
+          <div>
+            <button (click)="layerReset(layer.id)">
+                RESET
+            </button>
+            <button (click)="layerDelete(layer.id)">
+              DELETE
+            </button>
+          </div>
+      </div>
+
+  </ul>
+</div>
+
+
+<button class="addLayerBtn" (click)="layerAdd()">
+  Add Key
+</button>
+
+
+<!-- AB BAR -->
+<div class="AB">
+  <div class="bars">
+    <ul class="bar">
+      <div class="barLabel">PGM</div>
+      <li *ngFor="let producer of producers.values()" [class.selected]="producer.id==channels.get(2).selectedInput" class="program" (click)="channelSetInput(producer.id, 2)">
+        <div >
+          {{ producer.name }}
+        </div>
+      </li>
+    </ul>
+    <ul class="bar">
+      <div class="barLabel">PVW</div>
+      <li *ngFor="let producer of producers.values()" [class.selected]="producer.id==channels.get(3).selectedInput" class="preview" (click)="channelSetInput(producer.id, 3)">
+        <div>
+            {{ producer.name }}
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <button (click)="autoTransition()" class="autoBtn">
+    AUTO
+  </button>
+</div>

@@ -96,9 +96,16 @@ export class SocketIoService {
   /**
    *  Channels
    */
-  channelAdded = () => {
+  channelAdd = () => {
     return Observable.create((observer) => {
-      this.socket.on('channelAdded', (msg) => {
+      this.socket.on('channelAdd', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+  channelEdit = () => {
+    return Observable.create((observer) => {
+      this.socket.on('channelEdit', (msg) => {
         observer.next(msg);
       });
     });
@@ -106,6 +113,30 @@ export class SocketIoService {
   inputSwitched = () => {
     return Observable.create((observer) => {
       this.socket.on('inputSwitched', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+  /**
+   *  Layers
+   */
+  layerAdd = () => {
+    return Observable.create((observer) => {
+      this.socket.on('layerAdd', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+  layerEdit = () => {
+    return Observable.create((observer) => {
+      this.socket.on('layerEdit', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+  layerDelete = () => {
+    return Observable.create((observer) => {
+      this.socket.on('layerDelete', (msg) => {
         observer.next(msg);
       });
     });

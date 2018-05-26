@@ -134,20 +134,80 @@ export class ApiCallService {
    * Channel
    */
 
-  getChannels() {
-    return this.http.get(apiUrl + '/caspars/1/channels');
-  }
+  channelAdd (casparId, settings) {
 
-  channelSwitch(channelId, consumerId) {
+  }
+  channelGet(casparId, channelId) {
+    const url = `${apiUrl}/caspars/${casparId}/channels/${channelId}`;
+    return this.http.get(url);
+  }
+  channelGetAll(casparId) {
+    const url = `${apiUrl}/caspars/${casparId}/channels`;
+    return this.http.get(url);
+  }
+  channelSetInput(casparId, channelId, producerId) {
     const body = '';
-    return this.http.post(apiUrl + '/caspars/1/channels/' + channelId + '/' + consumerId, body, httpOptions);
+    const url = `${apiUrl}/caspars/${casparId}/channels/${channelId}/producers/${producerId}`;
+    return this.http.post(url, body, httpOptions);
+  }
+  channelEdit(casparId, channelId, settings) {
+    const body = settings;
+    const url = `${apiUrl}/caspars/${casparId}/channels/${channelId}`;
+    return this.http.put(url, body, httpOptions);
+  }
+  channelDelete(casparId, channelId) {
+    const url = `${apiUrl}/caspars/${casparId}/channels/${channelId}`;
+    return this.http.delete(url, httpOptions);
   }
 
   /**
    * Layer
    */
 
+  layerAdd (casparId, settings) {
+    console.log('coucou');
+    console.log(JSON.stringify(settings));
+    const body = settings;
+    const url = `${apiUrl}/caspars/${casparId}/layers/`;
+    return this.http.post(url, body, httpOptions);
+  }
 
+  layerGet(casparId, layerId) {
+    const url = `${apiUrl}/caspars/${casparId}/layers/${layerId}`;
+    return this.http.get(url);
+  }
+  layerGetAll(casparId, channelId = false) {
+    let url = '';
+    if (channelId) {
+      url = `${apiUrl}/caspars/${casparId}/channel/${channelId}layers`;
+    }
+    url = `${apiUrl}/caspars/${casparId}/layers`;
+    return this.http.get(url);
+  }
+  layerStart(casparId, layerId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/layers/${layerId}/start`;
+    return this.http.post(url, body, httpOptions);
+  }
+  layerStop(casparId, layerId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/layers/${layerId}/stop`;
+    return this.http.post(url, body, httpOptions);
+  }
+  layerSetInput(casparId, layerId, producerId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/layers/${layerId}/producers/${producerId}`;
+    return this.http.post(url, body, httpOptions);
+  }
+  layerEdit(casparId, layerId, settings) {
+    const body = settings;
+    const url = `${apiUrl}/caspars/${casparId}/layers/${layerId}`;
+    return this.http.put(url, body, httpOptions);
+  }
+  layerDelete(casparId, layerId) {
+    const url = `${apiUrl}/caspars/${casparId}/layers/${layerId}`;
+    return this.http.delete(url, httpOptions);
+  }
 
 
 
