@@ -1,68 +1,117 @@
 
+@import '../style/common.less';
 
-.selectBtn{
-  display : block;
+header{
+  margin-top : 20px;
+  width : 100%;
+  background-color : @brightColor;
+  color : rgb(30,30,30);
+  padding : 5px;
+  padding-left : 20px;
 }
 
-.bars {
-  display:  inline-block;
-}
-.bar{
-  display : block;
-}
-.layerBtn{
-  vertical-align: top;
-  display : inline-block;
-}
-.layerBtn button{
-  display : block;
-  width : 100px;
-  height : 25px;
+header h2{
+  margin : 0px;
+  font-size : 20px;
   padding : 0px;
-}
-.layerBtn div{
   display : inline-block;
-  margin-left : 20px;
+  width : 65%;
 }
-.geometry{
+
+header .selectBtn{
   display : inline-block;
-}
-.geometry label{
-  display: inline-block;
-  width : 100px;
-  text-align : right;
-}
-.geometry span{
-  display: inline-block;
-  width : 50px;
-}
-.bar .barLabel{
-  display: inline-block;
-  color :  rgb(210,210,210);
-  height : 50px;
-  width : 100px;
-  text-align : right;
-  line-height: 50px;
-  vertical-align : top;
   margin-right : 20px;
 }
-.bar li{
 
-  font-family : Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;
+header .addLayerBtn{
   display : inline-block;
-  width : 50px;
-  height : 50px;
-  margin : 2px;
-  font-size: 12px;
+}
+
+
+
+
+
+// .layerSetup{
+//   display : inline-block;
+//   vertical-align: top;
+//   width : 60px;
+//   margin-left : 20px;
+// }
+// .layerSetup .scale div{
+//   cursor : pointer;
+//   display : inline-block;
+//   width : 30px;
+//   margin:0px;
+//   height : 20px;
+//   line-height: 20px;
+//   vertical-align: middle;
+//   text-align : center;
+//   font-size : 20px;
+//   font-weight: bold;
+//   background-color : rgb(100,100,100);
+// }
+// .layerSetup .scale div:hover{
+//   background-color : rgb(210,210,210);
+//   color : rgb(30,30,30);
+// }
+// .layerSetup table, th, td{
+//   border-collapse: collapse;
+// }
+
+// .layerSetup .position .btn{
+//   cursor : pointer;
+//   color : rgb(100,100,100);
+//   text-align: center;
+//   width : 20px;
+//   height : 20px;
+//   padding : 0px;
+// }
+// .layerSetup .position .btn:hover{
+//   color : rgb(210,210,210);
+// }
+
+
+/**
+*     General switchbar Settings
+*/
+
+@switchBarBtnSize : 50px;
+.switchBar2D{
+  display : inline-block;
+}
+.switchBar1D{
+  display : inline-block;
+}
+.switchBar{
+  display : block;
+  margin : 10px;
+}
+.switchBar .label{
+  display: inline-block;
+  color :  @brightColor;
+  width : 100px;
+  height : @switchBarBtnSize;
+  line-height: @switchBarBtnSize;
+  vertical-align : middle;
+  text-align : right;
+  margin-right : 10px;
+  font-weight: bold;
+}
+.switchBar li{
+  font-weight: bold;
+  display : inline-block;
+  width : @switchBarBtnSize;
+  height : @switchBarBtnSize;
+  line-height : @switchBarBtnSize;
+  margin : 1px;
+  font-size: 14px;
   text-align : center;
   vertical-align: top;
   padding : 2px;
-  line-height : 50px;
   cursor : pointer;
-  background-color: rgb(210,210,210);
 }
-.bar li div{
-  color : rgb(30,30,30);
+.switchBar li div{
+  color : @darkColor;
   width : 100%;
   display : inline-block;
   line-height: normal;
@@ -70,46 +119,149 @@
   overflow-wrap: break-word;
   pointer-events: none;
 }
-
-.bar .input.selected {
-  background-color: red;
-}
-
-.bar .output.selected {
-  background-color: green;
-}
-
-.bar .preview.selected {
-  opacity : 1;
-}
-.bar .preview{
-  opacity : 0.6;
-  background-color: green;
-}
-
-.bar .program.selected {
-  opacity : 1;
-}
-
-.bar .program{
-  opacity : 0.6;
-  background-color: red;
-}
-
-.bar .key.selected{
-  opacity : 1;
-
-}
-.bar .key{
-  opacity : 0.6;
-  background-color: rgb(100,100,200);
-}
-
-.autoBtn{
+.btnCt{
+  margin : 10px;
   display : inline-block;
-  width : 70px;
-  height : 70px;
-  padding : 0px;
   vertical-align: top;
-  margin : 20px;
+  padding : 2px;
 }
+.btnCt button{
+  height : @switchBarBtnSize;
+}
+
+/**
+*   Program/Preview Bar Settings
+*/
+
+.PP .switchBar.pgm .active {
+  background-color: @redActive;
+}
+.PP .switchBar.pgm .normal {
+  background-color: @redNormal;
+}
+.PP .switchBar.pgm .normal:hover{
+  background-color: @redHover;
+}
+
+.PP .switchBar.pvw .active {
+  background-color: @greenActive;
+}
+.PP .switchBar.pvw .normal{
+  background-color: @greenNormal;
+}
+.PP .switchBar.pvw .normal:hover{
+  background-color: @greenHover;
+}
+.PP .btnCt .autoBtn{
+  width : 75px;
+}
+
+/**
+* DSK Bars Settings
+*/
+
+.DSK .switchBar .active{
+  background-color: @blueActive;
+}
+.DSK .switchBar .normal{
+  background-color: @blueNormal;
+}
+
+.DSK .switchBar .normal:hover{
+  background-color: @blueHover;
+}
+.DSK .btnCt .takeBtn{
+  width : 75px;
+}
+
+.DSK .btnCt .takeBtn.active{
+  background-color : @blueActive;
+}
+
+.DSK .btnCt .geometryBtn{
+  display : inline-block;
+  margin-left : 20px;
+  vertical-align: top;
+}
+.DSK .btnCt .geometryBtn .scale{
+  text-align: center;
+  display : inline-block;
+  vertical-align: top;
+}
+.DSK .btnCt .geometryBtn .scale div{
+  cursor : pointer;
+  display : block;
+  width : 50px;
+  margin:0px;
+  height : 25px;
+  line-height: 25px;
+  font-size : 20px;
+  font-weight: bold;
+  background-color :@mediumColor;
+}
+.DSK .btnCt .geometryBtn .scale div:hover{
+  background-color :@brightColor;
+  color : @darkColor;
+}
+.DSK .btnCt .geometryBtn .position{
+  display: inline-block;
+  vertical-align: top;
+  background-color : @mediumColor;
+}
+.DSK .btnCt .geometryBtn .position button{
+  width : 20px;
+  height : @switchBarBtnSize/2;
+  vertical-align: middle;
+  background-color: none;
+}
+.DSK .btnCt .geometryBtn .position button:hover{
+  background-color : @mediumColor;
+}
+.DSK .btnCt .geometryBtn .position .left{
+  display : inline-block;
+  height : @switchBarBtnSize;
+  line-height: @switchBarBtnSize;
+  vertical-align: top;
+}
+.DSK .btnCt .geometryBtn .position .center{
+  display : inline-block;
+}
+.DSK .btnCt .geometryBtn .position .center button{
+  display : block;
+}
+.DSK .btnCt .geometryBtn .position .right{
+  display : inline-block;
+  height : @switchBarBtnSize;
+  line-height: @switchBarBtnSize;
+  vertical-align: top;
+}
+
+.DSK .btnCt .geometryCursors{
+  display : inline-block;
+  vertical-align: top;
+  margin-left : 20px;
+  margin-right : 20px;
+}
+.DSK .btnCt .geometryCursors label{
+  display: inline-block;
+  width : 100px;
+  text-align: right;
+  vertical-align: top;
+}
+.DSK .btnCt .geometryCursors input{
+  width : 75px;
+  vertical-align: top;
+}
+.DSK .btnCt .geometryCursors span{
+  display : inline-block;
+  width : 30px;
+}
+
+.DSK .btnCt .resetBtn{
+  width : 60px;
+}
+.DSK .btnCt .deleteBtn{
+  width : 60px;
+}
+
+

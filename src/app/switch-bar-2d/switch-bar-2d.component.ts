@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../api-call.service';
 import { SocketIoService } from '../socket-io.service';
+import { CasparGetService } from '../caspar-get.service';
 
 class LayerGeometry {
   scale: number;
@@ -11,7 +12,9 @@ class LayerGeometry {
 @Component({
   selector: 'clydeui-switch-bar-2d',
   templateUrl: './switch-bar-2d.component.html',
-  styleUrls: ['./switch-bar-2d.component.less']
+  styleUrls: [
+    './switch-bar-2d.component.less',
+    '../style/common.less']
 })
 export class SwitchBar2dComponent implements OnInit {
 
@@ -25,9 +28,11 @@ export class SwitchBar2dComponent implements OnInit {
   selectedProducer = 0;
 
   layerGeometry = new LayerGeometry();
-  geometryGap = 0.02;
+  geometryGap = 0.01;
 
-  constructor( private _apiCallService: ApiCallService, private _socketIo: SocketIoService ) { }
+  constructor(  private _apiCallService: ApiCallService,
+                private _socketIo: SocketIoService,
+                private _casparGetService: CasparGetService ) { }
 
   ngOnInit() {
 
@@ -73,6 +78,7 @@ export class SwitchBar2dComponent implements OnInit {
 
     this._socketIo.layerEdit()
       .subscribe((msg: string) => {
+        console.log(JSON.stringify(msg));
         const layer = JSON.parse(msg);
         this.layers.set(layer.id, layer);
       });
@@ -234,6 +240,14 @@ export class SwitchBar2dComponent implements OnInit {
     );
   }
 
+  layerToggle(layerId) {
+    if (this.layers.get(layerId).isActive) {
+      this.layerStop(layerId);
+    } else {
+      this.layerStart(layerId);
+    }
+  }
+
   layerDelete(layerId) {
     console.log('layerDelete');
     this._apiCallService.layerDelete(this.casparId, layerId)
@@ -247,11 +261,20 @@ export class SwitchBar2dComponent implements OnInit {
     );
   }
 
+  precisionRound(number, precision) {
+    const factor = Math.pow(10, precision);
+    return Math.round(number * factor) / factor;
+  }
+
   layerGeometryUpdate(layerId, valueName, value) {
 
     const layer = this.layers.get(layerId);
 
     const settings = new Object();
+
+    this.layerGeometry.horizontal = this.precisionRound(this.layerGeometry.horizontal, 2);
+    this.layerGeometry.vertical = this.precisionRound(this.layerGeometry.vertical, 2);
+    this.layerGeometry.scale = this.precisionRound(this.layerGeometry.scale, 2);
 
     settings['posX'] = this.layerGeometry.horizontal || layer.posX;
     settings['posY'] = this.layerGeometry.vertical || layer.posY;
@@ -283,16 +306,15 @@ export class SwitchBar2dComponent implements OnInit {
       settings['scaleX'] = 1;
       settings['scaleY'] = 1;
 
-  //
-        this._apiCallService.layerEdit(this.casparId, layerId, settings)
-        .subscribe(
-          data => {
-            console.log('setInput result received');
-            console.log(JSON.stringify(data));
-          },
-          err => console.log(err),
-          () => console.log('')
-        );
+      this._apiCallService.layerEdit(this.casparId, layerId, settings)
+      .subscribe(
+        data => {
+          console.log('setInput result received');
+          console.log(JSON.stringify(data));
+        },
+        err => console.log(err),
+        () => console.log('')
+      );
     }
   autoTransition() {
 

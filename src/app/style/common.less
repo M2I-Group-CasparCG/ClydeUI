@@ -1,0 +1,91 @@
+
+
+@darkColor    : rgb( 30,30,30);
+@mediumColor  : rgb(100,100,100);
+@brightColor  : rgb(210,210,210);
+@redHover     : rgb(230,70,70);
+@redActive    : rgb(250,20,20);
+@redNormal    : rgb(180, 10, 10);
+@greenHover   : rgb(100,180,100);
+@greenActive  : rgb(50,180,50);
+@greenNormal  : rgb(50,130,50);
+@blueHover    : rgb(150,150,200);
+@blueActive   : rgb(100,100,200);
+@blueNormal   : rgb(70, 70, 140);
+
+@titleFont : Comfortaa-Regular;
+
+/* polices */
+@font-face {
+  font-family: "Comfortaa-Regular";
+  src: url('../style/fonts/Comfortaa-Regular.ttf');
+  font-weight :	normal;
+}
+@font-face {
+  font-family: "Comfortaa-Regular";
+  src: url('../style/fonts/Comfortaa-Light.ttf');
+  font-weight :	lighter;
+}
+@font-face {
+  font-family: "Comfortaa-Regular";
+  src: url('../style/fonts/Comfortaa-Bold.ttf');
+  font-weight :	bold;
+}
+
+:host{
+  font-family: @titleFont;
+}
+
+h1{
+  font-family: @titleFont;
+}
+h2{
+  font-family: @titleFont;
+}
+h3{
+  font-family: @titleFont;
+}
+h4{
+  font-family: @titleFont;
+}
+h5{
+  font-family: @titleFont;
+}
+
+button{
+  cursor : pointer;
+  padding : 0px;
+  text-decoration: none;
+  padding : none;
+  border-radius: 0px;
+  border : none;
+  background: none;
+  background-color : @mediumColor;
+}
+button:hover{
+  background-color : @brightColor;
+  color : @darkColor
+}
+button:active{
+  border:none;
+  padding : 0px;
+  outline: none;
+  background-color : @mediumColor;
+}
+button:focus{
+  outline: none;
+  border:none;
+}
+button::-moz-focus-inner {
+  border: 0;
+}
+
+
+ul{
+  margin : 0px;
+  padding : 0px;
+}
+li{
+  margin : 0px;
+  padding : 0px;
+}

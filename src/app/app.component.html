@@ -1,18 +1,17 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <section>
-  <h1>
-    ClydeUI - A new interface for CasparCG
-  </h1>
+  <header>
+        <div>
+            <img src="../assets/ClydeUI_label_white230.png"/>
+        </div>
+        <nav>
+          <a routerLink="/live" routerLinkActive="active">Live</a>
+          <a routerLink="/settings" routerLinkActive="active">Settings</a>
+          <a routerLink="/switchbar" routerLinkActive="active">Switch Bar</a>
+          <a routerLink="/outputmatrix" routerLinkActive="active">Output Matrix</a>
+        </nav>
+  </header>
 
-  <nav>
-    <a routerLink="/settings">Settings</a>
-  </nav>
-  <nav>
-    <a routerLink="/switchbar">Switch Bar</a>
-  </nav>
-  <!-- <clydeui-settings>
-
-  </clydeui-settings> -->
   <router-outlet></router-outlet>
 
 </section>

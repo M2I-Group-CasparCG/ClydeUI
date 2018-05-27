@@ -1,0 +1,20 @@
+<clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
+
+<table>
+  <tr>
+    <td *ngFor="let channel of channels.values()" class="label vertical">
+      <div>
+          {{channel.name}}
+      </div>
+
+    </td>
+  </tr>
+  <tr *ngFor="let consumer of consumers.values()">
+    <td *ngFor="let channel of channels.values()" class="cell" (click)="consumerSetChannel(consumer.id, channel.id)" [class.selected]="channel.id==consumer.channelId">
+
+    </td>
+    <td class="label horizontal">
+      {{ consumer.name }}
+    </td>
+  </tr>
+</table>

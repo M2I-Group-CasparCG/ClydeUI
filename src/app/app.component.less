@@ -12,10 +12,40 @@ section{
   overflow-y: scroll;
 }
 
-section h1{
-  font-size: 30px;
-  text-align: center;
-  padding-bottom: 30px;
-  border-bottom : 1px solid rgb(210,210,210);
+header{
+  display : inline-block;
+  margin-bottom : 70px;
+  z-index : 0;
+}
+
+header div img{
+  margin : 10px;
+  display: inline-block;
+  height : 100px;
+}
+
+header nav{
+  display : inline-block;
+  position : absolute;
+  left : 0px;
+  right : 0px;
+  background-color : rgb(210,210,210);
+  padding-left :400px;
+
+}
+
+header nav a {
+  padding : 10px;
+  text-decoration: none;
+  color : rgb(30,30,30);
+  background-color : rgb(100,150,100);
+  margin : 5px;
+}
+header nav a:active{
+  border:none;
+}
+
+header nav a.active{
+  background-color : rgb(100,200,100);
 }
 

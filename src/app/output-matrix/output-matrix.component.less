@@ -1,0 +1,36 @@
+table, th, td {
+  border-collapse: collapse;
+}
+
+td {
+  border : 3px solid rgb(30,30,30);
+  width : 30px;
+  height : 30px;
+}
+
+.label{
+  border : none;
+  font-weight: normal;
+
+}
+
+.label.vertical {
+  padding-bottom : 20px;
+}
+.label.vertical div{
+  transform: rotate(-90deg)
+}
+
+.label.horizontal {
+  padding-left : 20px;
+}
+
+.cell {
+  cursor : pointer;
+  background-color : rgb(100,100,100);
+}
+
+.cell.selected{
+  background-color: red;
+}
+

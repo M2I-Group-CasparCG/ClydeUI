@@ -1,9 +1,9 @@
-<h4>
-  Select a CasparCG Server
-</h4>
+<label>
+  server :
+</label>
 <select (change)="selectSubmit($event)">
     <option value="" selected disabled hidden>Choose here</option>
-  <option *ngFor="let caspar of caspars.values()" value="{{caspar.id}}" [(ngModel)]="selectedCasparId">
+    <option *ngFor="let caspar of caspars.values()" value="{{caspar.id}}" (load)="selectSubmit($event)" [(ngModel)]="selectedCasparId" [selected]="caspar.id == caspars.keys().next().value ? true : null" >
       {{ caspar.casparCommon.name }}
   </option>
 </select>

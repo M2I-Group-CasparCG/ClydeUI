@@ -10,6 +10,7 @@ import { SwitchBar2dComponent } from './switch-bar-2d/switch-bar-2d.component';
 import { HttpClientModule } from '@angular/common/http';  // prise en charge HTTP client pour api  calls
 import { ApiCallService } from './api-call.service';
 import { SocketIoService } from './socket-io.service';
+import { CasparGetService } from './caspar-get.service';
 import { IoConfigComponent } from './settings/caspars-settings/io-config/io-config.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,6 +39,8 @@ import { ConsumerAddComponent } from './settings/caspars-settings/io-config/cons
 import { ConsumersListComponent } from './settings/caspars-settings/io-config/consumers-settings/consumers-list/consumers-list.component';
 // tslint:disable-next-line:max-line-length
 import { ScreenConsumerFormComponent } from './settings/caspars-settings/io-config/consumers-settings/consumer-add/screen-consumer-form/screen-consumer-form.component';
+import { OutputMatrixComponent } from './output-matrix/output-matrix.component';
+import { LivePageComponent } from './live-page/live-page.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,9 @@ import { ScreenConsumerFormComponent } from './settings/caspars-settings/io-conf
     ProducersListComponent,
     ConsumerAddComponent,
     ConsumersListComponent,
-    ScreenConsumerFormComponent
+    ScreenConsumerFormComponent,
+    OutputMatrixComponent,
+    LivePageComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,8 @@ import { ScreenConsumerFormComponent } from './settings/caspars-settings/io-conf
   ],
   providers: [
     ApiCallService,
-    SocketIoService
+    SocketIoService,
+    CasparGetService
   ],
   bootstrap: [AppComponent]
 })
