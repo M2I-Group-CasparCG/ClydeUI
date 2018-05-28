@@ -301,6 +301,8 @@ export class SwitchBar2dComponent implements OnInit {
 
       const settings = new Object();
 
+
+
       settings['posX'] = 0;
       settings['posY'] = 0;
       settings['scaleX'] = 1;
@@ -311,6 +313,10 @@ export class SwitchBar2dComponent implements OnInit {
         data => {
           console.log('setInput result received');
           console.log(JSON.stringify(data));
+
+          this.layerGeometry.horizontal = 0;
+          this.layerGeometry.vertical = 0;
+          this.layerGeometry.scale = 0;
         },
         err => console.log(err),
         () => console.log('')
