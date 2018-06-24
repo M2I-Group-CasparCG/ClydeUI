@@ -52,6 +52,7 @@ export class SocketIoService {
   producerEdit = () => {
     return Observable.create((observer) => {
       this.socket.on('producerEdit', (msg) => {
+        console.log(JSON.stringify(msg));
         observer.next(msg);
       });
     });
@@ -143,6 +144,30 @@ export class SocketIoService {
   }
 
   /**
+   * MediaPlayer
+   */
+
+   mediaPlayerEdit = () => {
+    return Observable.create((observer) => {
+      this.socket.on('ddrEdit', (msg) => {
+        observer.next(msg);
+      });
+    });
+   }
+
+  /**
+   * Playlist
+   */
+
+  playlistEdit = () => {
+    return Observable.create((observer) => {
+      this.socket.on('playlistEdit', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+
+  /**
    * State
    */
   state = () => {
@@ -152,10 +177,6 @@ export class SocketIoService {
       });
     });
   }
-
-  /**
-   * State
-   */
   recordInfo = () => {
     return Observable.create((observer) => {
       this.socket.on('recordInfo', (msg) => {

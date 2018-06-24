@@ -21,9 +21,11 @@ export class CasparSelectComponent implements OnInit {
 
   constructor( private _apiCallService: ApiCallService, private _socketIo: SocketIoService) {
     // super(_apiCallService, _socketIo);
+    this.casparsGet();
   }
 
   ngOnInit() {
+    this.casparsGet();
 
       this._socketIo.casparAdd()
       .subscribe((msg: string) => {
@@ -44,7 +46,7 @@ export class CasparSelectComponent implements OnInit {
         this.caspars.delete(caspar.id);
     });
     // super.ngOnInit();
-    this.casparsGet();
+
   }
 
     /**
@@ -56,11 +58,11 @@ export class CasparSelectComponent implements OnInit {
     .subscribe(
       data => {
         console.log('data received from casparGet API request');
-        console.log(JSON.stringify(data));
         this.caspars = new Map();
         let result;
             result = data;
             result.forEach(element => {   // 0 = id, 1= casparInstance
+
               this.caspars.set(element[0], element[1]);
             });
         this.selectedCasparId = this.caspars.keys().next().value;

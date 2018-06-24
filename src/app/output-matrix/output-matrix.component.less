@@ -1,3 +1,6 @@
+
+@import '../style/common.less';
+
 table, th, td {
   border-collapse: collapse;
 }
@@ -33,4 +36,10 @@ td {
 .cell.selected{
   background-color: red;
 }
+
+@headerHeight  : 50px;
+.content header{
+  height : @headerHeight;
+}
+
 

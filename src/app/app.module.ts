@@ -41,6 +41,7 @@ import { ConsumersListComponent } from './settings/caspars-settings/io-config/co
 import { ScreenConsumerFormComponent } from './settings/caspars-settings/io-config/consumers-settings/consumer-add/screen-consumer-form/screen-consumer-form.component';
 import { OutputMatrixComponent } from './output-matrix/output-matrix.component';
 import { LivePageComponent } from './live-page/live-page.component';
+import { MediaPlayerComponent } from './media-player/media-player.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { LivePageComponent } from './live-page/live-page.component';
     ConsumersListComponent,
     ScreenConsumerFormComponent,
     OutputMatrixComponent,
-    LivePageComponent
+    LivePageComponent,
+    MediaPlayerComponent
   ],
   imports: [
     BrowserModule,

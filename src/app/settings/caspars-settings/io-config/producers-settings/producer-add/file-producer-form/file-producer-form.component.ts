@@ -27,7 +27,7 @@ export class FileProducerFormComponent implements OnInit {
 
   }
 
-  producerAdd(type) {
+  producerAdd() {
     console.log('producerAdd');
     console.log(this.producerFileForm.type);
     const settings = new Object();

@@ -80,12 +80,55 @@ button::-moz-focus-inner {
   border: 0;
 }
 
-
 ul{
   margin : 0px;
   padding : 0px;
+
 }
 li{
   margin : 0px;
   padding : 0px;
+  display : inline-block;
+}
+
+.content{
+  margin : 10px;
+  position : relative;
+  left : 0px;
+  right : 0px;
+  vertical-align: top;
+  height : auto;
+  max-height: 750px;
+  overflow-y: scroll;
+}
+
+
+header{
+  position : relative;
+  top : 0px;
+  left : 0px;
+  right : 0px;
+  background-color : @brightColor;
+  color : rgb(30,30,30);
+
+}
+
+header h2{
+  margin : 0px;
+  font-size : 20px;
+  padding : 0px;
+  display : inline-block;
+  margin : 10px;
+}
+
+header .selectBtn{
+  display : inline-block;
+  margin : 10px;
+}
+
+section{
+  position : relative;
+  display : inline-block;
+  margin-top : 20px;
+  width : 100%;
 }

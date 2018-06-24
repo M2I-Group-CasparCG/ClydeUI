@@ -180,8 +180,8 @@ export class SwitchBar2dComponent implements OnInit {
    *  API call to add a layer to a caspar instance
    * @param settings
    */
-  layerAdd(settings) {
-    settings = new Object();
+  layerAdd() {
+    const settings = new Object();
     settings['name'] = 'DSK' + (this.layers.size + 1);
     settings['channelId'] = 2;
     this._apiCallService.layerAdd(this.casparId, settings)

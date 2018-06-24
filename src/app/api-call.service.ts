@@ -57,6 +57,10 @@ export class ApiCallService {
     return this.http.delete(url);
   }
 
+  casparGetMedias (casparId) {
+    const url = `${apiUrl}/caspars/${casparId}/medias/`;
+    return this.http.get(url);
+  }
   /**
    * Producers
    */
@@ -209,7 +213,56 @@ export class ApiCallService {
     return this.http.delete(url, httpOptions);
   }
 
+  /**
+  * DDR
+  */
+  mediaPlayerGetPlaylist(casparId, mediaPlayerId) {
+    const url = `${apiUrl}/caspars/${casparId}/ddr/${mediaPlayerId}/playlist`;
+    return this.http.get(url, httpOptions);
+  }
+  mediaPlayerPlay(casparId, mediaPlayerId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/ddr/${mediaPlayerId}/play`;
+    return this.http.post(url, body, httpOptions);
+  }
+  mediaPlayerPause(casparId, mediaPlayerId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/ddr/${mediaPlayerId}/pause`;
+    return this.http.post(url, body, httpOptions);
+  }
+  mediaPlayerNext(casparId, mediaPlayerId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/ddr/${mediaPlayerId}/next`;
+    return this.http.post(url, body, httpOptions);
+  }
+  mediaPlayerPrevious(casparId, mediaPlayerId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/ddr/${mediaPlayerId}/previous`;
+    return this.http.post(url, body, httpOptions);
+  }
+  mediaPlayerPlaylistLoop(casparId, mediaPlayerId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/ddr/${mediaPlayerId}/playlistLoop`;
+    return this.http.post(url, body, httpOptions);
+  }
+  mediaPlayerAutoPlay(casparId, mediaPlayerId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/ddr/${mediaPlayerId}/autoPlay`;
+    return this.http.post(url, body, httpOptions);
+  }
 
+  /**
+   * PLAYLIST
+   */
+  playlistAddMedia(casparId, playlistId, mediaId) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/playlists/${playlistId}/files/${mediaId}`;
+    return this.http.post(url, body, httpOptions);
+  }
+  playlistRemoveMedia(casparId, playlistId, mediaIndex) {
+    const url = `${apiUrl}/caspars/${casparId}/playlists/${playlistId}/index/${mediaIndex}`;
+    return this.http.delete(url, httpOptions);
+  }
 
 
 }

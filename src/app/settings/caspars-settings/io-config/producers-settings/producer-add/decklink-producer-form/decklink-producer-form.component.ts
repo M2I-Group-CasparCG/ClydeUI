@@ -26,7 +26,7 @@ export class DecklinkProducerFormComponent implements OnInit {
     this.producerDecklinkForm.type = 'decklink';
   }
 
-  producerAdd(type) {
+  producerAdd() {
     console.log('producerAdd');
     console.log(this.producerDecklinkForm.type);
     const settings = new Object();

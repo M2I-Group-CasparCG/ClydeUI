@@ -24,7 +24,7 @@ export class StreamProducerFormComponent implements OnInit {
     this.producerStreamForm.type = 'stream';
   }
 
-  producerAdd(type) {
+  producerAdd() {
     console.log('producerAdd');
     console.log(this.producerStreamForm.type);
     const settings = new Object();

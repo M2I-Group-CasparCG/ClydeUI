@@ -1,0 +1,88 @@
+@import '../style/common.less';
+
+@headerHeight : 90px;
+header{
+  height : @headerHeight
+}
+// section{
+//   top : @headerHeight + 20px;
+// }
+
+.control{
+  border : 5px solid @brightColor;
+  padding : 10px;
+  position : relative;
+  text-align: center;
+}
+.control button {
+  background-color: inherit;
+}
+.control button img{
+  width : 40px;
+  height : 40px;
+}
+.control ul{
+  display: inline-block;
+}
+.control .transport{
+  margin : 0 auto;
+}
+.control .transport button{
+  margin-left : 5px;
+  margin-right : 5px;
+}
+
+.control .playlistSettings{
+  position : absolute;
+  right : 15px;
+}
+
+.progressBar{
+  width : 100%;
+  height : 60px;
+}
+.progressBar .bar{
+  display : inline-block;
+  background-color : @greenActive;
+  min-width : 1px;
+  height : 40px;
+}
+.progressBar .time{
+  position : relative;
+}
+.progressBar .time div{
+  display : inline-block;
+}
+.progressBar .current{
+
+}
+.progressBar .remaining{
+  position : absolute;
+  right : 0px;
+}
+.playlist li{
+  display : block;
+  border : 1px solid @brightColor;
+  padding : 0px;
+  margin : 5px;
+}
+
+.playlist .label{
+  font-size : 18px;
+  font-weight: bold;
+  margin : 10px;
+  margin-bottom : 0px;
+}
+
+.playlist ul ul li{
+  display : inline-block;
+  font-size : 14px;
+  margin-left : 10px;
+  margin-right : 10px;
+  border : none;
+}
+
+.playlist .active{
+  background-color : @brightColor;
+  color : @darkColor;
+}

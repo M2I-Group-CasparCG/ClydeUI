@@ -1,0 +1,147 @@
+
+
+<div class="content">
+  <header>
+    <h2>
+      Media Player
+    </h2>
+    <div>
+      <clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
+      <div class="selectBtn">
+          <label>
+              MediaPlayer :
+          </label>
+          <select (change)="setMediaPlayerId($event)">
+              <option value="" selected disabled hidden>Choose here</option>
+              <option *ngFor="let mediaPlayer of mediaPlayers.values()" (load)="setMediaPlayerId($event)" [(ngModel)]="mediaPlayerId" [selected]="mediaPlayer.id == mediaPlayers.keys().next().value ? true : null" >
+                {{ mediaPlayer.label }}
+            </option>
+          </select>
+          Add Media :
+          <select #selectedMedia>
+
+            <option *ngFor="let media of mediaList.values()"  value="{{media.id}}"> {{media.label}} </option>
+          </select>
+          <button (click)="addMedia(selectedMedia.value)">
+              ADD
+          </button>
+      </div>
+    </div>
+  </header>
+  <section>
+    <div class="control">
+      <ul class="transport">
+        <li>
+          <button (click)="mediaPlayerPrevious()">
+              <img src="../../assets/previous.png"/>
+          </button>
+        </li>
+        <li>
+            <button (click)="mediaPlayerPlay()" class="playBtn">
+                <div *ngIf="!paused; then activePlay else pausedPlay"></div>
+                  <ng-template #activePlay>
+                      <img src="../../assets/play_active.png"/>
+                  </ng-template>
+                  <ng-template #pausedPlay>
+                      <img src="../../assets/play.png"/>
+                  </ng-template>
+            </button>
+        </li>
+        <li>
+            <button (click)="mediaPlayerNext()">
+                <img src="../../assets/next.png"/>
+            </button>
+        </li>
+        <li>
+            <button (click)="mediaPlayerStop()">
+                <img src="../../assets/stop.png"/>
+            </button>
+        </li>
+      </ul>
+      <ul class="playlistSettings">
+        <li>
+            <button (click)="setPlaylistLoop()">
+                <div *ngIf="playlistLoop; then activeLoop else loop"></div>
+                <ng-template #activeLoop>
+                    <img src="../../assets/loop_active.png"/>
+                </ng-template>
+                <ng-template #loop>
+                    <img src="../../assets/loop.png"/>
+                </ng-template>
+            </button>
+        </li>
+        <li>
+            <button (click)="setPlaylistAutoPlay()">
+                <div *ngIf="playlistAutoPlay; then activeAutoPlay else autoPlay"></div>
+                <ng-template #activeAutoPlay>
+                    <img src="../../assets/autoplay_active.png"/>
+                </ng-template>
+                <ng-template #autoPlay>
+                    <img src="../../assets/autoplay.png"/>
+                </ng-template>
+            </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="progressBar">
+      <div class="bar" [style.width]="barWidth+'%'">
+      </div>
+      <div class="time">
+        <div class="current">
+            Current : {{ currentTime }}
+        </div>
+        <div class="remaining">
+            Remaining : {{ remainingTime }}
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="playlist">
+      <ul>
+        <li *ngFor="let media of playlist.list.values(); let i = index" value="{{i+1-1}}" [class.active]="playlistMedia.value == currentMediaIndex" #playlistMedia>
+          <div class="label">
+            {{ media.label }}
+          </div>
+
+          <ul>
+            <li>
+                <div  class="size">
+                    {{ media.formattedSize }}
+                </div>
+            </li>
+            <li>
+                <div>
+                    {{ media.duration }}
+                </div>
+            </li>
+            <li>
+                <div>
+                    {{ media.fullPath }}
+                </div>
+            </li>
+            <li>
+              <div>
+                  Index : {{playlistMedia.value}}
+              </div>
+            </li>
+            <li>
+                <button (click)="removeMedia(playlistMedia.value)">
+                    Remove
+                </button>
+            </li>
+          </ul>
+
+
+
+
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+
