@@ -101,7 +101,7 @@
 
     <div class="playlist">
       <ul>
-        <li *ngFor="let media of playlist.list.values(); let i = index" value="{{i+1-1}}" [class.active]="playlistMedia.value == currentMediaIndex" #playlistMedia>
+        <li *ngFor="let media of playlist.list.values(); let i = index" value="{{i+1-1}}" [class.active]="playlistMedia.value == currentIndex" #playlistMedia>
           <div class="label">
             {{ media.label }}
           </div>

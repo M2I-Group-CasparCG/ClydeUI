@@ -22,7 +22,7 @@ export class MediaPlayerComponent implements OnInit {
   // html variables
 
   currentMedia = null;
-  currentMediaIndex;
+  currentIndex;
   currentMediaPath = '';
   currentTime = '';
   remainingTime = '';
@@ -66,8 +66,8 @@ export class MediaPlayerComponent implements OnInit {
 
 
   mediaPlayerEditAnalysis (object) {
+    console.log(JSON.stringify(object));
     if (this.casparId !== null && this.currentMediaPlayer !== null) {
-      console.log('!');
       switch (object.property) {
         case 'paused' : {
           this.mediaPlayers.get(object.id).paused = object.value;
@@ -83,7 +83,6 @@ export class MediaPlayerComponent implements OnInit {
           this.playlistAutoPlay = object.value;
         }break;
         case 'playlistLoop' : {
-          console.log('coucou');
           this.mediaPlayers.get(object.id).playlistLoop = object.value;
           this.playlistLoop = object.value;
         }break;
@@ -105,9 +104,9 @@ export class MediaPlayerComponent implements OnInit {
           this.mediaPlayers.get(object.id).currentFileFrame = object.value;
           this.barWidth =  object.value /  this.currentMedia.frameNumber * 100;
         }break;
-        case 'currentMediaIndex' : {
-          this.mediaPlayers.get(object.id).currentMediaIndex = object.value;
-          this.currentMediaIndex = object.value;
+        case 'currentIndex' : {
+          this.mediaPlayers.get(object.id).currentIndex = object.value;
+          this.currentIndex = object.value;
         }break;
       }
 
@@ -246,7 +245,7 @@ export class MediaPlayerComponent implements OnInit {
     this.currentMediaPlayer = this.mediaPlayers.get(id);
 
     this.currentMedia = this.currentMediaPlayer.currentMedia;
-    this.currentMediaIndex = this.currentMediaPlayer.currentMediaIndex;
+    this.currentIndex = this.currentMediaPlayer.currentIndex;
     this.currentMediaPath = this.currentMediaPlayer.currentMedia.fullPath;
     this.playlistAutoPlay = this.currentMediaPlayer.autoPlay;
     this.playlistLoop = this.currentMediaPlayer.playlistLoop;

@@ -150,6 +150,7 @@ export class SocketIoService {
    mediaPlayerEdit = () => {
     return Observable.create((observer) => {
       this.socket.on('ddrEdit', (msg) => {
+        console.log(JSON.stringify(msg));
         observer.next(msg);
       });
     });
