@@ -42,6 +42,9 @@ import { ScreenConsumerFormComponent } from './settings/caspars-settings/io-conf
 import { OutputMatrixComponent } from './output-matrix/output-matrix.component';
 import { LivePageComponent } from './live-page/live-page.component';
 import { MediaPlayerComponent } from './media-player/media-player.component';
+// tslint:disable-next-line:max-line-length
+import { DdrProducerFormComponent } from './settings/caspars-settings/io-config/producers-settings/producer-add/ddr-producer-form/ddr-producer-form.component';
+
 
 @NgModule({
   declarations: [
@@ -68,7 +71,8 @@ import { MediaPlayerComponent } from './media-player/media-player.component';
     ScreenConsumerFormComponent,
     OutputMatrixComponent,
     LivePageComponent,
-    MediaPlayerComponent
+    MediaPlayerComponent,
+    DdrProducerFormComponent,
   ],
   imports: [
     BrowserModule,

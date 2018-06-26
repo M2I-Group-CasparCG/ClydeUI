@@ -1,7 +1,7 @@
 
 
 <div class="content">
-  <header>
+  <header >
     <h2>
       Media Player
     </h2>
@@ -11,10 +11,10 @@
           <label>
               MediaPlayer :
           </label>
-          <select (change)="setMediaPlayerId($event)">
+          <select (change)="setMediaPlayerId(mediaPlayerSelect.value)" #mediaPlayerSelect>
               <option value="" selected disabled hidden>Choose here</option>
-              <option *ngFor="let mediaPlayer of mediaPlayers.values()" (load)="setMediaPlayerId($event)" [(ngModel)]="mediaPlayerId" [selected]="mediaPlayer.id == mediaPlayers.keys().next().value ? true : null" >
-                {{ mediaPlayer.label }}
+              <option *ngFor="let mediaPlayer of mediaPlayers.values()" value={{mediaPlayer.id}} (load)="setMediaPlayerId($event)" [(ngModel)]="mediaPlayerId" [selected]="mediaPlayer.id == mediaPlayers.keys().next().value ? true : null" >
+                {{ mediaPlayer.name }}
             </option>
           </select>
           Add Media :
@@ -28,7 +28,7 @@
       </div>
     </div>
   </header>
-  <section>
+  <section *ngIf="mediaPlayers.size > 0 ">
     <div class="control">
       <ul class="transport">
         <li>
@@ -38,7 +38,7 @@
         </li>
         <li>
             <button (click)="mediaPlayerPlay()" class="playBtn">
-                <div *ngIf="!paused; then activePlay else pausedPlay"></div>
+                <div *ngIf="! mediaPlayer.paused; then activePlay else pausedPlay"></div>
                   <ng-template #activePlay>
                       <img src="../../assets/play_active.png"/>
                   </ng-template>
@@ -61,7 +61,7 @@
       <ul class="playlistSettings">
         <li>
             <button (click)="setPlaylistLoop()">
-                <div *ngIf="playlistLoop; then activeLoop else loop"></div>
+                <div *ngIf="mediaPlayer.playlistLoop; then activeLoop else loop"></div>
                 <ng-template #activeLoop>
                     <img src="../../assets/loop_active.png"/>
                 </ng-template>
@@ -72,7 +72,7 @@
         </li>
         <li>
             <button (click)="setPlaylistAutoPlay()">
-                <div *ngIf="playlistAutoPlay; then activeAutoPlay else autoPlay"></div>
+                <div *ngIf="mediaPlayer.autoPlay; then activeAutoPlay else autoPlay"></div>
                 <ng-template #activeAutoPlay>
                     <img src="../../assets/autoplay_active.png"/>
                 </ng-template>
@@ -85,23 +85,24 @@
     </div>
 
     <div class="progressBar">
-      <div class="bar" [style.width]="barWidth+'%'">
+      <div class="bar" [style.width]="mediaPlayer.barWidth+'%'">
       </div>
       <div class="time">
         <div class="current">
-            Current : {{ currentTime }}
+            Current : {{ mediaPlayer.currentTime }}
         </div>
         <div class="remaining">
-            Remaining : {{ remainingTime }}
+            Remaining : {{ mediaPlayer.remainingTime }}
         </div>
       </div>
 
 
     </div>
 
-    <div class="playlist">
+    <div class="playlist" >
       <ul>
-        <li *ngFor="let media of playlist.list.values(); let i = index" value="{{i+1-1}}" [class.active]="playlistMedia.value == currentIndex" #playlistMedia>
+        <li *ngFor="let media of mediaPlayer.mediaList.values(); let i = index" value={{i+1-1}} [class.active]="playlistMedia.value === mediaPlayer.currentIndex" #playlistMedia>
+
           <div class="label">
             {{ media.label }}
           </div>
@@ -141,6 +142,22 @@
       </ul>
     </div>
   </section>
+  <section *ngIf="mediaPlayer.mediaList.length == 0 ">
+      <p>
+        Not media found in the player. You can add medias with dropdown list in the header
+      </p>
+  </section>
+  <section *ngIf="mediaPlayers.size == 0 ">
+      <p>
+        Not media player seems to be configured ! You can add one in the Settings page.
+      </p>
+
+      <button routerLink="/settings" routerLinkActive="active">Go to the settings</button>
+  </section>
+  <!-- <section *ngIf="mediaPlayers == null">
+
+    Not media player seems to be configured ! You can add one in the Settings page.
+  </section> -->
 
 </div>
 

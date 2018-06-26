@@ -13,6 +13,9 @@
         <option value="DECKLINK" >
             Decklink producer
         </option>
+        <option value="DDR" >
+          MediaPlayer
+      </option>
     </select>
 
     <clydeui-file-producer-form *ngIf="inputSelected=='FILE'" (whenFormCompleted)="formCompleted($event)" >
@@ -21,3 +24,5 @@
     </clydeui-decklink-producer-form>
     <clydeui-stream-producer-form *ngIf="inputSelected=='STREAM'" (whenFormCompleted)="formCompleted($event)" >
       </clydeui-stream-producer-form>
+      <clydeui-ddr-producer-form *ngIf="inputSelected=='DDR'" (whenFormCompleted)="formCompleted($event)" >
+      </clydeui-ddr-producer-form>
