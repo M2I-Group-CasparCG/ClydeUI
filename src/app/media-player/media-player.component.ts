@@ -9,6 +9,7 @@ class MediaPlayer {
   currentTime: String;
   remainingTime: String;
   currentIndex: Number;
+  totalFrame: number;
   mediaList: Array<Object>;
   barWidth: Number;
   playlistId: Number;
@@ -52,14 +53,7 @@ export class MediaPlayerComponent implements OnInit {
 
   ngOnInit() {
 
-    this.mediaPlayer.currentTime = '';
-    this.mediaPlayer.remainingTime = '';
-    this.mediaPlayer.barWidth = 0;
-    this.mediaPlayer.currentIndex = -1;
-    this.mediaPlayer.paused = true;
-    this.mediaPlayer.autoPlay = false;
-    this.mediaPlayer.playlistLoop = false;
-    this.mediaPlayer.mediaList = new Array();
+
 
     this._socketIo.mediaPlayerEdit()
     .subscribe((msg: string) => {
@@ -75,6 +69,7 @@ export class MediaPlayerComponent implements OnInit {
         this.mediaPlayer.barWidth = mediaPlayer.currentFileFrame / mediaPlayer.totalFileFrame * 100;
         this.mediaPlayer.paused = mediaPlayer.paused;
         this.mediaPlayer.autoPlay = mediaPlayer.autoPlay;
+        this.mediaPlayer.totalFrame = parseInt(mediaPlayer.totalFileFrame, 10);
         this.mediaPlayer.playlistLoop = mediaPlayer.playlistLoop;
         if (JSON.stringify(this.mediaPlayer.mediaList) !== JSON.stringify(mediaPlayer.playlist.list)) {
           this.mediaPlayer.mediaList = mediaPlayer.playlist.list;
@@ -100,60 +95,7 @@ export class MediaPlayerComponent implements OnInit {
 
   }
 
-  AfterViewInit() {
 
-  }
-
-
-  mediaPlayerEditAnalysis (object) {
-    // console.log(JSON.stringify(object.id));
-    // if (this.casparId !== null && this.currentMediaPlayer !== null) {
-
-    //   if (object.id === this.currentMediaPlayer.id) {
-    //     switch (object.property) {
-    //       case 'paused' : {
-    //         this.mediaPlayers.get(object.id).paused = object.value;
-    //         this.paused = object.value;
-    //       }break;
-    //       case 'currentMedia' : {
-    //         this.mediaPlayers.get(object.id).currentMedia = object.value;
-    //         this.currentMedia = object.value;
-    //         this.currentMediaPath = object.value.fullPath;
-    //       }break;
-    //       case 'autoPlay' : {
-    //         this.mediaPlayers.get(object.id).autoPlay = object.value;
-    //         this.playlistAutoPlay = object.value;
-    //       }break;
-    //       case 'playlistLoop' : {
-    //         this.mediaPlayers.get(object.id).playlistLoop = object.value;
-    //         this.playlistLoop = object.value;
-    //       }break;
-    //       case 'fileTime' : {
-    //         this.mediaPlayers.get(object.id).fileTime = object.value;
-    //       }break;
-    //       case 'formattedFileTime' : {
-    //         this.mediaPlayers.get(object.id).formattedFileTime = object.value;
-    //         this.currentTime = object.value;
-    //       }break;
-    //       case 'remainingTime' : {
-    //         this.mediaPlayers.get(object.id).remainingTime = object.value;
-    //       }break;
-    //       case 'formattedRemainingTime' : {
-    //         this.mediaPlayers.get(object.id).formattedRemainingTime = object.value;
-    //         this.remainingTime = object.value;
-    //       }break;
-    //       case 'currentFileFrame' : {
-    //         this.mediaPlayers.get(object.id).currentFileFrame = object.value;
-    //         this.barWidth =  object.value /  this.currentMedia.frameNumber * 100;
-    //       }break;
-    //       case 'currentIndex' : {
-    //         this.mediaPlayers.get(object.id).currentIndex = object.value;
-    //         this.currentIndex = object.value;
-    //       }break;
-    //     }
-    //   }
-  // }
-}
   mediaPlayersGet() {
     // console.log('mediaPlayersGet');
     // console.log(this.casparId);
@@ -230,6 +172,14 @@ export class MediaPlayerComponent implements OnInit {
     }
   }
 
+  mediaPlayerPlayId (index) {
+    this._apiCallService.mediaPlayerPlayId(this.casparId, this.mediaPlayerId, index)
+    .subscribe(
+      data => {
+      }
+    );
+  }
+
   mediaPlayerPause () {
     this._apiCallService.mediaPlayerPause(this.casparId, this.mediaPlayerId)
       .subscribe(
@@ -284,6 +234,20 @@ export class MediaPlayerComponent implements OnInit {
       );
   }
 
+  seekMedia(event) {
+
+    const seekedFrame = Math.floor(event.offsetX / document.getElementById('progressBar').offsetWidth * this.mediaPlayer.totalFrame);
+    console.log('seek' + seekedFrame);
+    this._apiCallService.mediaPlayerSeek(this.casparId, this.mediaPlayerId, seekedFrame)
+    .subscribe(
+        data => {
+          console.log(JSON.stringify(data));
+        }
+    );
+    // this.mediaPlayer.barWidth = mediaPlayer.currentFileFrame / mediaPlayer.totalFileFrame * 100;
+
+  }
+
   setCasparId(id) {
     this.casparId = id;
     this.mediaPlayersGet();
@@ -298,24 +262,9 @@ export class MediaPlayerComponent implements OnInit {
     console.log(this.mediaPlayerId);
     console.log(this.casparId);
     console.log(JSON.stringify(this.mediaPlayers));
-
-    /**
-     * init values
-     */
+    this.mediaPlayer = new MediaPlayer();
+    this.mediaPlayer.barWidth = 0;
     await this.mediasGet();
-
-    // console.log('____________');
-    // console.log(JSON.parse(this.playlist));
-    // this.currentMediaPlayer = this.mediaPlayers.get(id);
-    // this.currentMedia = this.currentMediaPlayer.currentMedia;
-    // this.currentIndex = this.currentMediaPlayer.currentIndex;
-    // this.currentMediaPath = this.currentMediaPlayer.currentMedia.fullPath;
-    // this.playlistAutoPlay = this.currentMediaPlayer.autoPlay;
-    // this.playlistLoop = this.currentMediaPlayer.playlistLoop;
-    // this.barWidth = this.currentMediaPlayer.currentFileFrame /  this.currentMedia.frameNumber * 100;
-    // this.paused = this.currentMediaPlayer.paused;
-    // this.currentTime = this.currentMediaPlayer.formattedFileTime;
-    // this.remainingTime = this.currentMediaPlayer.formattedRemainingTime;
 
   }
 

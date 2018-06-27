@@ -225,6 +225,16 @@ export class ApiCallService {
     const url = `${apiUrl}/caspars/${casparId}/ddr/${mediaPlayerId}/play`;
     return this.http.post(url, body, httpOptions);
   }
+  mediaPlayerPlayId(casparId, mediaPlayerId, index) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/ddr/${mediaPlayerId}/playId/${index}`;
+    return this.http.post(url, body, httpOptions);
+  }
+  mediaPlayerSeek(casparId, mediaPlayerId, frame) {
+    const body = '';
+    const url = `${apiUrl}/caspars/${casparId}/ddr/${mediaPlayerId}/seek/${frame}`;
+    return this.http.post(url, body, httpOptions);
+  }
   mediaPlayerPause(casparId, mediaPlayerId) {
     const body = '';
     const url = `${apiUrl}/caspars/${casparId}/ddr/${mediaPlayerId}/pause`;

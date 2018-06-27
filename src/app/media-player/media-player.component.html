@@ -84,7 +84,7 @@
       </ul>
     </div>
 
-    <div class="progressBar">
+    <div class="progressBar" (click)="seekMedia($event)" id="progressBar">
       <div class="bar" [style.width]="mediaPlayer.barWidth+'%'">
       </div>
       <div class="time">
@@ -101,7 +101,7 @@
 
     <div class="playlist" >
       <ul>
-        <li *ngFor="let media of mediaPlayer.mediaList.values(); let i = index" value={{i+1-1}} [class.active]="playlistMedia.value === mediaPlayer.currentIndex" #playlistMedia>
+        <li *ngFor="let media of mediaPlayer.mediaList.values(); let i = index" value={{i+1-1}} [class.active]="playlistMedia.value === mediaPlayer.currentIndex" #playlistMedia (click)="mediaPlayerPlayId(playlistMedia.value)">
 
           <div class="label">
             {{ media.label }}
