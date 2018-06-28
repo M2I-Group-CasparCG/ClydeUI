@@ -59,6 +59,8 @@ export class MediaPlayerComponent implements OnInit {
     .subscribe((msg: string) => {
 
       const mediaPlayer = JSON.parse(msg);
+      console.log('__________');
+      console.log(mediaPlayer);
       if (mediaPlayer.id === this.mediaPlayerId ) {
         // console.log(msg);
         this.currentMediaPlayer = mediaPlayer;
@@ -71,8 +73,10 @@ export class MediaPlayerComponent implements OnInit {
         this.mediaPlayer.autoPlay = mediaPlayer.autoPlay;
         this.mediaPlayer.totalFrame = parseInt(mediaPlayer.totalFileFrame, 10);
         this.mediaPlayer.playlistLoop = mediaPlayer.playlistLoop;
-        if (JSON.stringify(this.mediaPlayer.mediaList) !== JSON.stringify(mediaPlayer.playlist.list)) {
+        if (JSON.stringify(this.mediaPlayer.mediaList) != JSON.stringify(mediaPlayer.playlist.list)) {
+         
           this.mediaPlayer.mediaList = mediaPlayer.playlist.list;
+          // console.log(JSON.stringify(this.mediaPlayer.mediaList));
         }
         this.mediaPlayer.playlistId = mediaPlayer.playlist.id;
         this.mediaPlayer.currentIndex = mediaPlayer.currentIndex;
@@ -104,20 +108,24 @@ export class MediaPlayerComponent implements OnInit {
         data => {
           this.mediaPlayers = new Map();
           let result;
-          console.log(JSON.stringify(data));
+          // console.log(JSON.stringify(data));
           result = data;
           result.forEach(element => {
             if (element[1].type === 'DDR') {
               // console.log('id');
               // console.log(element[0]);
               // console.log('id');
-              // console.log(JSON.stringify(element[1]));
+              console.log('_____________');
+              console.log(element[0]);
+              console.log(JSON.stringify(element[1]));
               this.mediaPlayers.set(element[0], element[1]);
+              console.log(JSON.stringify(this.mediaPlayers));
             }
           });
           if (this.mediaPlayers.size > 0) {
             console.log('mediaPlayers Detected !');
-
+            console.log(JSON.stringify(this.mediaPlayers));
+            console.log(this.mediaPlayers.keys().next().value);
             this.setMediaPlayerId(this.mediaPlayers.keys().next().value);
 
           }
@@ -248,22 +256,31 @@ export class MediaPlayerComponent implements OnInit {
 
   }
 
-  setCasparId(id) {
+  async setCasparId(id) {
     this.casparId = id;
-    this.mediaPlayersGet();
-    this.mediaListGet();
+    console.log('#######');
+    console.log(id);
+    await this.mediaPlayersGet();
+    await this.mediaListGet();
   }
 
   async setMediaPlayerId(id) {
     console.log('MEDIA PLAYER CHANGED !!!');
 
     this.mediaPlayerId = parseInt(id, 10);
-    this.currentMediaPlayer = new Map();
+    // this.currentMediaPlayer = new Map();
+    console.log('*****************');
     console.log(this.mediaPlayerId);
     console.log(this.casparId);
-    console.log(JSON.stringify(this.mediaPlayers));
-    this.mediaPlayer = new MediaPlayer();
-    this.mediaPlayer.barWidth = 0;
+    // this.mediaPlayer.paused =  false;
+    // this.mediaPlayer.playlistLoop = false;
+    // this.mediaPlayer.autoPlay = true;
+    // this.mediaPlayer.currentTime = '';
+    // this.mediaPlayer.remainingTime = '';
+    // this.mediaPlayer.currentIndex = -1;
+    // this.mediaPlayer.totalFrame = -1;
+    // this.mediaPlayer.mediaList = [];
+    // this.mediaPlayer.playlistId =  -1;
     await this.mediasGet();
 
   }

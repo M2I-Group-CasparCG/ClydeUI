@@ -100,11 +100,14 @@
     </div>
 
     <div class="playlist" >
+            
       <ul>
-        <li *ngFor="let media of mediaPlayer.mediaList.values(); let i = index" value={{i+1-1}} [class.active]="playlistMedia.value === mediaPlayer.currentIndex" #playlistMedia (click)="mediaPlayerPlayId(playlistMedia.value)">
-
+        <!-- <li *ngFor="let media of mediaPlayer.mediaList.values(); let i = index" value={{i+1-1}} [class.active]="playlistMedia.value === mediaPlayer.currentIndex" #playlistMedia (click)="mediaPlayerPlayId(playlistMedia.value)"> -->
+            <li *ngFor="let media of mediaPlayer.mediaList; let i = index" value={{i+1-1}} [class.active]="playlistMedia.value === mediaPlayer.currentIndex" #playlistMedia (click)="mediaPlayerPlayId(playlistMedia.value)">
+                
           <div class="label">
             {{ media.label }}
+           
           </div>
 
           <ul>
