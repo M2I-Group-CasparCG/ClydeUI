@@ -73,8 +73,8 @@ export class MediaPlayerComponent implements OnInit {
         this.mediaPlayer.autoPlay = mediaPlayer.autoPlay;
         this.mediaPlayer.totalFrame = parseInt(mediaPlayer.totalFileFrame, 10);
         this.mediaPlayer.playlistLoop = mediaPlayer.playlistLoop;
-        if (JSON.stringify(this.mediaPlayer.mediaList) != JSON.stringify(mediaPlayer.playlist.list)) {
-         
+        if (JSON.stringify(this.mediaPlayer.mediaList) !== JSON.stringify(mediaPlayer.playlist.list)) {
+
           this.mediaPlayer.mediaList = mediaPlayer.playlist.list;
           // console.log(JSON.stringify(this.mediaPlayer.mediaList));
         }
