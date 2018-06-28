@@ -11,20 +11,9 @@ pipeline {
         sh 'npm test'
       }
     }
-    stage('Api Tests') {
-      parallel {
-        stage('npm run') {
-          steps {
-            sh 'npm run dev'
-          }
-        }
-        stage('newman tests') {
-          steps {
-            sleep 10
-            sh 'newman run ./utilities/API/CasparCGAPI_tests.postman_collection.json -e ./utilities/API/CasparCGAPI.postman_environment.json'
-            sh 'pkill node'
-          }
-        }
+    stage('ng-build') {
+      steps {
+        sh 'ng build'
       }
     }
     stage('Sonar-Scan') {
@@ -34,4 +23,3 @@ pipeline {
     }
   }
 }
-
