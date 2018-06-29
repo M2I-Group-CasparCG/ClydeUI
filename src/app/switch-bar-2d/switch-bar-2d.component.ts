@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../api-call.service';
 import { SocketIoService } from '../socket-io.service';
-import { CasparGetService } from '../caspar-get.service';
 
 class LayerGeometry {
   scale: number;
@@ -31,8 +30,7 @@ export class SwitchBar2dComponent implements OnInit {
   geometryGap = 0.01;
 
   constructor(  private _apiCallService: ApiCallService,
-                private _socketIo: SocketIoService,
-                private _casparGetService: CasparGetService ) { }
+                private _socketIo: SocketIoService ) { }
 
   ngOnInit() {
 
