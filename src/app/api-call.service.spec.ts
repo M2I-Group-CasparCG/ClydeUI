@@ -16,10 +16,7 @@ describe('ApiCallService', () => {
   });
 
 
-
-const apiUrl = 'http://localhost:3000/api/v1';
-
-  it('should be created', inject([ApiCallService], (service: ApiCallService) => {     
-    expect(service).toBeTruthy();
-  }));
+  // it('should be created', inject([ApiCallService], (service: ApiCallService) => {     
+  //   expect(service).toBeTruthy();
+  // }));
 });
