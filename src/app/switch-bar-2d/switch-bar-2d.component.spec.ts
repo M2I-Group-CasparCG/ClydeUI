@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SwitchBar2dComponent } from './switch-bar-2d.component';
 
 describe('SwitchBar2dComponent', () => {
@@ -19,7 +18,7 @@ describe('SwitchBar2dComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
 });
