@@ -1,0 +1,26 @@
+
+
+
+<p>
+  API connection information : {{ apiSettings.url }}
+</p>
+
+<form (ngSubmit)="apiSettingsSubmit()" #apiSettingsForm="ngForm">
+  <label for="apiIpAddr">IP Address : </label>
+  <input id="apiIpAddr"  name="ipAddr" [(ngModel)]="apiSettings.ipAddr" required >
+  <label for="apiPort">Port : </label>
+  <input id="apiPort"  name="port" [(ngModel)]="apiSettings.port" required >
+  <button type="submit">Apply</button>
+</form>
+
+<p>
+  SocketIO connection information : {{ socketIoSettings.url}}
+</p>
+<form (ngSubmit)="socketIoSettingsSubmit()" #socketIoSettingsForm="ngForm">
+  <label for="socketIpAddr">IP Address : </label>
+  <input id="socketIpAddr"  name="ipAddr" [(ngModel)]="socketIoSettings.ipAddr" required >
+  <label for="socketPort">Port : </label>
+  <input id="socketPort"  name="port" [(ngModel)]="socketIoSettings.port" required >
+  <button type="submit">Apply</button>
+</form>
+
