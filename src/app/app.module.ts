@@ -6,11 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SwitchBar2dComponent } from './switch-bar-2d/switch-bar-2d.component';
 
-//
 import { HttpClientModule } from '@angular/common/http';  // prise en charge HTTP client pour api  calls
 import { ApiCallService } from './api-call.service';
 import { SocketIoService } from './socket-io.service';
-import { CasparGetService } from './caspar-get.service';
 import { IoConfigComponent } from './settings/caspars-settings/io-config/io-config.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -84,7 +82,6 @@ import { DdrProducerFormComponent } from './settings/caspars-settings/io-config/
   providers: [
     ApiCallService,
     SocketIoService,
-    CasparGetService
   ],
   bootstrap: [AppComponent]
 })
