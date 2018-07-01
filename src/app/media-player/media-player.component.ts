@@ -59,8 +59,8 @@ export class MediaPlayerComponent implements OnInit {
     .subscribe((msg: string) => {
 
       const mediaPlayer = JSON.parse(msg);
-      console.log('__________');
-      console.log(mediaPlayer);
+      // console.log('__________');
+      // console.log(msg);
       if (mediaPlayer.id === this.mediaPlayerId ) {
         // console.log(msg);
         this.currentMediaPlayer = mediaPlayer;
@@ -68,7 +68,7 @@ export class MediaPlayerComponent implements OnInit {
         // récupération des éléments
         this.mediaPlayer.currentTime = mediaPlayer.formattedFileTime;
         this.mediaPlayer.remainingTime = mediaPlayer.formattedRemainingTime;
-        this.mediaPlayer.barWidth = mediaPlayer.currentFileFrame / mediaPlayer.totalFileFrame * 100;
+        this.mediaPlayer.barWidth = mediaPlayer.fileTime / mediaPlayer.currentMedia.duration * 100;
         this.mediaPlayer.paused = mediaPlayer.paused;
         this.mediaPlayer.autoPlay = mediaPlayer.autoPlay;
         this.mediaPlayer.totalFrame = parseInt(mediaPlayer.totalFileFrame, 10);
@@ -80,7 +80,7 @@ export class MediaPlayerComponent implements OnInit {
         }
         this.mediaPlayer.playlistId = mediaPlayer.playlist.id;
         this.mediaPlayer.currentIndex = mediaPlayer.currentIndex;
-        console.log(this.mediaPlayer.currentIndex);
+        // console.log(this.mediaPlayer.currentIndex);
       }
       // console.log('___________');
       // console.log(mediaPlayer.currentIndex);

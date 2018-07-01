@@ -16,7 +16,9 @@ export class ConsumerAddComponent implements OnInit {
   }
 
   consumerTypeSelected(event) {
+
     const type = event.target.value;
+    console.log(type);
     this.consumerType = type;
   }
 

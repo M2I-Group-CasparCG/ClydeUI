@@ -28,8 +28,6 @@ export class ApiCallService {
 
   apiSettings = new ApiSettings();
 
-
-
   setApiSettings(ipAddr, port) {
 
     this.apiSettings.ipAddr = ipAddr;

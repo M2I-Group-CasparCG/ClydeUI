@@ -18,7 +18,7 @@ export class SocketIoService {
 
   constructor() {
     this.socketIoSettings.ipAddr = '127.0.0.1';
-    this.socketIoSettings.port = 3002;
+    this.socketIoSettings.port = 3001;
     this.socketIoSettings.url = `http://${this.socketIoSettings.ipAddr}:${this.socketIoSettings.port}`;
     this.socket = socketIo.connect(this.socketIoSettings.url);
    }
