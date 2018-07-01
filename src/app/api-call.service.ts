@@ -92,6 +92,12 @@ export class ApiCallService {
     const url = `${ this.apiSettings.url}/caspars/${casparId}/medias/`;
     return this.http.get(url);
   }
+
+  casparScanMedias (casparId) {
+    const body = '';
+    const url = `${this.apiSettings.url}/caspars/${casparId}/medias/`;
+    return this.http.post(url, body, httpOptions);
+  }
   /**
    * Producers
    */

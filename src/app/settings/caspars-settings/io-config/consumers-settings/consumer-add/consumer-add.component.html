@@ -18,11 +18,11 @@
 
   </select>
 
-  <clydeui-screen-consumer-form *ngIf="consumerType=='SCREEN'" (submit)="formCompleted($event)" >
+  <clydeui-screen-consumer-form *ngIf="consumerType=='SCREEN'" [casparId]="casparId"  (submit)="formCompleted($event)" >
     </clydeui-screen-consumer-form>
-  <clydeui-file-consumer-form *ngIf="consumerType=='FILE'" (submit)="formCompleted($event)" >
+  <clydeui-file-consumer-form *ngIf="consumerType=='FILE'" [casparId]="casparId" (submit)="formCompleted($event)" >
   </clydeui-file-consumer-form>
-  <clydeui-decklink-consumer-form *ngIf="consumerType=='DECKLINK'" (submit)="formCompleted($event)" >
+  <clydeui-decklink-consumer-form *ngIf="consumerType=='DECKLINK'" [casparId]="casparId" (submit)="formCompleted($event)" >
   </clydeui-decklink-consumer-form>
-  <clydeui-stream-consumer-form *ngIf="consumerType=='STREAM'" (submit)="formCompleted($event)" >
+  <clydeui-stream-consumer-form *ngIf="consumerType=='STREAM'" [casparId]="casparId" (submit)="formCompleted($event)" >
     </clydeui-stream-consumer-form>

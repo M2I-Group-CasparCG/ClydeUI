@@ -1,4 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ApiCallService } from './../../../../../../api-call.service';
+
 
 class ProducerDecklinkForm {
   type: string;
@@ -17,13 +19,38 @@ class ProducerDecklinkForm {
 })
 export class DecklinkProducerFormComponent implements OnInit {
 
+
+  casparId;
+  caspar;
+  decklinks;
+
+  @Input('casparId') set _casparId(casparId) {
+    this.casparId = casparId;
+    this.getCaspar();
+  }
+
   @Output() whenFormCompleted: EventEmitter<any> = new EventEmitter();
   producerDecklinkForm = new ProducerDecklinkForm();
 
-  constructor() { }
+  constructor(   private _apiCallService: ApiCallService) { }
 
   ngOnInit() {
     this.producerDecklinkForm.type = 'decklink';
+  }
+
+  getCaspar() {
+
+    this._apiCallService.casparGet(this.casparId)
+      .subscribe(
+        data => {
+          this.caspar = data;
+          let element = null;
+          element = data;
+          this.decklinks = element.casparCommon.decklinkCards;
+          console.log('==================');
+          console.log(JSON.stringify(element.casparCommon.decklinkCards[0]));
+        }
+      );
   }
 
   producerAdd() {

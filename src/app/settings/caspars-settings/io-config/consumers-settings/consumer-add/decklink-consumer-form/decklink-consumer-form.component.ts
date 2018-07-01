@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ApiCallService } from './../../../../../../api-call.service';
 
 class ConsumerDecklinkForm {
   type: string;
@@ -19,6 +20,14 @@ class ConsumerDecklinkForm {
   styleUrls: ['../consumer-form.component.less']
 })
 export class DecklinkConsumerFormComponent implements OnInit {
+
+
+  casparId;
+  channels;
+  @Input('casparId') set _casparId(casparId) {
+    this.casparId = casparId;
+    // this.getChannels();
+  }
 
   @Output() submit: EventEmitter<any> = new EventEmitter();
   consumerDecklinkForm = new ConsumerDecklinkForm();

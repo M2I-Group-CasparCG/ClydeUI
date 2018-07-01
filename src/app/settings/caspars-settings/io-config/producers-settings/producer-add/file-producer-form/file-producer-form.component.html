@@ -5,7 +5,12 @@
   </div>
   <div>
     <label for="fileName">File Name</label>
-    <input id="fileName" name="fileName" [(ngModel)]="producerFileForm.fileName" ngPattern="\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}" required>
+    <!-- <input id="fileName" name="fileName" [(ngModel)]="producerFileForm.fileName" ngPattern="\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}" required> -->
+    <select #mediaIdSelect id="fileName" name="fileName" [(ngModel)]="producerFileForm.fileName">
+      <option *ngFor="let media of medias.values()" value={{media.fullPath}} required>
+        {{ media.name}}
+      </option>
+    </select>
   </div>
   <div>
     <label for="playMode">Play Mode</label>
@@ -17,7 +22,5 @@
   </div>
 
   {{ producerFileForm.errorMessage }}
+
 </form>
-
-
-

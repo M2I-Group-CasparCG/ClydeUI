@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ApiCallService } from './../../../../../../api-call.service';
 
 class ConsumerStreamForm {
   type: string;
@@ -20,15 +21,37 @@ class ConsumerStreamForm {
 })
 export class StreamConsumerFormComponent implements OnInit {
 
+  casparId;
+  channels;
+  @Input('casparId') set _casparId(casparId) {
+    this.casparId = casparId;
+    this.getChannels();
+  }
 
   @Output() submit: EventEmitter<any> = new EventEmitter();
   consumerStreamForm = new ConsumerStreamForm();
 
-  constructor() { }
+  constructor(private _apiCallService: ApiCallService) { }
 
   ngOnInit() {
     this.consumerStreamForm.type = 'stream';
   }
+
+  getChannels() {
+    this._apiCallService.channelGetAll(this.casparId)
+      .subscribe(
+        data => {
+          this.channels = new Map();
+          let element = null;
+          element = data;
+          element.forEach(channel => {
+            console.log(JSON.stringify(channel[1]));
+            this.channels.set(channel[0], channel[1]);
+          });
+        }
+      );
+  }
+
 
   formSubmit() {
     const settings = new Object();

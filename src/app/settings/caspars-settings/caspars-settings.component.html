@@ -1,12 +1,79 @@
-<h3>
-  Caspars Settings
-</h3>
+<div class="content">
 
-<section class="left">
-    <clydeui-caspars-list  [caspars]="caspars" (delete)="casparDelete($event)"></clydeui-caspars-list>
-    <clydeui-caspar-add (add)="casparAdd($event)"></clydeui-caspar-add>
-</section>
-<section class="right">
-    <clydeui-io-config></clydeui-io-config>
-</section>
 
+  <header class="header">
+    <h2>
+      CasparCG Settings
+    </h2>
+  </header>
+
+  <div class="add">
+
+      <h4>
+          Add a CasparCG server
+      </h4>
+
+      <form (ngSubmit)="casparAdd(casparAddForm.value)" #casparAddForm="ngForm">
+        <div>
+            <label for="casparName">Name :</label>
+            <input id="caparName" name="name" required ngModel>
+        </div>
+        <div>
+          <label for="casparIp">IP Address :</label>
+          <input id="casparIp" name="ipAddr" required ngModel>
+        </div>
+        <div>
+          <label for="casparPort">Amcp Port :</label>
+          <input id="casparPort" name="amcpPort" value="5250" required ngModel>
+        </div>
+        <div>
+          <label></label>
+          <button type="submit">Add Server</button>
+
+        </div>
+    </form>
+  </div>
+
+  <table>
+    <tr>
+      <th>
+          NAME
+      </th>
+      <th>
+        IP ADDRESS
+      </th>
+      <th colspan="4">
+        ACTIONS
+      </th>
+    </tr>
+    <tr *ngFor="let caspar of caspars.values()">
+      <td>
+          {{caspar.casparCommon.name}}
+      </td>
+      <td>
+          {{caspar.casparCommon.ipAddr}}
+      </td>
+
+      <td>
+          <button (click)="casparScanMedias(caspar.id)">
+            Scan Medias
+          </button>
+      </td>
+      <td>
+          <button (click)="casparRestart(caspar.id)">
+            Restart
+          </button>
+      </td>
+      <td>
+        <button (click)="casparIni(caspar.id)">
+          Re-Init
+        </button>
+        </td>
+        <td>
+          <button (click)="casparDelete(caspar.id)">
+            delete
+          </button>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -125,4 +125,31 @@ export class CasparsSettingsComponent implements OnInit {
     );
   }
 
+
+  casparRestart(casparId) {
+    this._apiCallService.casparRestart(casparId)
+      .subscribe(
+        data => {
+          console.log(data);
+        }
+      );
+  }
+
+  casparIni(casparId) {
+    this._apiCallService.casparIni(casparId)
+    .subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+  }
+
+  casparScanMedias(casparId) {
+    this._apiCallService.casparScanMedias(casparId)
+    .subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+  }
 }

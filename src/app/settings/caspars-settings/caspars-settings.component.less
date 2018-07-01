@@ -1,31 +1,82 @@
-h3{
-  padding-bottom : 20px;
-  border-bottom : 1px solid rgb(210,210,210);
+
+@import '../../style/common.less';
+
+.content{
+  padding-left : 50px;
 }
 
-section{
-  vertical-align: top;
+.header{
+  position : relative;
+  top: -20px;
+  left : 100px;
+  width : 600px;
+  border-top : 2px solid @darkColor;
+  margin-bottom : 40px;
+}
+
+.add{
   display: inline-block;
-}
-.left{
-  width : 500px;
-}
-.right{
-
+  vertical-align: top;
+  margin-right: 40px;
 }
 
-
-
-
-
-clydeui-io-config{
-
+.add h4{
+  border-bottom : 1px solid @brightColor;
+  margin-top : 0px;
+  padding : 10px;
+  padding-bottom : 20px;
+  padding-top : 0px;
+  text-align: right;
 }
 
-clydeui-caspar-add{
-
+label{
+  display: inline-block;
+  width : 120px;
+  text-align : right;
+  vertical-align: middle;
 }
 
-clydeui-caspars-list{
+form div {
+  margin : 10px;
+}
 
+form button{
+  margin : 3px;
+  padding : 10px;
+  // position : absolute;;
+  // bottom : 20px;
+  width : 190px;
+}
+
+table, th, td, tr{
+  border : 1px solid @brightColor;
+  padding : 5px;
+  border-collapse: collapse;
+  text-align: left;
+}
+table{
+  text-align: left;
+  display: inline-block;
+  border : none;
+  vertical-align: top;
+  margin : 0px;
+  padding : 0px;
+}
+th{
+  color : @darkColor;
+  background-color: @brightColor;
+}
+td, th{
+  padding : 10px;
+}
+
+tr{
+  margin-top : 10px;
+  margin-bottom : 10px;
+}
+
+table button{
+  padding : 15px;
+  padding-top : 10px;
+  padding-bottom : 10px;
 }

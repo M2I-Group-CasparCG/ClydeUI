@@ -8,6 +8,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ProducerAddComponent implements OnInit {
 
+  casparId;
+
+  @Input('casparId') set _casparId(casparId) {
+    this.casparId = casparId;
+  }
+
   inputSelected = 'FILE';
 
   @Output() add: EventEmitter<any> = new EventEmitter();

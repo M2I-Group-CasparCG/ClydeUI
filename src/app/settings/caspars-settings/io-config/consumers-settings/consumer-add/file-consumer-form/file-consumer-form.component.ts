@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ApiCallService } from './../../../../../../api-call.service';
 
 class ConsumerFileForm {
   type: string;
@@ -16,6 +17,14 @@ class ConsumerFileForm {
   styleUrls: ['../consumer-form.component.less']
 })
 export class FileConsumerFormComponent implements OnInit {
+
+
+  casparId;
+  channels;
+  @Input('casparId') set _casparId(casparId) {
+    this.casparId = casparId;
+    // this.getChannels();
+  }
 
   @Output() submit: EventEmitter<any> = new EventEmitter();
   consumerFileForm = new ConsumerFileForm();

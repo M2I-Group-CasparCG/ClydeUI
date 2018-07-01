@@ -1,15 +1,218 @@
 
+<header class="header">
+    <h2>
+      Input / Output configuration
+    </h2>
+    <clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
+
+</header>
+  <!-- <clydeui-producers-settings [casparId]="casparId" ></clydeui-producers-settings>
+  <clydeui-consumers-settings [casparId]="casparId"></clydeui-consumers-settings> -->
+
+
+
+<div class="inputSettings">
   <h3>
-    IO Config
+      Input Settings
   </h3>
-<div class="select">
-  <clydeui-caspar-select (select)="setCasparId($event)"></clydeui-caspar-select>
-  {{ casparId }}
+  <div class="add">
+
+      <h4>
+        <label for="producerType">
+          Add :
+        </label>
+        <select  [(ngModel)]="selectedProducerType" id="producerType" #producerTypeSelect>
+            <option *ngFor="let element of producersType.entries()" value={{element[0]}} >
+              {{element[1]}}
+            </option>
+        </select>
+      </h4>
+
+      <form (ngSubmit)="producerFormSubmit(producerForm.value)" #producerForm="ngForm">
+        <div>
+            <label for="producerName">Name :</label>
+            <input id="producerName" name="name" required ngModel>
+
+        </div>
+        <div *ngIf="selectedProducerType=='file'" >
+            <label for="media">Media :</label>
+            <select id="media" name="fileName" ngModel>
+              <option *ngFor="let media of medias.values()" value={{media.fullPath}}>
+                {{media.name}}
+              </option>
+            </select>
+
+            <input type="hidden" value="LOOP" name="playMode" ngModel>
+
+        </div>
+        <div *ngIf="selectedProducerType=='decklink'" >
+            <label for="cardId">Card :</label>
+            <select id="cardId" name="decklinkId" ngModel>
+              <option *ngFor="let card of caspar.casparCommon.decklinkCards.values()" value={{card[0]}}>
+                {{card[1]}}
+              </option>
+            </select>
+
+        </div>
+        <div *ngIf="selectedProducerType=='stream'" >
+            <label for="url">Url :  </label>
+            <input if="url" name="url" required ngModel>
+
+        </div>
+        <div>
+            <label></label>
+            <button type="submit">Add Producer</button>
+
+          </div>
+      </form>
+
+  </div>
+  <table>
+    <tr>
+      <th>
+          NAME
+      </th>
+      <th>
+        TYPE
+      </th>
+      <th colspan="3">
+        ACTIONS
+      </th>
+    </tr>
+    <tr *ngFor="let producer of producers.values()">
+      <td>
+          {{producer.name}}
+      </td>
+      <td>
+          {{producer.type}}
+      </td>
+      <td>
+          <button (click)="start(producer.object, producer.id)">
+            Start
+          </button>
+      </td>
+      <td>
+          <button (click)="stop(producer.object, producer.id)">
+            Stop
+          </button>
+      </td>
+      <td>
+          <button (click)="delete(producer.object, producer.id)">
+            delete
+          </button>
+      </td>
+    </tr>
+  </table>
 </div>
-  <clydeui-producers-settings [casparId]="casparId" ></clydeui-producers-settings>
-  <clydeui-consumers-settings [casparId]="casparId"></clydeui-consumers-settings>
 
 
+<div class="outputSettings">
+    <h3>
+        Output Settings
+    </h3>
+
+    <table>
+      <tr>
+        <th>
+            NAME
+        </th>
+        <th>
+          TYPE
+        </th>
+        <th colspan="3">
+          ACTIONS
+        </th>
+      </tr>
+      <tr *ngFor="let consumer of consumers.values()">
+        <td>
+            {{consumer.name}}
+        </td>
+        <td>
+            {{consumer.type}}
+        </td>
+        <td>
+            <button (click)="start(consumer.object, consumer.id)">
+              Start
+            </button>
+        </td>
+        <td>
+            <button (click)="stop(consumer.object, consumer.id)">
+              Stop
+            </button>
+        </td>
+        <td>
+            <button (click)="delete(consumer.object, consumer.id)">
+              delete
+            </button>
+        </td>
+      </tr>
+    </table>
+    <div class="add">
+
+        <h4>
+
+          <select id="consumerType" [(ngModel)]="selectedConsumerType" #producerTypeSelect>
+              <option *ngFor="let element of consumersType.entries()" value={{element[0]}} >
+                {{element[1]}}
+              </option>
+            </select>
+            <label for="consumerType">
+               : Add
+            </label>
+        </h4>
+
+        <form (ngSubmit)="consumerFormSubmit(consumerForm.value)" #consumerForm="ngForm">
+          <div>
+
+              <input id="consumerName" name="name" required ngModel>
+              <label for="consumerName">: Name </label>
+          </div>
+          <div>
+
+              <select id="channel" name="channelId"  ngModel>
+                <option *ngFor="let channel of channels.values()" value={{channel.id}}>
+                  {{channel.name}}
+                </option>
+              </select>
+              <label for="channel">: Channel</label>
+          </div>
+
+          <div *ngIf="selectedConsumerType=='file'" >
+
+              <input id="fileName" name="fileName" required  ngModel>
+              <label for="fileName">: File</label>
+          </div>
+          <div *ngIf="selectedConsumerType=='file'" >
+
+              <input id="filePath" name="filePath"  required  ngModel>
+              <label for="filePath">: Path</label>
+          </div>
+
+          <div *ngIf="selectedConsumerType=='stream'" >
+
+              <input id="url" name="url"  required  ngModel>
+              <label for="url">: Url</label>
+          </div>
+
+          <div *ngIf="selectedConsumerType=='decklink'" >
+
+              <select id="consumerCard" name="decklinkId" ngModel>
+                <option *ngFor="let card of caspar.casparCommon.decklinkCards.values()" value={{card[0]}}>
+                  {{card[1]}}
+                </option>
+              </select>
+              <label for="consumerCard">: Card</label>
+          </div>
+
+          <div>
+
+              <button type="submit">Add Consumer</button>
+              <label></label>
+            </div>
+        </form>
+
+    </div>
+</div>
 
 
 

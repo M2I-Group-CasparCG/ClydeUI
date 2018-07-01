@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 class DdrFileForm {
   type: string;
@@ -12,6 +12,14 @@ class DdrFileForm {
   styleUrls: ['../producer-form.component.less']
 })
 export class DdrProducerFormComponent implements OnInit {
+
+
+  casparId;
+  channels;
+  @Input('casparId') set _casparId(casparId) {
+    this.casparId = casparId;
+    // this.getChannels();
+  }
 
   @Output() whenFormCompleted: EventEmitter<any> = new EventEmitter();
   ddrFileForm = new DdrFileForm();

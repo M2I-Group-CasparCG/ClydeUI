@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'clydeui-consumer-add',
@@ -6,6 +6,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./consumer-add.component.less']
 })
 export class ConsumerAddComponent implements OnInit {
+
+  casparId;
+  @Input('casparId') set _casparId(casparId) {
+    this.casparId = casparId;
+  }
 
   consumerType = 'SCREEN';
   @Output() add: EventEmitter<any> = new EventEmitter();

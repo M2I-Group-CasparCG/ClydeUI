@@ -6,4 +6,4 @@
 
   <clydeui-consumers-list [consumers]="consumers" (delete)="consumerDelete($event)" (start)="consumerStart($event)" (stop)="consumerStop($event)"></clydeui-consumers-list>
 
-  <clydeui-consumer-add (add)="consumerAdd($event)" > </clydeui-consumer-add>
+  <clydeui-consumer-add (add)="consumerAdd($event)" [casparId]="casparId"> </clydeui-consumer-add>

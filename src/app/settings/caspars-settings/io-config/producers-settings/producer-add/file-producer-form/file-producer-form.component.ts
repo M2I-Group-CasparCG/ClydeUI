@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
-
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { ApiCallService } from './../../../../../../api-call.service';
 
 class ProducerFileForm {
   type: string;
@@ -17,14 +17,38 @@ class ProducerFileForm {
 })
 export class FileProducerFormComponent implements OnInit {
 
+  casparId;
+  caspar;
+  medias = new Map();
+
+  @Input('casparId') set _casparId(casparId) {
+    this.casparId = casparId;
+    this.getMedias();
+  }
+
   @Output() whenFormCompleted: EventEmitter<any> = new EventEmitter();
   producerFileForm = new ProducerFileForm();
 
-  constructor() { }
+  constructor(private _apiCallService: ApiCallService) { }
 
   ngOnInit() {
     this.producerFileForm.type = 'file';
 
+  }
+
+  getMedias() {
+
+    this._apiCallService.casparGetMedias(this.casparId)
+      .subscribe(
+        data => {
+          this.medias = new Map();
+          let element = null;
+          element = data;
+          element.forEach(media => {
+            this.medias.set(media[0], media[1]);
+          });
+        }
+      );
   }
 
   producerAdd() {
