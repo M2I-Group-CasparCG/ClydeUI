@@ -1,26 +1,66 @@
 
+<div class="content">
 
 
-<p>
-  API connection information : {{ apiSettings.url }}
-</p>
+    <header class="header">
+      <h2>
+       API Settings
+      </h2>
+    </header>
 
-<form (ngSubmit)="apiSettingsSubmit()" #apiSettingsForm="ngForm">
-  <label for="apiIpAddr">IP Address : </label>
-  <input id="apiIpAddr"  name="ipAddr" [(ngModel)]="apiSettings.ipAddr" required >
-  <label for="apiPort">Port : </label>
-  <input id="apiPort"  name="port" [(ngModel)]="apiSettings.port" required >
-  <button type="submit">Apply</button>
-</form>
+  <div class="api bloc">
+      <div class="head">
+          <h3>
+              REST API connection settings
+          </h3>
+          <p>
+            {{apiSettings.url}}
+          </p>
+      </div>
+    <form (ngSubmit)="apiSettingsSubmit()" #apiSettingsForm="ngForm">
+      <div>
+          <label for="apiIpAddr">IP Address : </label>
+          <input id="apiIpAddr"  name="ipAddr" [(ngModel)]="apiSettings.ipAddr" required >
+      </div>
+      <div>
+          <label for="apiPort">Port : </label>
+          <input id="apiPort"  name="port" [(ngModel)]="apiSettings.port" required >
+      </div>
+      <div>
+        <label></label>
+        <button type="submit">Apply</button>
+      </div>
 
-<p>
-  SocketIO connection information : {{ socketIoSettings.url}}
-</p>
-<form (ngSubmit)="socketIoSettingsSubmit()" #socketIoSettingsForm="ngForm">
-  <label for="socketIpAddr">IP Address : </label>
-  <input id="socketIpAddr"  name="ipAddr" [(ngModel)]="socketIoSettings.ipAddr" required >
-  <label for="socketPort">Port : </label>
-  <input id="socketPort"  name="port" [(ngModel)]="socketIoSettings.port" required >
-  <button type="submit">Apply</button>
-</form>
 
+    </form>
+
+  </div>
+
+  <div class="socketIo bloc">
+      <div class="head">
+          <h3>
+              Socket.IO connection settings
+          </h3>
+          <p>
+            {{ socketIoSettings.url}}
+          </p>
+        </div>
+
+    <form (ngSubmit)="socketIoSettingsSubmit()" #socketIoSettingsForm="ngForm">
+      <div>
+        <label for="socketIpAddr">IP Address : </label>
+        <input id="socketIpAddr"  name="ipAddr" [(ngModel)]="socketIoSettings.ipAddr" required >
+      </div>
+     <div>
+        <label for="socketPort">Port : </label>
+        <input id="socketPort"  name="port" [(ngModel)]="socketIoSettings.port" required >
+     </div>
+      <div>
+        <label for="socketPort">Port : </label>
+        <button type="submit">Apply</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>

@@ -5,7 +5,7 @@ import { SwitchBar2dComponent } from './switch-bar-2d/switch-bar-2d.component';
 import { OutputMatrixComponent } from './output-matrix/output-matrix.component';
 import { LivePageComponent } from './live-page/live-page.component';
 import { MediaPlayerComponent } from './media-player/media-player.component';
-import { IoConfigComponent } from './settings/caspars-settings/io-config/io-config.component';
+import { IoConfigComponent } from './settings/io-config/io-config.component';
 import { CasparsSettingsComponent } from './settings/caspars-settings/caspars-settings.component';
 import { ApiSettingsComponent } from './settings/api-settings/api-settings.component';
 
