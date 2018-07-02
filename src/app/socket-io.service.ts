@@ -181,6 +181,16 @@ export class SocketIoService {
    }
 
   /**
+   * Recorder
+   */
+  recorderEdit = () => {
+    return Observable.create((observer) => {
+      this.socket.on('recorderEdit', (msg) => {
+        observer.next(msg);
+      });
+    });
+   }
+  /**
    * Playlist
    */
 

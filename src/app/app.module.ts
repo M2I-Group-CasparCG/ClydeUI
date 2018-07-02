@@ -16,6 +16,7 @@ import { OutputMatrixComponent } from './output-matrix/output-matrix.component';
 import { LivePageComponent } from './live-page/live-page.component';
 import { MediaPlayerComponent } from './media-player/media-player.component';
 import { ApiSettingsComponent } from './settings/api-settings/api-settings.component';
+import { RecordsComponent } from './records/records.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { ApiSettingsComponent } from './settings/api-settings/api-settings.compo
     LivePageComponent,
     MediaPlayerComponent,
     ApiSettingsComponent,
+    RecordsComponent,
   ],
   imports: [
     BrowserModule,

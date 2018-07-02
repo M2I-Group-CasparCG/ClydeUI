@@ -1,0 +1,35 @@
+<header class="header">
+    <h2>
+      Records
+    </h2>
+    <clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
+
+</header>
+
+
+<ul>
+    <li *ngFor="let record of consumersFile.values()">
+      <ul>
+        <li>
+            {{record.name}}
+        </li>
+        <li>
+            {{record.fileName}}
+        </li>
+        <li>
+            {{record.casparCommon.mediaPath}}\{{record.filePath}}
+        </li>
+        <li>
+
+            {{record.formattedDuration}}
+        </li>
+        <li *ngIf="record.started">
+            STARTED
+        </li>
+        <li *ngIf="! record.started">
+            STOPPED
+        </li>
+      </ul>
+    </li>
+</ul>
+

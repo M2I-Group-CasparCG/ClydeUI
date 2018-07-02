@@ -69,7 +69,7 @@ export class IoConfigComponent implements OnInit {
     this._socketIoService.consumerDelete()
     .subscribe((msg: string) => {
       const consumer = JSON.parse(msg);
-      this.consumers.delete(consumer.id, consumer);
+      this.consumers.delete(consumer.id);
     });
 
     /**
