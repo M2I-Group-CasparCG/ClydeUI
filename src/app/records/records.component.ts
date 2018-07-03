@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../api-call.service';
 import { SocketIoService } from '../socket-io.service';
 
+class RecorderSatus {
+  id: number;
+  started: boolean;
+  duration: 'string';
+}
+
 @Component({
   selector: 'clydeui-records',
   templateUrl: './records.component.html',
@@ -11,6 +17,7 @@ export class RecordsComponent implements OnInit {
 
   casparId = 0;
   consumersFile = new Map();
+  recordersSatus = new Map();
   consumersFileLastTime = new Map();
 
   constructor(
@@ -49,26 +56,9 @@ export class RecordsComponent implements OnInit {
      */
     this._socketIoService.recorderEdit()
     .subscribe((msg: string) => {
-      console.log('coucou');
       const recorder = JSON.parse(msg);
       this.consumersFile.set(recorder.id, recorder);
     });
-
-    /**
-     * Watcher
-     */
-    // setInterval(
-    //   function() {
-    //     this.consumersFile.forEach(element => {
-    //       if (! this.consumersFileLastTime.has(element[0])) {
-    //         this.consumersFileLastTime.set(element[0], element[1]);
-    //       }else{
-    //         if (this.)
-    //       }
-
-    //     });
-    //     }
-    //   }, 500);
 
   }
 
@@ -81,9 +71,9 @@ export class RecordsComponent implements OnInit {
         let element = null;
            element = data;
            element.forEach(consumer => {
-             console.log(JSON.stringify(consumer));
              if (consumer[1].type === 'FILE') {
               this.consumersFile.set(consumer[0], consumer[1]);
+              this.recordersSatus.set(consumer[0], new RecorderSatus());
              }
            });
        }
@@ -95,6 +85,38 @@ export class RecordsComponent implements OnInit {
     this.getConsumersFile();
   }
 
+  consumerStartStop(id) {
+    console.log('start top');
+    console.log(id);
+    console.log(this.consumersFile.get(id).started);
+    if (this.consumersFile.get(id).started) {
+      this._apiCallService.consumerStop(this.casparId, id)
+      .subscribe(
+        data => {
+          console.log(data);
+        });
+    } else {
+      this._apiCallService.consumerStart(this.casparId, id)
+      .subscribe(
+        data => {
+          console.log(data);
+        });
+    }
+  }
 
+  consumerStart(id) {
+      this._apiCallService.consumerStart(this.casparId, id)
+      .subscribe(
+        data => {
+          console.log(JSON.stringify(data));
+        });
+    }
+    consumerStop(id) {
+      this._apiCallService.consumerStop(this.casparId, id)
+      .subscribe(
+        data => {
+          console.log(JSON.stringify(data));
+        });
+    }
 
 }

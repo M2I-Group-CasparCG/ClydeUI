@@ -119,6 +119,9 @@
         <th>
           TYPE
         </th>
+        <th>
+          STATUS
+        </th>
         <th colspan="3">
           ACTIONS
         </th>
@@ -129,6 +132,15 @@
         </td>
         <td>
             {{consumer.type}}
+        </td>
+        <td>
+          {{consumer.started}}
+          <div *ngIf="consumer.started">
+            STARTED
+          </div>
+          <div *ngIf="! consumer.started">
+            STOPPED
+          </div>
         </td>
         <td>
             <button (click)="start(consumer.object, consumer.id)">
