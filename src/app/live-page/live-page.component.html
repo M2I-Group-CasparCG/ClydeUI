@@ -1,11 +1,20 @@
 <section>
 
         <div class="zone left">
-            <clydeui-output-matrix class="component outputMatrix" ></clydeui-output-matrix>
-            <clydeui-media-player class="component mediaPlayer" ></clydeui-media-player>
+            <div>
+                <button (click)="isVisibleMatrix = !isVisibleMatrix"> Hide </button>
+                <clydeui-output-matrix *ngIf="isVisibleMatrix" class="component outputMatrix" ></clydeui-output-matrix>
+            </div>
+            <div>
+                <button (click)="isVisiblePlayer = !isVisiblePlayer"> Hide </button>
+                <clydeui-media-player *ngIf="isVisiblePlayer" class="component mediaPlayer" ></clydeui-media-player>
+            </div>
         </div>
         <div class="zone right">
-            <clydeui-switch-bar-2d class="component switchBar2d" ></clydeui-switch-bar-2d>
+            <div>
+                <button (click)="isVisibleSwitchBar2d = !isVisibleSwitchBar2d"> Hide </button>
+                <clydeui-switch-bar-2d *ngIf="isVisibleSwitchBar2d" class="component switchBar2d" ></clydeui-switch-bar-2d>
+            </div>
         </div>
 
 
