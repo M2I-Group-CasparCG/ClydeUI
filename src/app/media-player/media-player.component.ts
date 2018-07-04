@@ -53,11 +53,10 @@ export class MediaPlayerComponent implements OnInit {
 
   ngOnInit() {
 
-
+    this.mediaPlayer.paused = true;
 
     this._socketIo.mediaPlayerEdit()
     .subscribe((msg: string) => {
-
       const mediaPlayer = JSON.parse(msg);
       // console.log('__________');
       // console.log(msg);
@@ -268,19 +267,6 @@ export class MediaPlayerComponent implements OnInit {
     console.log('MEDIA PLAYER CHANGED !!!');
 
     this.mediaPlayerId = parseInt(id, 10);
-    // this.currentMediaPlayer = new Map();
-    console.log('*****************');
-    console.log(this.mediaPlayerId);
-    console.log(this.casparId);
-    // this.mediaPlayer.paused =  false;
-    // this.mediaPlayer.playlistLoop = false;
-    // this.mediaPlayer.autoPlay = true;
-    // this.mediaPlayer.currentTime = '';
-    // this.mediaPlayer.remainingTime = '';
-    // this.mediaPlayer.currentIndex = -1;
-    // this.mediaPlayer.totalFrame = -1;
-    // this.mediaPlayer.mediaList = [];
-    // this.mediaPlayer.playlistId =  -1;
     await this.mediasGet();
 
   }
