@@ -46,9 +46,8 @@ export class SwitchBar2dComponent implements OnInit {
 
     this._socketIo.producerEdit()
     .subscribe((msg: string) => {
-      /**
-       * TO BE IMPLEMENTED
-       */
+      const producer = JSON.parse(msg);
+      this.producers.set(producer.id, producer);
     });
 
     this._socketIo.producerDelete()
@@ -239,7 +238,7 @@ export class SwitchBar2dComponent implements OnInit {
   }
 
   layerToggle(layerId) {
-    if (this.layers.get(layerId).isActive) {
+    if (this.layers.get(layerId).started) {
       this.layerStop(layerId);
     } else {
       this.layerStart(layerId);
