@@ -10,7 +10,6 @@
   <clydeui-consumers-settings [casparId]="casparId"></clydeui-consumers-settings> -->
 
 
-
 <div class="inputSettings">
   <h3>
       Input Settings
@@ -45,18 +44,18 @@
             <input type="hidden" value="LOOP" name="playMode" ngModel>
 
         </div>
-        <div *ngIf="selectedProducerType=='decklink'" >
+        <div *ngIf="selectedProducerType=='decklink'">
             <label for="cardId">Card :</label>
             <select id="cardId" name="decklinkId" ngModel>
-              <option *ngFor="let card of caspar.casparCommon.decklinkCards.values()" value={{card[0]}}>
-                {{card[1]}}
-              </option>
+                <option *ngFor="let card of cards.entries()" value={{card[0]}}>
+                  {{card[1]}}
+                </option>
             </select>
 
         </div>
         <div *ngIf="selectedProducerType=='stream'" >
             <label for="url">Url :  </label>
-            <input if="url" name="url" required ngModel>
+            <input if="url" name="url" placeholder="rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov" required ngModel>
 
         </div>
         <div>
@@ -212,17 +211,27 @@
           </div>
 
           <div *ngIf="selectedConsumerType=='stream'" >
-
-              <input id="url" name="url"  required  ngModel>
-              <label for="url">: Url</label>
+              <select id="protocol" name="protocol"  ngModel>
+                  <option value='udp'>
+                    UDP
+                  </option>
+                </select>
+              <label for="protocol">: Protocol</label>
+          </div>
+          <div *ngIf="selectedConsumerType=='stream'" >
+              <input id="host" name="host"  required  ngModel>
+              <label for="host">: Host</label>
+          </div>
+          <div *ngIf="selectedConsumerType=='stream'" >
+              <input id="port" name="port"  required  ngModel>
+              <label for="port">: Port</label>
           </div>
 
           <div *ngIf="selectedConsumerType=='decklink'" >
-
               <select id="consumerCard" name="decklinkId" ngModel>
-                <option *ngFor="let card of caspar.casparCommon.decklinkCards.values()" value={{card[0]}}>
-                  {{card[1]}}
-                </option>
+                  <option *ngFor="let card of cards.entries()" value={{card[0]}}>
+                      {{card[1]}}
+                    </option>
               </select>
               <label for="consumerCard">: Card</label>
           </div>

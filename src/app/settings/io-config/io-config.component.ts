@@ -19,7 +19,7 @@ export class IoConfigComponent implements OnInit {
   producers = null;
   channels = null;
   medias = null;
-
+  cards = new Map();
 
   selectedProducerType = 'file';
   producersType = new Map(
@@ -51,6 +51,17 @@ export class IoConfigComponent implements OnInit {
       .subscribe((msg: string) => {
         const caspar = JSON.parse(msg);
         this.caspars.set(caspar.id, caspar);
+      });
+      this._socketIoService.casparEdit()
+      .subscribe((msg: string) => {
+        const caspar = JSON.parse(msg);
+        this.caspars.set(caspar.id, caspar);
+      });
+
+      this._socketIoService.casparDelete()
+      .subscribe((msg: string) => {
+        const caspar = JSON.parse(msg);
+        this.caspars.delete(caspar.id);
       });
 
     /**
@@ -94,12 +105,25 @@ export class IoConfigComponent implements OnInit {
   }
 
   setCasparId(id) {
-    this.casparId = id;
+    console.log('ID !!!!!!');
+
+    this.cards = new Map();
+    this.casparId = parseInt(id, 10);
+    console.log(this.casparId);
     this.getConsumers();
     this.getProducers();
     this.getMedias();
     this.getChannels();
+    this.caspar = null;
     this.caspar = this.caspars.get(this.casparId);
+    console.log('########################');
+    console.log(JSON.stringify(this.caspar));
+    console.log(JSON.stringify(this.caspar.casparCommon.decklinkCards.length));
+    // if (this.caspar.casparCommon.decklinkCards.length > 0) {
+      for (let n = 0; n < this.caspar.casparCommon.decklinkCards.length; n++) {
+        console.log('card!');
+        this.cards.set(this.caspar.casparCommon.decklinkCards[n][0], this.caspar.casparCommon.decklinkCards[n][1]);
+      }
   }
 
   getCaspars() {
