@@ -31,9 +31,8 @@ export class CasparsSettingsComponent implements OnInit {
 
       this._socketIo.casparEdit()
       .subscribe((msg: string) => {
-        /**
-         * TO BE IMPLEMENTED
-         */
+        const caspar = JSON.parse(msg);
+        this.caspars.set(caspar.id, caspar);
       });
 
       this._socketIo.casparDelete()

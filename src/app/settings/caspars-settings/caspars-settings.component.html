@@ -42,6 +42,9 @@
       <th>
         IP ADDRESS
       </th>
+      <th>
+        STATUS
+      </th>
       <th colspan="4">
         ACTIONS
       </th>
@@ -53,7 +56,12 @@
       <td>
           {{caspar.casparCommon.ipAddr}}
       </td>
-
+      <td>
+        <div class="status" [ngClass]="{'active':caspar.casparCommon.online}">
+          <span *ngIf="caspar.casparCommon.online">✔</span>
+          <span *ngIf="! caspar.casparCommon.online">✘</span>
+        </div>
+    </td>
       <td>
           <button (click)="casparScanMedias(caspar.id)">
             Scan Medias

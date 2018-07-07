@@ -90,7 +90,10 @@
           {{producer.type}}
       </td>
       <td>
-        {{producer.started}}
+        <div class="status"  [ngClass]="{'active':producer.started}">
+            <span *ngIf="producer.started">✔</span>
+            <span *ngIf="! producer.started">✘</span>
+        </div>
       </td>
       <td>
           <button (click)="start(producer.object, producer.id)">
@@ -140,12 +143,9 @@
             {{consumer.type}}
         </td>
         <td>
-          {{consumer.started}}
-          <div *ngIf="consumer.started">
-            STARTED
-          </div>
-          <div *ngIf="! consumer.started">
-            STOPPED
+          <div class="status"  [ngClass]="{'active':consumer.started}">
+              <span *ngIf="consumer.started">✔</span>
+              <span *ngIf="! consumer.started">✘</span>
           </div>
         </td>
         <td>
