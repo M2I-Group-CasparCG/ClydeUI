@@ -91,16 +91,16 @@ li{
   display : inline-block;
 }
 
-.content{
-  margin : 10px;
-  position : relative;
-  left : 0px;
-  right : 0px;
-  vertical-align: top;
-  height : auto;
-  max-height: 750px;
-  overflow-y: scroll;
-}
+// .content{
+//   margin : 10px;
+//   position : relative;
+//   left : 0px;
+//   right : 0px;
+//   vertical-align: top;
+//   height : auto;
+//   max-height: 750px;
+//   overflow-y: scroll;
+// }
 
 
 header{
@@ -131,4 +131,25 @@ section{
   display : inline-block;
   margin-top : 20px;
   width : 100%;
+}
+
+a{
+  color : inherit;
+  text-decoration: none;
+}
+
+.status.active{
+  color : @greenActive;
+}
+
+.status.error{
+  color : @redNormal;
+  text-align : center;
+  font-size : 30px;
+}
+
+.status{
+  color : @mediumColor;
+  text-align : center;
+  font-size : 30px;
 }

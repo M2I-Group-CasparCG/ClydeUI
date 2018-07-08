@@ -53,14 +53,13 @@ export class MediaPlayerComponent implements OnInit {
 
   ngOnInit() {
 
-
+    this.mediaPlayer.paused = true;
 
     this._socketIo.mediaPlayerEdit()
     .subscribe((msg: string) => {
-
       const mediaPlayer = JSON.parse(msg);
-      console.log('__________');
-      console.log(mediaPlayer);
+      // console.log('__________');
+      // console.log(msg);
       if (mediaPlayer.id === this.mediaPlayerId ) {
         // console.log(msg);
         this.currentMediaPlayer = mediaPlayer;
@@ -68,7 +67,7 @@ export class MediaPlayerComponent implements OnInit {
         // récupération des éléments
         this.mediaPlayer.currentTime = mediaPlayer.formattedFileTime;
         this.mediaPlayer.remainingTime = mediaPlayer.formattedRemainingTime;
-        this.mediaPlayer.barWidth = mediaPlayer.currentFileFrame / mediaPlayer.totalFileFrame * 100;
+        this.mediaPlayer.barWidth = mediaPlayer.fileTime / mediaPlayer.currentMedia.duration * 100;
         this.mediaPlayer.paused = mediaPlayer.paused;
         this.mediaPlayer.autoPlay = mediaPlayer.autoPlay;
         this.mediaPlayer.totalFrame = parseInt(mediaPlayer.totalFileFrame, 10);
@@ -80,7 +79,7 @@ export class MediaPlayerComponent implements OnInit {
         }
         this.mediaPlayer.playlistId = mediaPlayer.playlist.id;
         this.mediaPlayer.currentIndex = mediaPlayer.currentIndex;
-        console.log(this.mediaPlayer.currentIndex);
+        // console.log(this.mediaPlayer.currentIndex);
       }
       // console.log('___________');
       // console.log(mediaPlayer.currentIndex);
@@ -268,19 +267,6 @@ export class MediaPlayerComponent implements OnInit {
     console.log('MEDIA PLAYER CHANGED !!!');
 
     this.mediaPlayerId = parseInt(id, 10);
-    // this.currentMediaPlayer = new Map();
-    console.log('*****************');
-    console.log(this.mediaPlayerId);
-    console.log(this.casparId);
-    // this.mediaPlayer.paused =  false;
-    // this.mediaPlayer.playlistLoop = false;
-    // this.mediaPlayer.autoPlay = true;
-    // this.mediaPlayer.currentTime = '';
-    // this.mediaPlayer.remainingTime = '';
-    // this.mediaPlayer.currentIndex = -1;
-    // this.mediaPlayer.totalFrame = -1;
-    // this.mediaPlayer.mediaList = [];
-    // this.mediaPlayer.playlistId =  -1;
     await this.mediasGet();
 
   }

@@ -2,15 +2,40 @@ import { Injectable } from '@angular/core';
 import * as socketIo from 'socket.io-client';
 import { Observable } from 'rxjs/Observable';
 
+
+class SocketIoSettings {
+  ipAddr: string;
+  port: number;
+  url: string;
+}
+
 @Injectable()
 export class SocketIoService {
+
+  socketIoSettings = new SocketIoSettings();
 
   public socket;
 
   constructor() {
-    this.socket = socketIo.connect('http://localhost:3001');
+    this.socketIoSettings.ipAddr = '127.0.0.1';
+    this.socketIoSettings.port = 3001;
+    this.socketIoSettings.url = `http://${this.socketIoSettings.ipAddr}:${this.socketIoSettings.port}`;
+    this.socket = socketIo.connect(this.socketIoSettings.url);
    }
 
+
+  setSocketIoSettings(ipAddr, port) {
+    this.socketIoSettings.ipAddr = ipAddr;
+    this.socketIoSettings.port = port;
+    this.socketIoSettings.url = `http://${this.socketIoSettings.ipAddr}:${this.socketIoSettings.port}`;
+    this.socket.close();
+    this.socket.disconnect();
+    this.socket = socketIo.connect(this.socketIoSettings.url);
+  }
+
+  getSocketIoSettings() {
+    return this.socketIoSettings;
+  }
    /**
     * Caspars
     */
@@ -52,7 +77,6 @@ export class SocketIoService {
   producerEdit = () => {
     return Observable.create((observer) => {
       this.socket.on('producerEdit', (msg) => {
-        console.log(JSON.stringify(msg));
         observer.next(msg);
       });
     });
@@ -72,6 +96,7 @@ export class SocketIoService {
   consumerAdd = () => {
     return Observable.create((observer) => {
       this.socket.on('consumerAdd', (msg) => {
+        console.log(JSON.stringify(msg));
         observer.next(msg);
       });
     });
@@ -155,6 +180,16 @@ export class SocketIoService {
     });
    }
 
+  /**
+   * Recorder
+   */
+  recorderEdit = () => {
+    return Observable.create((observer) => {
+      this.socket.on('recorderEdit', (msg) => {
+        observer.next(msg);
+      });
+    });
+   }
   /**
    * Playlist
    */

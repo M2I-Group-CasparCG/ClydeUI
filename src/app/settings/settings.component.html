@@ -1,6 +1,36 @@
-<h2>
-  Settings
-</h2>
-<clydeui-caspars-settings>
 
-</clydeui-caspars-settings>
+<div class="content">
+  <header>
+    <h2>
+      Settings
+    </h2>
+  </header>
+
+  <nav>
+  <ul>
+    <li (click)="setPage('ApiSettings')">
+        Api Settings
+    </li>
+    <li (click)="setPage('CasparSettings')">
+        Caspar Settings
+    </li>
+    <li (click)="setPage('IoSettings')">
+        I/O Settings
+    </li>
+  </ul>
+  </nav>
+
+  <section>
+    <clydeui-api-settings *ngIf="page=='ApiSettings'">
+
+      </clydeui-api-settings>
+      <clydeui-caspars-settings *ngIf="page=='CasparSettings'">
+
+      </clydeui-caspars-settings >
+
+      <clydeui-io-config  *ngIf="page=='IoSettings'">
+
+      </clydeui-io-config>
+  </section>
+
+</div>

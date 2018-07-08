@@ -1,0 +1,150 @@
+@import '../../style/common.less';
+
+
+.header{
+  position : relative;
+  top: -20px;
+  left : 100px;
+  width : 600px;
+  border-top : 2px solid @darkColor;
+}
+
+.content{
+  position : absolute;
+  left : 0px;
+  right : 0px;
+  bottom : 0px;
+  top : 250px;
+}
+section {
+  position : absolute;
+  left : 0px;
+  right : 0px;
+  text-align: center;
+}
+
+.select{
+  display : inline-block;
+}
+
+.inputSettings{
+  display: inline-block;
+  vertical-align: top;
+  padding : 20px;
+  padding-right : 40px;
+  border-right : 3px solid @brightColor;
+}
+
+.outputSettings{
+  display: inline-block;
+  vertical-align: top;
+  text-align: right;
+  padding : 20px;
+  padding-left : 40px;
+}
+
+.outputSettings div{
+  text-align: left;
+
+}
+.inputSettings div{
+  text-align: right;
+
+}
+
+.outputSettings h3{
+  text-align: left;
+
+}
+.inputSettings h3{
+  text-align: right;
+
+}
+
+table, th, td, tr{
+  border : 1px solid @brightColor;
+  padding : 5px;
+  border-collapse: collapse;
+  text-align: left;
+}
+table{
+  text-align: left;
+  display: inline-block;
+  border : none;
+  vertical-align: top;
+  margin : 0px;
+  padding : 0px;
+}
+th{
+  color : @darkColor;
+  background-color: @brightColor;
+}
+td, th{
+  padding : 10px;
+}
+
+tr{
+  margin-top : 10px;
+  margin-bottom : 10px;
+}
+table .status{
+  text-align : center;
+}
+table button{
+  padding : 15px;
+  padding-top : 10px;
+  padding-bottom : 10px;
+}
+
+.add{
+  display : inline-block;
+  position : relative;
+  vertical-align: top;
+  // border : 1px solid @brightColor;
+  padding : 10px;
+}
+.add h4{
+  border-bottom : 1px solid @brightColor;
+  margin-top : 0px;
+  padding : 10px;
+  padding-bottom : 20px;
+  padding-top : 0px;
+}
+.add h4 label{
+  width : 80px;
+}
+form div {
+  margin : 10px;
+}
+
+label{
+  display: inline-block;
+  width : 80px;
+  text-align : right;
+  vertical-align: middle;
+}
+
+.outputSettings label{
+  text-align: left;
+  width : 100px;
+}
+
+form button{
+  margin : 5px;
+  padding : 10px;
+  // position : absolute;;
+  // bottom : 20px;
+  width : 160px;
+}
+
+#consumerFullscreen{
+  width : auto;
+  margin-left : 75px;
+}
+
+input{
+  width : 150px;
+}
+select{
+  width : 168px;
+}
