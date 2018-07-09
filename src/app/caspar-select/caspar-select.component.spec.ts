@@ -2,7 +2,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CasparSelectComponent } from './caspar-select.component';
 import { ApiCallService } from '../api-call.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { SocketIoService } from '../socket-io.service';
+
+
+class Event {
+  target: Object;
+}
 
 describe('CasparSelectComponent', () => {
   let component: CasparSelectComponent;
@@ -10,8 +17,9 @@ describe('CasparSelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ FormsModule],
       declarations: [ CasparSelectComponent ],
-      providers : [ ApiCallService, HttpClient,  ]
+      providers : [ ApiCallService, HttpClient, HttpHandler, SocketIoService  ]
     })
     .compileComponents();
   }));
@@ -22,7 +30,14 @@ describe('CasparSelectComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
-});
+  it('should create', () => {
+    const event = new Event();
+        event.target = {value : 1000 };
+        component.selectSubmit(event);
+    expect(component.selectedCasparId).toBe(1000);
+  });
+
+    it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+ });
