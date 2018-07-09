@@ -32,4 +32,4 @@ describe('CasparsSettingsComponent', () => {
   // it('should create', () => {
   //   expect(component).toBeTruthy();
   // });
-});
+ });

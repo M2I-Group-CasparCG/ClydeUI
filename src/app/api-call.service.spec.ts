@@ -19,4 +19,4 @@ describe('ApiCallService', () => {
   it('should be created', inject([ApiCallService], (service: ApiCallService) => {
     expect(service).toBeTruthy();
   }));
-});
+ });

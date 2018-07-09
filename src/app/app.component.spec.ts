@@ -28,4 +28,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('clydeui');
   }));
 
-});
+ });

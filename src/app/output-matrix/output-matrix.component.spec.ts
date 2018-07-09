@@ -35,4 +35,4 @@ describe('OutputMatrixComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+ });

@@ -31,4 +31,4 @@ describe('ApiSettingsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+ });
