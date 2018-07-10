@@ -56,11 +56,11 @@ Once the installation done, make sure everything is reading :
     ```bash
     git clone https://github.com/M2I-Group-CasparCG/CasparCGAPI.git
     ```
-    Or manually download the archive [here](https://github.com/M2I-Group-CasparCG/CasparCGAPI.git).
+    Or manually download the archive [here](https://github.com/M2I-Group-CasparCG/CasparCGAPI.git) and extract it.
 2. install the depedencies
-    ```bash
-    cd CasparCGAPI
 
+    In the CasparCGAPI folder : 
+    ```bash
     npm install
     ```
 3. once everything is installed, just run the API 
@@ -81,10 +81,26 @@ Once the installation done, make sure everything is reading :
     git clone https://github.com/M2I-Group-CasparCG/ClydeUI.git
     ```
     
-    Or manually download the archive [here](https://github.com/M2I-Group-CasparCG/ClydeUI.git).
-2. Install the depedencies
-    ```bash
-    cd CasparCGAPI
+    Or manually download the archive [here](https://github.com/M2I-Group-CasparCG/ClydeUI.git)  and extract it.
 
+2. Install the depedencies
+
+   In the ClydeUi folder :
+    ```bash
     npm install
     ```
+3. Start the web interface : 
+    ```bash
+    npm start
+    ```
+4. The web interface should now be accessible from http://127.0.0.1:4600.
+
+    > If you want the interface to be reachable from other clients than only the localhost, please add --host 0.0.0.0 to the start command :
+
+    ```bash
+    npm start --host 0.0.0.0
+    ```
+
+### Help needed ? Or bug detected ?
+
+If you encountered any problem during the installation process, please create an [issue]() ! We will be glad to help you. 
