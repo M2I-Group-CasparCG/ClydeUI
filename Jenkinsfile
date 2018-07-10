@@ -18,7 +18,7 @@ pipeline {
     }
     stage('Sonar-Scan') {
       steps {
-        sh '/etc/sonar-scanner-3.1.0.1141-linux/bin/sonar-scanner -Dproject.settings=../ClydeUi_master_sonar-project.properties'
+        sh '/etc/sonar-scanner-3.1.0.1141-linux/bin/sonar-scanner -Dproject.settings=../ClydeUi_pre-prod_sonar-project.properties'
       }
     }
   }
