@@ -103,4 +103,4 @@ Once the installation done, make sure everything is reading :
 
 ### Help needed ? Or bug detected ?
 
-If you encountered any problem during the installation process, please create an [issue]() ! We will be glad to help you. 
+If you encountered any problem during the installation process, please create an [issue](https://github.com/M2I-Group-CasparCG/ClydeUI/issues/new/choose) ! We will be glad to help you. 
