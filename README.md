@@ -10,7 +10,7 @@ ClydeUI aims to offer a new way to use the playout server. Its main functionnali
   * Media Players
   * Recorder
 
-![ClydeUi_Composants](ressources/ClydeUi.png)
+![ClydeUi_Composants](ressources/ClydeUI.png)
 
 ## Installation guide
 
