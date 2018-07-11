@@ -2,6 +2,7 @@
 
 ClydeUI is a web interface for [CasparCG](http://casparcg.com/). It uses the [CasparCGAPI](https://github.com/M2I-Group-CasparCG/CasparCGAPI) backend. 
 ClydeUI aims to offer a new way to use the playout server. Its main features are :
+
   * Scalable multiview channel
   * Easy input/output configuration
   * Multi-server support
@@ -85,17 +86,22 @@ Once the installation done, make sure everything is ready :
 
 2. Install the depedencies
 
-   In the ClydeUi folder :
+    In the ClydeUi folder :
+
     ```bash
     npm install
     ```
+
 3. Start the web interface : 
     ```bash
     npm start
     ```
+
 4. The web interface should now be accessible from http://127.0.0.1:4600.
 
-    > If you want the interface to be reachable from clients other than localhost, please add --host 0.0.0.0 to the start command :
+
+    If you want the interface to be reachable from clients other than localhost, please add --host 0.0.0.0 to the start command :
+
 
     ```bash
     npm start --host 0.0.0.0
