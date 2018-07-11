@@ -58,12 +58,9 @@ export class MediaPlayerComponent implements OnInit {
     this._socketIo.mediaPlayerEdit()
     .subscribe((msg: string) => {
       const mediaPlayer = JSON.parse(msg);
-      // console.log('__________');
-      // console.log(msg);
       if (mediaPlayer.id === this.mediaPlayerId ) {
-        // console.log(msg);
         this.currentMediaPlayer = mediaPlayer;
-
+        console.log('player edit');
         // récupération des éléments
         this.mediaPlayer.currentTime = mediaPlayer.formattedFileTime;
         this.mediaPlayer.remainingTime = mediaPlayer.formattedRemainingTime;
@@ -73,17 +70,11 @@ export class MediaPlayerComponent implements OnInit {
         this.mediaPlayer.totalFrame = parseInt(mediaPlayer.totalFileFrame, 10);
         this.mediaPlayer.playlistLoop = mediaPlayer.playlistLoop;
         if (JSON.stringify(this.mediaPlayer.mediaList) !== JSON.stringify(mediaPlayer.playlist.list)) {
-
           this.mediaPlayer.mediaList = mediaPlayer.playlist.list;
-          // console.log(JSON.stringify(this.mediaPlayer.mediaList));
         }
         this.mediaPlayer.playlistId = mediaPlayer.playlist.id;
         this.mediaPlayer.currentIndex = mediaPlayer.currentIndex;
-        // console.log(this.mediaPlayer.currentIndex);
       }
-      // console.log('___________');
-      // console.log(mediaPlayer.currentIndex);
-      // console.log('___________');
     });
 
     this._socketIo.playlistEdit()
@@ -100,31 +91,18 @@ export class MediaPlayerComponent implements OnInit {
 
 
   mediaPlayersGet() {
-    // console.log('mediaPlayersGet');
-    // console.log(this.casparId);
     this._apiCallService.producerGetAll(this.casparId)
       .subscribe(
         data => {
           this.mediaPlayers = new Map();
           let result;
-          // console.log(JSON.stringify(data));
           result = data;
           result.forEach(element => {
             if (element[1].type === 'DDR') {
-              // console.log('id');
-              // console.log(element[0]);
-              // console.log('id');
-              console.log('_____________');
-              console.log(element[0]);
-              console.log(JSON.stringify(element[1]));
               this.mediaPlayers.set(element[0], element[1]);
-              console.log(JSON.stringify(this.mediaPlayers));
             }
           });
           if (this.mediaPlayers.size > 0) {
-            console.log('mediaPlayers Detected !');
-            console.log(JSON.stringify(this.mediaPlayers));
-            console.log(this.mediaPlayers.keys().next().value);
             this.setMediaPlayerId(this.mediaPlayers.keys().next().value);
 
           }
@@ -242,30 +220,23 @@ export class MediaPlayerComponent implements OnInit {
   }
 
   seekMedia(event) {
-
     const seekedFrame = Math.floor(event.offsetX / document.getElementById('progressBar').offsetWidth * this.mediaPlayer.totalFrame);
-    console.log('seek' + seekedFrame);
     this._apiCallService.mediaPlayerSeek(this.casparId, this.mediaPlayerId, seekedFrame)
     .subscribe(
         data => {
           console.log(JSON.stringify(data));
         }
     );
-    // this.mediaPlayer.barWidth = mediaPlayer.currentFileFrame / mediaPlayer.totalFileFrame * 100;
 
   }
 
   async setCasparId(id) {
     this.casparId = id;
-    console.log('#######');
-    console.log(id);
-    await this.mediaPlayersGet();
-    await this.mediaListGet();
+    this.mediaPlayersGet();
+    this.mediaListGet();
   }
 
   async setMediaPlayerId(id) {
-    console.log('MEDIA PLAYER CHANGED !!!');
-
     this.mediaPlayerId = parseInt(id, 10);
     await this.mediasGet();
 
@@ -280,7 +251,6 @@ export class MediaPlayerComponent implements OnInit {
         );
   }
   removeMedia(mediaIndex) {
-    console.log(mediaIndex);
     this._apiCallService.playlistRemoveMedia(this.casparId, this.mediaPlayer.playlistId, mediaIndex)
     .subscribe(
         data => {
