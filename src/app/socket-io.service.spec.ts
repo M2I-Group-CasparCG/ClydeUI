@@ -12,4 +12,4 @@ describe('SocketIoService', () => {
   it('should be created', inject([SocketIoService], (service: SocketIoService) => {
     expect(service).toBeTruthy();
   }));
-});
+ });

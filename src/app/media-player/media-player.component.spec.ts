@@ -22,4 +22,4 @@ describe('MediaPlayerComponent', () => {
   // it('should create', () => {
   //   expect(component).toBeTruthy();
   // });
-});
+ });
