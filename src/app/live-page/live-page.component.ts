@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LivePageComponent implements OnInit {
 
+  isVisibleMatrix:boolean = true;
+  isVisiblePlayer:boolean = true;
+  isVisibleSwitchBar2d:boolean = true;
+
   constructor() { }
 
   ngOnInit() {
