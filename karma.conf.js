@@ -29,7 +29,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['PhantomJS'],
-    browserNoActivityTimeout: 60 000,
+    browserNoActivityTimeout: 60000,
     singleRun: true
   });
 };
