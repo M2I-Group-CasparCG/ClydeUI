@@ -31,7 +31,7 @@ export class MediaPlayerComponent implements OnInit {
   casparId = -1;
   mediaPlayerId = -1;
   mediaPlayers = new Map();
-  currentMediaPlayer = new Object();
+  currentMediaPlayer;
   playlist = null;
   playlistIndex = -1;
   mediaList = new Map();
@@ -56,6 +56,7 @@ export class MediaPlayerComponent implements OnInit {
     private _socketIo: SocketIoService) { }
 
   ngOnInit() {
+    this.currentMediaPlayer = new Object();
     this.currentMediaPlayer['currentMedia'] = new Object();
     this.mediaPlayer.paused = true;
     this.mediaPlayer.mediaList = new Array();
@@ -63,21 +64,7 @@ export class MediaPlayerComponent implements OnInit {
     .subscribe((msg: string) => {
       const mediaPlayer = JSON.parse(msg);
       if (mediaPlayer.id === this.mediaPlayerId ) {
-        this.currentMediaPlayer = mediaPlayer;
-        console.log('player edit');
-        // récupération des éléments
-        this.mediaPlayer.currentTime = mediaPlayer.formattedFileTime;
-        this.mediaPlayer.remainingTime = mediaPlayer.formattedRemainingTime;
-        this.mediaPlayer.barWidth = mediaPlayer.fileTime / mediaPlayer.currentMedia.duration * 100;
-        this.mediaPlayer.paused = mediaPlayer.paused;
-        this.mediaPlayer.autoPlay = mediaPlayer.autoPlay;
-        this.mediaPlayer.totalFrame = parseInt(mediaPlayer.totalFileFrame, 10);
-        this.mediaPlayer.playlistLoop = mediaPlayer.playlistLoop;
-        if (JSON.stringify(this.mediaPlayer.mediaList) !== JSON.stringify(mediaPlayer.playlist.list)) {
-          this.mediaPlayer.mediaList = mediaPlayer.playlist.list;
-        }
-        this.mediaPlayer.playlistId = mediaPlayer.playlist.id;
-        this.mediaPlayer.currentIndex = mediaPlayer.currentIndex;
+        this.mediaPlayerUiUpdate(mediaPlayer);
       }
     });
 
@@ -93,6 +80,26 @@ export class MediaPlayerComponent implements OnInit {
 
   }
 
+  mediaPlayerUiUpdate(mediaPlayer) {
+    this.currentMediaPlayer = mediaPlayer;
+        console.log('player edit');
+        // récupération des éléments
+        this.mediaPlayer.currentIndex = mediaPlayer.currentIndex;
+        this.mediaPlayer.currentTime = mediaPlayer.formattedFileTime;
+        this.mediaPlayer.remainingTime = mediaPlayer.formattedRemainingTime;
+        this.mediaPlayer.barWidth = mediaPlayer.fileTime / mediaPlayer.currentMedia.duration * 100;
+        this.mediaPlayer.paused = mediaPlayer.paused;
+        this.mediaPlayer.autoPlay = mediaPlayer.autoPlay;
+        this.mediaPlayer.totalFrame = parseInt(mediaPlayer.totalFileFrame, 10);
+        this.mediaPlayer.playlistLoop = mediaPlayer.playlistLoop;
+        if (JSON.stringify(this.mediaPlayer.mediaList) !== JSON.stringify(mediaPlayer.playlist.list)) {
+          this.mediaPlayer.mediaList = new Array();
+          this.mediaPlayer.mediaList = mediaPlayer.playlist.list;
+        }
+
+
+
+    }
 
   mediaPlayersGet() {
     this._apiCallService.producerGetAll(this.casparId)
@@ -134,7 +141,7 @@ export class MediaPlayerComponent implements OnInit {
         data => {
           let element;
           element = data;
-          this.mediaPlayer.mediaList = element.list;
+          // this.mediaPlayer.mediaList = element.list;
           this.mediaPlayer.playlistId = element.id;
         }
       );
@@ -242,6 +249,13 @@ export class MediaPlayerComponent implements OnInit {
 
   async setMediaPlayerId(id) {
     this.mediaPlayerId = parseInt(id, 10);
+    this._apiCallService.producerGet(this.casparId, id)
+      .subscribe(
+        data => {
+          const mediaPlayer = JSON.parse(JSON.stringify(data));
+          this.mediaPlayerUiUpdate(mediaPlayer);
+        }
+      );
     await this.mediasGet();
 
   }
