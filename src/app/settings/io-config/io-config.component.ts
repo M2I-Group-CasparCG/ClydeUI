@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
 import { ApiCallService } from '../../api-call.service';
 import { SocketIoService } from '../../socket-io.service';
-import { forEach } from '@angular/router/src/utils/collection';
-import { CasparSelectComponent } from '../../caspar-select/caspar-select.component';
 
 @Component({
   selector: 'clydeui-io-config',
@@ -10,42 +8,27 @@ import { CasparSelectComponent } from '../../caspar-select/caspar-select.compone
   styleUrls: ['./io-config.component.less']
 })
 
-export class IoConfigComponent implements OnInit {
+export class IoConfigComponent implements OnInit, AfterContentInit, AfterViewInit {
 
   casparId = null;
-  caspars = null;
-  caspar = null;
-  consumers = null;
-  producers = null;
-  channels = null;
-  medias = null;
+  caspars = new Map();
+  caspar;
+  consumers = new Map();
+  producers = new Map();
+  channels = new Map();
+  medias = new Map();
   cards = new Map();
 
   selectedProducerType = 'file';
-  producersType = new Map(
-    [
-      ['file', 'Media'],
-      ['ddr', 'Media Player'],
-      ['stream', 'Stream'],
-      ['decklink', 'Video Card']
-    ]
-  );
+  producersType = new Map();
 
   selectedConsumerType = 'screen';
-  consumersType = new Map(
-    [
-      ['screen', 'Host Screen'],
-      ['file', 'Record'],
-      ['stream', 'Stream'],
-      ['decklink', 'Video Card']
-    ]
-  );
+  consumersType = new Map();
 
   constructor(private _apiCallService: ApiCallService, private _socketIoService: SocketIoService) {
   }
 
   ngOnInit() {
-    this.getCaspars();
 
     this._socketIoService.casparAdd()
       .subscribe((msg: string) => {
@@ -99,43 +82,64 @@ export class IoConfigComponent implements OnInit {
     this._socketIoService.producerDelete()
     .subscribe((msg: string) => {
       const producer = JSON.parse(msg);
-      this.producers.delete(producer.id, producer);
+      this.producers.delete(producer.id);
     });
+
 
   }
 
-  setCasparId(id) {
+  ngAfterViewInit() {
+
+  }
+
+  ngAfterContentInit() {
+
+  }
+
+  async setCasparId(id) {
+
+    this.consumersType = new Map(
+      [
+        ['screen', 'Host Screen'],
+        ['file', 'Record'],
+        ['stream', 'Stream'],
+        ['decklink', 'Video Card']
+      ]
+    );
+    this.producersType = new Map(
+      [
+        ['file', 'Media'],
+        ['ddr', 'Media Player'],
+        ['stream', 'Stream'],
+        ['decklink', 'Video Card']
+      ]
+    );
+
     console.log('ID !!!!!!');
 
-    this.cards = new Map();
+    // this.cards = new Map();
     this.casparId = parseInt(id, 10);
-    console.log(this.casparId);
     this.getConsumers();
     this.getProducers();
     this.getMedias();
     this.getChannels();
     this.caspar = null;
     this.caspar = this.caspars.get(this.casparId);
-    console.log('########################');
-    console.log(JSON.stringify(this.caspar));
-    console.log(JSON.stringify(this.caspar.casparCommon.decklinkCards.length));
-    // if (this.caspar.casparCommon.decklinkCards.length > 0) {
-      for (let n = 0; n < this.caspar.casparCommon.decklinkCards.length; n++) {
-        console.log('card!');
-        this.cards.set(this.caspar.casparCommon.decklinkCards[n][0], this.caspar.casparCommon.decklinkCards[n][1]);
-      }
+    for (let n = 0; n < this.caspar.casparCommon.decklinkCards.length; n++) {
+      this.cards.set(this.caspar.casparCommon.decklinkCards[n][0], this.caspar.casparCommon.decklinkCards[n][1]);
+    }
   }
 
-  getCaspars() {
+  async getCaspars() {
     this._apiCallService.casparGetAll()
     .subscribe(
        data => {
         this.caspars = new Map();
         let element = null;
-           element = data;
-           element.forEach(caspar => {
-             this.caspars.set(caspar[0], caspar[1]);
-           });
+            element = data;
+            element.forEach(caspar => {
+            this.caspars.set(caspar[0], caspar[1]);
+          });
        }
     );
   }

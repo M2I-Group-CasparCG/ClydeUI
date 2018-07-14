@@ -19,6 +19,8 @@ export class CasparsSettingsComponent implements OnInit {
 
   ngOnInit() {
 
+    this.caspars = new Map();
+
     /**
      * Observers subscriptions
      */

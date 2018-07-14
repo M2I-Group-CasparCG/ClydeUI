@@ -15,6 +15,10 @@ class MediaPlayer {
   playlistId: Number;
 }
 
+class Media {
+  fullPath: string;
+}
+
 @Component({
   selector: 'clydeui-media-player',
   templateUrl: './media-player.component.html',
@@ -27,14 +31,14 @@ export class MediaPlayerComponent implements OnInit {
   casparId = -1;
   mediaPlayerId = -1;
   mediaPlayers = new Map();
-  currentMediaPlayer = null;
+  currentMediaPlayer = new Object();
   playlist = null;
   playlistIndex = -1;
   mediaList = new Map();
 
   // html variables
 
-  currentMedia = null;
+  currentMedia = new Object();
   currentIndex;
   currentMediaPath = '';
   currentTime = '';
@@ -52,9 +56,9 @@ export class MediaPlayerComponent implements OnInit {
     private _socketIo: SocketIoService) { }
 
   ngOnInit() {
-
+    this.currentMediaPlayer['currentMedia'] = new Object();
     this.mediaPlayer.paused = true;
-
+    this.mediaPlayer.mediaList = new Array();
     this._socketIo.mediaPlayerEdit()
     .subscribe((msg: string) => {
       const mediaPlayer = JSON.parse(msg);
