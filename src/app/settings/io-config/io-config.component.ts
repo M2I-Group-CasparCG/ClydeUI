@@ -85,6 +85,7 @@ export class IoConfigComponent implements OnInit, AfterContentInit, AfterViewIni
       this.producers.delete(producer.id);
     });
 
+    this.getCaspars();
 
   }
 
@@ -125,9 +126,14 @@ export class IoConfigComponent implements OnInit, AfterContentInit, AfterViewIni
     this.getChannels();
     this.caspar = null;
     this.caspar = this.caspars.get(this.casparId);
+    console.log('___________________');
+    console.log(JSON.stringify(this.caspars));
+    console.log(this.caspar.casparCommon.decklinkCards.length);
     for (let n = 0; n < this.caspar.casparCommon.decklinkCards.length; n++) {
       this.cards.set(this.caspar.casparCommon.decklinkCards[n][0], this.caspar.casparCommon.decklinkCards[n][1]);
+      console.log('card');
     }
+    console.log('/___________________');
   }
 
   async getCaspars() {

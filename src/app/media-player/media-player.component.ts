@@ -249,6 +249,7 @@ export class MediaPlayerComponent implements OnInit {
 
   async setMediaPlayerId(id) {
     this.mediaPlayerId = parseInt(id, 10);
+    this.mediaPlayer.mediaList = new Array();
     this._apiCallService.producerGet(this.casparId, id)
       .subscribe(
         data => {
