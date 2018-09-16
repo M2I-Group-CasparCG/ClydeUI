@@ -311,5 +311,39 @@ export class ApiCallService {
     return this.http.delete(url, httpOptions);
   }
 
+  /**
+   * Hyperdecks
+   */
+  hyperdecksGetAll () {
+    const url = `${this.apiSettings.url}/hyperdecks`;
+    return this.http.get(url);
+  }
 
+  hyperdeckAdd (settings) {
+    const body = settings;
+    console.log('hyperdeckAdd');
+    console.log(this.apiSettings.url);
+    const url = `${this.apiSettings.url}/hyperdecks/`;
+    console.log('____________________');
+    console.log(url);
+    return this.http.post(url, body, httpOptions);
+  }
+
+  hyperdeckDelete (hyperdeckId) {
+    const body = '';
+    const url = `${ this.apiSettings.url}/hyperdecks/${hyperdeckId}`;
+    return this.http.delete(url);
+  }
+
+  hyperdeckGetInfos (hyperdeckId) {
+    const body = '';
+    const url = `${ this.apiSettings.url}/hyperdecks/${hyperdeckId}/infos`;
+    return this.http.post(url, body, httpOptions);
+  }
+
+  hyperdeckControl (hyperdeckId, control) {
+    const body = '';
+    const url = `${ this.apiSettings.url}/hyperdecks/${hyperdeckId}/controls/${control}`;
+    return this.http.post(url, body, httpOptions);
+  }
 }

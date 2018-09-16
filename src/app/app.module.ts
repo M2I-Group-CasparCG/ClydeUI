@@ -17,6 +17,7 @@ import { LivePageComponent } from './live-page/live-page.component';
 import { MediaPlayerComponent } from './media-player/media-player.component';
 import { ApiSettingsComponent } from './settings/api-settings/api-settings.component';
 import { RecordsComponent } from './records/records.component';
+import { HyperdecksSettingsComponent } from './settings/hyperdecks-settings/hyperdecks-settings.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { RecordsComponent } from './records/records.component';
     MediaPlayerComponent,
     ApiSettingsComponent,
     RecordsComponent,
+    HyperdecksSettingsComponent,
   ],
   imports: [
     BrowserModule,

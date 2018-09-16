@@ -220,4 +220,32 @@ export class SocketIoService {
     });
   }
 
+
+  /**
+   * Hyperdeck
+   */
+  hyperdeckAdd = () => {
+    return Observable.create((observer) => {
+      this.socket.on('hyperdeckAdd', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+
+  hyperdeckEdit = () => {
+    return Observable.create((observer) => {
+      this.socket.on('hyperdeckEdit', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+
+  hyperdeckDelete = () => {
+    return Observable.create((observer) => {
+      this.socket.on('hyperdeckDelete', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+
 }

@@ -1,0 +1,77 @@
+<div class="content">
+
+
+  <header class="header">
+    <h2>
+      Hyperdeck Settings
+    </h2>
+  </header>
+
+  <div class="add">
+
+      <h4>
+          Add an Hyperdeck
+      </h4>
+
+      <form (ngSubmit)="hyperdeckAdd(hyperdeckAddForm.value)" #hyperdeckAddForm="ngForm">
+        <div>
+            <label for="hyperdeckName">Name :</label>
+            <input id="hyperdeckName" name="name" required ngModel>
+        </div>
+        <div>
+          <label for="hyperdeckIp">IP Address :</label>
+          <input id="hyperdeckIp" name="ipAddr" placeholder="127.0.0.1" required ngModel>
+        </div>
+        <div>
+          <label for="hyperdeckPort">TCP Port :</label>
+          <input id="hyperdeckPort" name="tcpPort" value="9993" placeholder=9993 required ngModel>
+        </div>
+        <div>
+          <label></label>
+          <button type="submit">Add an Hyperdeck</button>
+
+        </div>
+    </form>
+  </div>
+
+  <table>
+    <tr>
+      <th>
+          NAME
+      </th>
+      <th>
+        IP ADDRESS
+      </th>
+      <th>
+        STATUS
+      </th>
+      <th colspan="4">
+        ACTIONS
+      </th>
+    </tr>
+    <tr *ngFor="let hyperdeck of hyperdecks.values()">
+      <td>
+          {{hyperdeck.common.name}}
+      </td>
+      <td>
+          {{hyperdeck.common.ipAddr}}
+      </td>
+      <td>
+        <div class="status" [ngClass]="{'active':hyperdeck.common.online}">
+          <span *ngIf="hyperdeck.common.online">✔</span>
+          <span *ngIf="! hyperdeck.common.online">✘</span>
+        </div>
+    </td>
+      <td>
+        <button (click)="hyperdeckGetInfo(hyperdeck.id)">
+          Refresh infos
+        </button>
+        </td>
+        <td>
+          <button (click)="hyperdeckDelete(hyperdeck.id)">
+            delete
+          </button>
+      </td>
+    </tr>
+  </table>
+</div>

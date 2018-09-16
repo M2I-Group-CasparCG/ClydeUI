@@ -38,7 +38,6 @@
             {{record.casparCommon.mediaPath}}\{{record.filePath}}
         </li>
         <li>
-
             {{record.formattedDuration}}
         </li>
 
@@ -46,3 +45,97 @@
     </li>
 </ul>
 
+
+<ul class="hyperdeck">
+  <li *ngFor="let hyperdeck of hyperdecks.values()" >
+
+
+        <h3>
+        <div class="name">
+          {{hyperdeck.common.name}}
+        </div>
+        <div class="ipAddr">
+          {{hyperdeck.common.ipAddr}}
+        </div>
+    </h3>
+
+    <div class="left">
+      <div class="timecode">
+        {{hyperdeck.common.displayTimeCode}}
+        <div class="speed">
+          x{{ hyperdeck.common.speed/100}}
+       </div>
+      </div>
+
+
+      <ul class="controls">
+        <li (click)="hyperdeckControl(hyperdeck.id, 'previous')">
+            <img src="./../assets/previous.png"/>
+        </li>
+        <li (click)="hyperdeckControl(hyperdeck.id, 'fastBw')">
+            <img *ngIf="hyperdeck.common.status != 'rewind'" src="./../assets/rewind.png"/>
+            <img *ngIf="hyperdeck.common.status == 'rewind'" src="./../assets/rewind_active.png"/>
+        </li>
+        <li (click)="hyperdeckControl(hyperdeck.id, 'play')">
+            <img *ngIf="hyperdeck.common.status != 'play'" src="./../assets/play.png"/>
+            <img *ngIf="hyperdeck.common.status == 'play'" src="./../assets/play_active.png"/>
+        </li>
+        <li (click)="hyperdeckControl(hyperdeck.id, 'stop')">
+            <img *ngIf="hyperdeck.common.status != 'stopped'" src="./../assets/stop.png"/>
+            <img *ngIf="hyperdeck.common.status == 'stopped'" src="./../assets/stop_active.png"/>
+        </li>
+        <li (click)="hyperdeckControl(hyperdeck.id, 'fastFw')">
+            <img *ngIf="hyperdeck.common.status != 'forward'" src="./../assets/fast-forward.png"/>
+            <img *ngIf="hyperdeck.common.status == 'forward'" src="./../assets/fast-forward_active.png"/>
+        </li>
+        <li (click)="hyperdeckControl(hyperdeck.id, 'next')">
+            <img src="./../assets/next.png"/>
+        </li>
+      </ul>
+
+      <ul class="additionnalControls">
+        <li (click)="hyperdeckControl(hyperdeck.id, 'previewEnable')" [class.active]="hyperdeck.common.previewEnable===true">
+           Preview Mode
+        </li>
+        <li (click)="hyperdeckControl(hyperdeck.id, 'remoteEnable')" [class.active]="hyperdeck.common.remoteEnabled===true">
+            Remote
+         </li>
+    </ul>
+    </div>
+    <div class="rec">
+        <div (click)="hyperdeckControl(hyperdeck.id, 'rec')">
+            <img src="./../assets/rec.png"/>
+        </div>
+    </div>
+
+    <ul class="config">
+      <h4>
+        Configuration
+      </h4>
+      <li>
+        <label>Video Input : </label>{{hyperdeck.common.videoInput}}
+      </li>
+      <li>
+          <label>Audio Input : </label>{{hyperdeck.common.audioInput}}
+       </li>
+      <li>
+        <label>Video Format : </label>{{hyperdeck.common.videoFormat}}
+      </li>
+      <li>
+        <label>File Format : </label>{{hyperdeck.common.fileFormat}}
+      </li>
+      <li>
+        <label>Active Slot :</label>{{ hyperdeck.common.activeSlot }}
+      </li>
+      <li>
+        <label>Active Clip :</label>{{hyperdeck.common.activeClipId}}
+      </li>
+      <li>
+        <label>Online : </label>{{hyperdeck.common.socketActive}}
+      </li>
+    </ul>
+
+
+  </li>
+
+</ul>

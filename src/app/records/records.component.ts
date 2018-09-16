@@ -15,6 +15,7 @@ class RecorderSatus {
 })
 export class RecordsComponent implements OnInit {
 
+  hyperdecks;
   casparId = 0;
   consumersFile = new Map();
   recordersSatus = new Map();
@@ -60,6 +61,34 @@ export class RecordsComponent implements OnInit {
       this.consumersFile.set(recorder.id, recorder);
     });
 
+
+    /**
+     * Hyperdeck events
+     */
+
+    this._socketIoService.hyperdeckAdd()
+    .subscribe((msg: string) => {
+      const hyperdeck = JSON.parse(msg);
+      this.hyperdecks.set(hyperdeck.id, hyperdeck);
+    });
+
+    this._socketIoService.hyperdeckEdit()
+    .subscribe((msg: string) => {
+      console.log('hyperdeck edit catched');
+      const hyperdeckCommon = JSON.parse(msg);
+      const hyperdeck = this.hyperdecks.get(hyperdeckCommon.hyperdeckId);
+      console.log(hyperdeck);
+      hyperdeck.common = hyperdeckCommon;
+      this.hyperdecks.set(hyperdeck.id, hyperdeck);
+    });
+
+    this._socketIoService.hyperdeckDelete()
+      .subscribe((msg: string) => {
+        const hyperdeck = JSON.parse(msg);
+        this.hyperdecks.delete(hyperdeck.id);
+    });
+
+    this.hyperdecksGet();
   }
 
 
@@ -118,5 +147,40 @@ export class RecordsComponent implements OnInit {
           console.log(JSON.stringify(data));
         });
     }
+
+    hyperdecksGet () {
+      this._apiCallService.hyperdecksGetAll()
+      .subscribe(
+        data => {
+          console.log('data received from hyperdeckGet API request');
+          console.log(JSON.stringify(data));
+          this.hyperdecks = new Map();
+          let result;
+              result = data;
+              result.forEach(element => {   // 0 = id, 1= casparInstance
+                console.log(JSON.stringify(element));
+                this.hyperdecks.set(element[0], element[1]);
+              });
+        },
+        err => console.log('error received from casparGet API request'),
+          // console.log(err);
+        () => console.log('')
+      );
+    }
+
+    hyperdeckControl (hyperdeckId, controlType) {
+      this._apiCallService.hyperdeckControl(hyperdeckId, controlType)
+      .subscribe(
+        data => {
+          console.log('data received from hyperdeckGet API request');
+          console.log(JSON.stringify(data));
+
+        },
+        err => console.log('error received from casparGet API request'),
+          // console.log(err);
+        () => console.log('')
+      );
+    }
+
 
 }
