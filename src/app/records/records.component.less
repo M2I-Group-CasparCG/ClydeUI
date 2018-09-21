@@ -1,152 +1,330 @@
 @import '../style/common.less';
 
-.recordBloc{
-  border : 1px solid @brightColor;
+
+/**
+* COMMON
+*/
+.hyperdeck {
+  margin : 40px;
 }
-
-.recordBloc li{
-  display : inline-block;
+.hyperdeck .green{
+  color : @greenNormal;
 }
-
-.recordBloc {
-
-}
-.recBtn img{
-  width : 100px;
-  cursor : pointer;
-}
-
-
-.hyperdeck{
-  width : 900px;
-  display: inline-block;
+.hyperdeck .red{
+  color : @redNormal;
 }
 
 /**
-* Title
+* HEADER
 */
-.hyperdeck h3{
+.hyperdeck header{
   position : relative;
-  background-color: @brightColor;
-  color : @darkColor;
-  height : 50px;
-  font-size : 25px;
-  margin-bottom : 0px;
+  width : 700px;
+  padding : 5px;
+  background-color: transparent;
+  border-bottom: 1px solid @brightColor;
+
 }
-.hyperdeck h3 .div{
+.hyperdeck header div{
   display: inline-block;
-  padding : 10px;
+  margin-left : 5px;
+  margin-right: 5px;
+  color : @brightColor;
+
 }
-.hyperdeck .name{
+.hyperdeck header .right{
   position : absolute;
-  left : 12px;
-  top : 12px;
+  right : 5px;
+  bottom: 5px;
 }
-.hyperdeck .ipAddr{
-  position : absolute;
-  right : 12px;
-  top : 12px;
-}
+.hyperdeck header .left{
 
-.hyperdeck .left{
-  display: inline-block;
-  width : 350px;
-  vertical-align: top;
 }
+.hyperdeck header .status{
 
+}
+.hyperdeck header .hyperdeckName{
+  border-right: 1px solid @brightColor;
+  padding-right: 10px;
+}
+.hyperdeck header .clipName{
+
+}
 /**
-* Timecode
+* HYPERDECK settings
 */
-.hyperdeck .timecode{
-  margin : 10px;
-  width : 280px;
-  text-align: left;
-  background-color: @brightColor;
-  color : @darkColor;
-  font-family: ds-digi;
-  font-size : 60px;
-  padding-top : 10px;
-  padding-left : 20px;
-  padding-right : 20px;
-}
-
-.hyperdeck .timecode .speed{
-  font-size : 12px;
-  font-family : comfortaa;
-  text-align: right;
-  padding-bottom : 5px;
-}
-
-/**
-* Controls
-*/
-.hyperdeck .controls{
-  margin : 10px;
-  padding : 20px;
+.hyperdeck .settings{
   text-align: center;
-  width : 280px;
+  margin-top : 10px;
+  margin-bottom : 10px;
+  font-size : 15px;
 }
-.hyperdeck .controls li{
+.hyperdeck .settings label{
+  font-weight: bold;
+}
+.hyperdeck .settings select{
+  border-radius: none;
+  border:none;
+  font-family: inherit;
+  padding : 5px;
+  background-color: @darkColor;
+  color : @brightColor;
   cursor: pointer;
 }
-.hyperdeck .controls img{
-  height: 40px;
-}
-
-.hyperdeck .rec{
-  display: inline-block;
-  cursor : pointer;
-  vertical-align: top;
-  margin : 10px;
-}
-.hyperdeck .rec div{
-  display: inline-block;
-}
-
-.hyperdeck .rec img{
-  display: inline-block;
-  width : 150px;
-}
-
-.hyperdeck .config{
-  margin : 10px;
-  display : inline-block;
-  width : 300px;
-  border : 1px solid @brightColor;
-  padding-bottom : 10px;
-}
-.hyperdeck .config h4{
+.hyperdeck .settings select:hover{
   background-color: @brightColor;
   color : @darkColor;
-  padding : 20px;
-  padding-bottom : 10px;
-
-  margin :0px;
-  margin-bottom : 10px;
 }
-.hyperdeck .config li{
-  margin-left : 10px;
+
+.hyperdeck .settings .resolution{
   margin-right : 10px;
 }
-.hyperdeck .config label{
+
+/**
+* HYPERDECK CENTER ZONE
+*/
+
+// timecode
+.hyperdeck .content{
+  text-align : center;
+}
+.hyperdeck .content .left .timecode{
+    position: relative;
+    text-align: left;
+    margin : 10px;
+    width : 250px;
+    background-color: @brightColor;
+    color : @darkColor;
+    font-family: ds-digi;
+    font-size : 50px;
+    padding-top : 5px;
+    padding-bottom : 5px;
+    padding-left : 10px;
+    padding-right : 10px;
+    margin-bottom: 20px;
+    height : 50px;
+  }
+
+  .hyperdeck .content .left .timecode .speed{
+    position : absolute;
+    font-size : 12px;
+    font-family : comfortaa;
+    text-align: right;
+    bottom : 5px;
+    right : 5px;
+  }
+// Controls
+.hyperdeck .content .left{
   display: inline-block;
-  width : 130px;
-  text-align: right;
-  font-weight: bold;
-  padding : 2px;
-  padding-right : 5px;
+}
+.hyperdeck .content .left .controls {
+  margin : 10px;
+}
+.hyperdeck .content .left .controls li{
+  cursor : pointer;
+}
+.hyperdeck .content .left .controls li:hover{
+  opacity: 0.7;
+}
+.hyperdeck .content .left .controls li img{
+  height : 40px;
 }
 
-.hyperdeck .additionnalControls{
-  margin-left : 10px;
+
+
+// rec button
+.hyperdeck .content .rec {
+  margin : 10px;
+  display: inline-block;
+  vertical-align: top;
+  cursor : pointer;
+  margin-left : 0px;
 }
-.hyperdeck .additionnalControls li{
-  background-color: @brightColor;
-  color : @darkColor;
-  padding : 10px;
-  cursor : pointer
+.hyperdeck .content .rec:hover{
+  opacity: 0.7;
 }
-.hyperdeck .additionnalControls li.active{
-  background-color: @blueActive ;
+.hyperdeck .content .rec img{
+  height : 60px;
 
 }
+
+// additionnal buttons
+.hyperdeck  .content .right{
+    margin-top : 10px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .hyperdeck  .content .right div{
+    background-color: @brightColor;
+    color : @darkColor;
+    padding : 10px;
+    cursor : pointer;
+    display : block;
+    margin-bottom : 10px;
+    text-align : center;
+    margin-right: 5px;
+    margin-left : 5px;
+  }
+  .hyperdeck  .content .right div:hover{
+    opacity : 0.7;
+  }
+  .hyperdeck  .content .right .active{
+    background-color: rgb(0,75,130);
+    color : @brightColor;
+    font-weight: bold;
+  }
+
+
+
+
+
+// .recordBloc{
+//   border : 1px solid @brightColor;
+// }
+
+// .recordBloc li{
+//   display : inline-block;
+// }
+
+// .recordBloc {
+
+// }
+// .recBtn img{
+//   width : 100px;
+//   cursor : pointer;
+// }
+
+
+// .hyperdeck{
+//   width : 900px;
+//   display: inline-block;
+// }
+
+// /**
+// * Title
+// */
+// .hyperdeck h3{
+//   position : relative;
+//   background-color: @brightColor;
+//   color : @darkColor;
+//   height : 50px;
+//   font-size : 25px;
+//   margin-bottom : 0px;
+// }
+// .hyperdeck h3 .div{
+//   display: inline-block;
+//   padding : 10px;
+// }
+// .hyperdeck .name{
+//   position : absolute;
+//   left : 12px;
+//   top : 12px;
+// }
+// .hyperdeck .ipAddr{
+//   position : absolute;
+//   right : 12px;
+//   top : 12px;
+// }
+
+// .hyperdeck .left{
+//   display: inline-block;
+//   width : 350px;
+//   vertical-align: top;
+// }
+
+// /**
+// * Timecode
+// */
+// .hyperdeck .timecode{
+//   margin : 10px;
+//   width : 280px;
+//   text-align: left;
+//   background-color: @brightColor;
+//   color : @darkColor;
+//   font-family: ds-digi;
+//   font-size : 60px;
+//   padding-top : 10px;
+//   padding-left : 20px;
+//   padding-right : 20px;
+// }
+
+// .hyperdeck .timecode .speed{
+//   font-size : 12px;
+//   font-family : comfortaa;
+//   text-align: right;
+//   padding-bottom : 5px;
+// }
+
+// /**
+// * Controls
+// */
+// .hyperdeck .controls{
+//   margin : 10px;
+//   padding : 20px;
+//   text-align: center;
+//   width : 280px;
+// }
+// .hyperdeck .controls li{
+//   cursor: pointer;
+// }
+// .hyperdeck .controls img{
+//   height: 40px;
+// }
+
+// .hyperdeck .rec{
+//   display: inline-block;
+//   cursor : pointer;
+//   vertical-align: top;
+//   margin : 10px;
+// }
+// .hyperdeck .rec div{
+//   display: inline-block;
+// }
+
+// .hyperdeck .rec img{
+//   display: inline-block;
+//   width : 150px;
+// }
+
+// .hyperdeck .config{
+//   margin : 10px;
+//   display : inline-block;
+//   width : 300px;
+//   border : 1px solid @brightColor;
+//   padding-bottom : 10px;
+// }
+// .hyperdeck .config h4{
+//   background-color: @brightColor;
+//   color : @darkColor;
+//   padding : 20px;
+//   padding-bottom : 10px;
+
+//   margin :0px;
+//   margin-bottom : 10px;
+// }
+// .hyperdeck .config li{
+//   margin-left : 10px;
+//   margin-right : 10px;
+// }
+// .hyperdeck .config label{
+//   display: inline-block;
+//   width : 130px;
+//   text-align: right;
+//   font-weight: bold;
+//   padding : 2px;
+//   padding-right : 5px;
+// }
+
+// .hyperdeck .additionnalControls{
+//   margin-left : 10px;
+// }
+// .hyperdeck .additionnalControls li{
+//   background-color: @brightColor;
+//   color : @darkColor;
+//   padding : 10px;
+//   cursor : pointer
+// }
+// .hyperdeck .additionnalControls li.active{
+//   background-color: @blueActive ;
+
+// }
