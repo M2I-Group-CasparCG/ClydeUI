@@ -10,7 +10,7 @@
 
 <ul class="hyperdecks">
   <li *ngFor="let hyperdeck of hyperdecks.values()" class="hyperdeck">
-    <header>
+    <div class="header">
       <div class="left">
         <div class="status">
           <span *ngIf="hyperdeck.common.socketActive" class="green">
@@ -21,9 +21,7 @@
           </span>
         </div>
         <div class="hyperdeckName">
-          <h2>
             {{ hyperdeck.common.name }}
-          </h2>
         </div>
         <div class="clipName">
             <!-- {{ hyperdeck.common.activeClip.clipName }} -->
@@ -33,7 +31,7 @@
       <div class="right">
           {{ hyperdeck.common.ipAddr }}
       </div>
-    </header>
+  </div>
     <div class="settings">
         <ul>
             <li>

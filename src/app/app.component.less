@@ -1,52 +1,54 @@
+@import './style/common.less';
+
+// @headerHeight : 20px;
 
 section{
   background-color: rgb(30,30,30);
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color : rgb(210,210,210);
   position : absolute;
-  top : 0px;
+  top : @headerHeight;
   bottom : 0px;
   right : 0px;
   left  : 0px;
-  padding : 10px;
   font-size : 16px;
   overflow-y: scroll;
 }
 
-header{
-  display : inline-block;
-  margin-bottom : 70px;
+nav{
   z-index : 0;
-}
-
-header div img{
-  margin : 10px;
-  display: inline-block;
-  height : 100px;
-}
-
-header nav{
-  display : inline-block;
-  position : absolute;
-  left : 0px;
-  right : 0px;
-  background-color : rgb(210,210,210);
-  padding-left :400px;
-
-}
-
-header nav a {
+  background-color : @blueNormal;
+  margin : 0px;
+  position: absolute;
+  top:0px; left : 0px; right : 0px;
+  padding : 0px;  
+  height: @headerHeight;
+  line-height: @headerHeight;
+  color : @brightColor;
   padding : 10px;
-  text-decoration: none;
-  color : rgb(30,30,30);
-  background-color : rgb(100,150,100);
-  margin : 5px;
-}
-header nav a:active{
-  border:none;
+  padding-top : 0px;
+  padding-bottom: 18px;
+  border-bottom : 2px solid @brightColor;
 }
 
-header nav a.active{
-  background-color : rgb(100,200,100);
+ nav div {
+  display: inline-block;
+  padding : 10px;
+  height : @headerHeight -10;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer; 
+}
+ nav div:active{
+  border:0px solid black;
+}
+ nav div:focus{
+  border : 0px solid black;
+}
+
+ nav div.active{
+  background-color: @brightColor;
+  color : @darkColor;
+  padding-bottom : 15px;
 }
 

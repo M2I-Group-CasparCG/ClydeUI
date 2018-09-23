@@ -9,9 +9,16 @@
 @greenHover   : rgb(100,180,100);
 @greenActive  : rgb(50,180,50);
 @greenNormal  : rgb(50,130,50);
-@blueHover    : rgb(150,150,200);
-@blueActive   : rgb(100,100,200);
-@blueNormal   : rgb(70, 70, 140);
+// @blueHover    : rgb(150,150,200);
+// @blueActive   : rgb(100,100,200);
+// @blueNormal   : rgb(70, 70, 140);
+@blueNormal   : rgb(0,75,130);
+@blueActive   : rgb(0,120,180);
+@blueHover    : rgb(100,200,250);
+
+
+@headerHeight : 20px;
+
 
 @titleFont : Comfortaa-Regular;
 
@@ -110,9 +117,10 @@ li{
 
 // .content{
 //   margin : 10px;
-//   position : relative;
+//   position : absolute;
 //   left : 0px;
 //   right : 0px;
+//   bottom : 0px;
 //   vertical-align: top;
 //   height : auto;
 //   max-height: 750px;
@@ -120,28 +128,30 @@ li{
 // }
 
 
-header{
-  position : relative;
-  top : 0px;
-  left : 0px;
-  right : 0px;
-  background-color : @brightColor;
-  color : rgb(30,30,30);
+  header{
+    position : relative;
+    display: inline-block;
+    top : 0px;
+    left : 0px;
+    right : 0px;
+    background-color : @brightColor;
+    color : rgb(30,30,30);
+    height : 20px;
 
-}
+  }
 
-header h2{
-  margin : 0px;
-  font-size : 20px;
-  padding : 0px;
-  display : inline-block;
-  margin : 10px;
-}
+  header h2{
+    margin : 0px;
+    font-size : 15px;
+    padding : 0px;
+    display : inline-block;
+    margin : 0px;
+  }
 
-header .selectBtn{
-  display : inline-block;
-  margin : 10px;
-}
+  header .selectBtn{
+    display : inline-block;
+    margin : 10px;
+  }
 
 section{
   position : relative;
