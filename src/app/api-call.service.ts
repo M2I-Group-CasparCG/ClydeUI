@@ -321,12 +321,14 @@ export class ApiCallService {
 
   hyperdeckAdd (settings) {
     const body = settings;
-    console.log('hyperdeckAdd');
-    console.log(this.apiSettings.url);
     const url = `${this.apiSettings.url}/hyperdecks/`;
-    console.log('____________________');
-    console.log(url);
     return this.http.post(url, body, httpOptions);
+  }
+
+  hyperdeckEdit (hyperdeckId, settings) {
+    const body = settings;
+    const url = `${ this.apiSettings.url}/hyperdecks/${hyperdeckId}`;
+    return this.http.put(url, body, httpOptions);
   }
 
   hyperdeckDelete (hyperdeckId) {

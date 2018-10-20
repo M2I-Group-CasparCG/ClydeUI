@@ -6,7 +6,16 @@
 
 </header> -->
 
-
+<clydeui-modal-window
+  [visible]="modalWindow"
+  title="{{modalWindowTitle}}"
+  [buttons]="modalWindowButtons"
+  content="{{modalWindowContent}}"
+  [width]="modalWindowWidth"
+  [height]="modalWindowHeight">
+</clydeui-modal-window>
+<!-- <button (click)="setModalWindowTest()">Ξ</button> -->
+<!-- {{test}} -->
 
 <ul class="hyperdecks">
   <li *ngFor="let hyperdeck of hyperdecks.values()" class="hyperdeck">
@@ -24,13 +33,20 @@
             {{ hyperdeck.common.name }}
         </div>
         <div class="clipName">
-            <!-- {{ hyperdeck.common.activeClip.clipName }} -->
-            ClipNamePlaceHolder.mov
+            {{ hyperdeck.common.recordName }}
         </div>
       </div>
       <div class="right">
+          <div class="grouped" >
+              <div (click)="hyperdeckGroupedToggle(hyperdeck.id)" [class.active]="hyperdeck.common.grouped===true">
+                  GROUP
+              </div>
+          </div>
           {{ hyperdeck.common.ipAddr }}
+          | <button (click)="setModalWindowHyperdeckInfos(hyperdeck.id)">Ξ</button>
+          | <button (click)="setModalWindowHyperdeckDelete(hyperdeck.id)">✗</button>
       </div>
+
   </div>
     <div class="settings">
         <ul>
@@ -168,7 +184,7 @@
 </ul>
 
 
-<ul class="hyperdeck" style="display: none">
+<!-- <ul class="hyperdeck" style="display: none">
   <li *ngFor="let hyperdeck of hyperdecks.values()" >
 
 
@@ -233,4 +249,4 @@
 
   </li>
 
-</ul>
+</ul> -->

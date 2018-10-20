@@ -1,0 +1,26 @@
+
+<span *ngIf="visible">
+<div class="modalWindow">
+  <div class="background">
+    <div class="window" [style.width]="width+'px'" [style.heigth]="height+'px'" [style.margin-top]="-height/2+'px'">
+        <div class="menuBar">
+          {{title}}
+          <!-- <button (click)="callbackActionSend('close')"> -->
+              <!-- <button (click)="close()">
+            ✗
+          </button> -->
+        </div>
+        <div class="content" >
+          <div [innerHTML]="content">
+
+          </div>
+          <div class="buttonBar">
+              <button *ngFor="let button of buttons" (click)="button.callback(button.param)">
+                {{button.label}}
+              </button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+</span>

@@ -49,9 +49,9 @@
           {{hyperdeck.common.ipAddr}}
       </td>
       <td>
-        <div class="status" [ngClass]="{'active':hyperdeck.common.online}">
-          <span *ngIf="hyperdeck.common.online">✔</span>
-          <span *ngIf="! hyperdeck.common.online">✘</span>
+        <div class="status" [ngClass]="{'active':hyperdeck.common.socketActive}">
+          <span *ngIf="hyperdeck.common.socketActive">✔</span>
+          <span *ngIf="! hyperdeck.common.socketActive">✘</span>
         </div>
     </td>
       <td>

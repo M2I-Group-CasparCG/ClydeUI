@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ApiCallService } from '../api-call.service';
 import { SocketIoService } from '../socket-io.service';
 
@@ -20,6 +20,16 @@ export class RecordsComponent implements OnInit {
   consumersFile = new Map();
   recordersSatus = new Map();
   consumersFileLastTime = new Map();
+
+  modalWindow = false;
+  modalWindowTitle: String;
+  modalWindowButtons: Array<Object>;
+  modalWindowContent: String;
+  modalWindowWidth: number;
+  modalWindowHeight: number;
+  modalWindowCallback: Function;
+
+  test = true;
 
   constructor(
     private _apiCallService: ApiCallService,
@@ -74,11 +84,11 @@ export class RecordsComponent implements OnInit {
 
     this._socketIoService.hyperdeckEdit()
     .subscribe((msg: string) => {
-      console.log('hyperdeck edit catched');
       const hyperdeckCommon = JSON.parse(msg);
       const hyperdeck = this.hyperdecks.get(hyperdeckCommon.hyperdeckId);
-      console.log(hyperdeck);
-      hyperdeck.common = hyperdeckCommon;
+      for (const [key, value] of Object.entries(hyperdeckCommon)) {
+        hyperdeck.common[key] = value;
+      }
       this.hyperdecks.set(hyperdeck.id, hyperdeck);
     });
 
@@ -168,6 +178,27 @@ export class RecordsComponent implements OnInit {
       );
     }
 
+    hyperdeckEdit (hyperdeckId, settings) {
+      this._apiCallService.hyperdeckEdit(hyperdeckId, settings)
+      .subscribe(
+        data => {
+          console.log('data received from hyperdeckEdit API request');
+          console.log(JSON.stringify(data));
+
+        },
+        err => console.log('error received from hyperdeckEdit API request'),
+          // console.log(err);
+        () => console.log('')
+      );
+    }
+
+    hyperdeckGroupedToggle (hyperdeckId) {
+      const hyperdeck = this.hyperdecks.get(hyperdeckId);
+      const settings = new Object();
+            settings['grouped'] = ! hyperdeck.common.grouped;
+      this.hyperdeckEdit(hyperdeckId, settings);
+    }
+
     hyperdeckControl (hyperdeckId, controlType) {
       this._apiCallService.hyperdeckControl(hyperdeckId, controlType)
       .subscribe(
@@ -182,5 +213,97 @@ export class RecordsComponent implements OnInit {
       );
     }
 
+    setModalWindow(boolean) {
+      this.modalWindow = boolean;
+    }
 
+    closeModalWindow() {
+      this.setModalWindow(false);
+    }
+
+    setModalWindowHyperdeckInfos(id) {
+      this.modalWindowTitle = 'Hyperdeck Informations';
+      this.modalWindowButtons = [{label: 'Close', callback: this.closeModalWindow.bind(this) }];
+      this.modalWindowContent = '<ul>';
+      const hyperdeck = this.hyperdecks.get(id).common;
+      for ( const key in hyperdeck) {
+        if (hyperdeck.hasOwnProperty(key)) {
+          this.modalWindowContent += `
+            <li>
+              <label>
+                ${key}
+              </label>
+              <span>
+              ${hyperdeck[key]}
+              </span>
+            </li>`;
+         }
+      }
+      this.modalWindowContent += `
+      </ul>
+      <style>li{display:block; text-align : left;}
+      label{width:160px; text-align : right; margin-right : 10px; display:inline-block;}</style>`;
+      this.modalWindowWidth = 500;
+      this.modalWindowHeight = 800;
+
+      this.setModalWindow(true);
+    }
+
+    setModalWindowHyperdeckDelete(id) {
+      this.modalWindowTitle = 'Hyperdeck Delete';
+      this.modalWindowButtons = [{label: 'Delete', callback: this.hyperdeckDelete.bind(this), param: id},
+                                 {label: 'Cancel', callback: this.closeModalWindow.bind(this)}];
+      this.modalWindowContent = `/!\\ Are you sure to want to delete hyperdeck ${this.hyperdecks.get(id).common.name} ?`;
+      this.modalWindowWidth = 300;
+      this.modalWindowHeight = 300;
+      this.setModalWindow(true);
+    }
+
+    hyperdeckDelete(hyperdeckId) {
+      this._apiCallService.hyperdeckDelete(hyperdeckId)
+          .subscribe(
+            data => {
+              console.log('data received from hyperdeckDelete API request');
+              console.log(JSON.stringify(data));
+              /**
+               * TO DO : analyze the response and update the interface
+               */
+            },
+            err => {
+              console.log('error received from hyperdeckDelete API request');
+              err.forEach(element => {
+                console.log(element);
+              });
+            },
+            () => console.log('hyperdeckDelete error')
+          );
+      this.setModalWindow(false);
+    }
+
+    // setModalWindowTest() {
+    //   this.modalWindowTitle = 'Hyperdeck Delete';
+    //   this.modalWindowButtons = [{label: 'Delete', callback: this.testToogle.bind(this) },
+    //                             {label: 'Cancel', callback: this.testToogle.bind(this) }];
+    //   this.modalWindowContent = `/!\\ Are you sure to want to delete hyperdeck ?`;
+    //   this.modalWindowWidth = 300;
+    //   this.modalWindowHeight = 300;
+    //   this.modalWindowCallback = this.testToogle.bind(this);
+    //   this.setModalWindow(true);
+    // }
+
+
+    // modalWindowCallbackAction(event) {
+
+    //   console.log(event);
+    //   switch (event) {
+    //     case 'Exit' :
+    //     case 'Cancel' :
+    //     case 'close' : {
+    //       this.setModalWindow(false);
+    //     }break;
+    //     case 'Delete' : {
+    //       this.hyperdecks.delete();
+    //     }break;
+    //   }
+    // }
 }

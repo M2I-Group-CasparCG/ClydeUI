@@ -1,0 +1,88 @@
+@import '../style/common.less';
+
+.modalWindow .background{
+  background-color : rgba(30,30,30,0.8);
+  display: inline-block;
+  position: absolute;
+  top : 0px;
+  bottom : 0px;
+  right : 0px;
+  left : 0px;
+  height: 100%;
+  line-height: 100%;
+  text-align: center;
+  z-index: 10;
+}
+
+.modalWindow .window{
+  background-color: @darkColor;
+  line-height: normal;
+  position: relative;
+  top : 50%;
+  // margin-top : -100px;
+  display: inline-block;
+  opacity: 1;
+
+}
+
+@menuBarHeight : 20px;
+@buttonBarHeight : 40px;
+
+.modalWindow .window .menuBar{
+  position: absolute;
+  top : 0px;
+  left : 0px;
+  right : 0px;
+  height : @menuBarHeight;
+  background-color: @brightColor;
+  color : @darkColor;
+  text-align: left;
+  padding : 5px;
+}
+.modalWindow .window .menuBar:active{
+  cursor: pointer;
+}
+
+.modalWindow .window .menuBar button{
+  background-color: inherit;
+  position : absolute;
+  right : 5px;
+  width : 15px;
+  font-size : 20px;
+  text-align: center;
+  margin : 0px;
+  z-index: 15;
+
+}
+.modalWindow .window .menuBar button:hover{
+  font-size : 18px;
+}
+
+.modalWindow .window .content{
+  border-bottom : 1px solid @brightColor;
+  border-right : 1px solid @brightColor;
+  position: relative;
+  top : @menuBarHeight+10;
+  // left : 0px;
+  // right : 0px;
+  // bottom : 0px;
+  padding : 10px;
+}
+
+.modalWindow .window .buttonBar{
+  // position: absolute;
+  // bottom : 0px;
+  // left : 0px;
+  // right : 0px;
+  margin-top : 20px;
+  height : @buttonBarHeight;
+}
+.modalWindow .window .buttonBar button{
+  padding : 5px;
+  background-color: @brightColor;
+  margin : 10px;
+}
+.modalWindow .window .buttonBar button:hover{
+  background-color: @mediumColor;
+  color : @brightColor;
+}

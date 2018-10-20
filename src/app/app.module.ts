@@ -18,6 +18,7 @@ import { MediaPlayerComponent } from './media-player/media-player.component';
 import { ApiSettingsComponent } from './settings/api-settings/api-settings.component';
 import { RecordsComponent } from './records/records.component';
 import { HyperdecksSettingsComponent } from './settings/hyperdecks-settings/hyperdecks-settings.component';
+import { ModalWindowComponent } from './modal-window/modal-window.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { HyperdecksSettingsComponent } from './settings/hyperdecks-settings/hype
     ApiSettingsComponent,
     RecordsComponent,
     HyperdecksSettingsComponent,
+    ModalWindowComponent,
   ],
   imports: [
     BrowserModule,
