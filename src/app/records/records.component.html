@@ -1,10 +1,10 @@
-<!-- <header class="header">
+<header class="header">
     <h2>
       Records
     </h2>
     <clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
 
-</header> -->
+</header>
 
 <clydeui-modal-window
   [visible]="modalWindow"
@@ -17,7 +17,7 @@
 <!-- <button (click)="setModalWindowTest()">Ξ</button> -->
 <!-- {{test}} -->
 
-<ul class="hyperdecks">
+<ul class="hyperdecks recorder">
   <li *ngFor="let hyperdeck of hyperdecks.values()" class="hyperdeck">
     <div class="header">
       <div class="left">
@@ -147,23 +147,158 @@
 
 
 
-<ul>
+<ul class="casparRecords recorder">
+    <li *ngFor="let consumer of consumersFile.values()">
+      <div class="header">
+        <div class="left">
+          <div class="status">
+            <span *ngIf="consumer.casparCommon.online" class="green">
+              ✓
+            </span>
+            <span *ngIf="! consumer.casparCommon.online" class="red">
+              ✗
+            </span>
+          </div>
+          <div class="hyperdeckName">
+              {{ consumer.name }}
+          </div>
+          <div class="clipName">
+              {{ consumer.fileName }}
+          </div>
+        </div>
+        <div class="right">
+            <!-- <div class="grouped" >
+                <div (click)="hyperdeckGroupedToggle(hyperdeck.id)" [class.active]="hyperdeck.common.grouped===true">
+                    GROUP
+                </div>
+            </div> -->
+            {{ consumer.casparCommon.ipAddr }}
+            | <button (click)="setModalWindowHyperdeckInfos(hyperdeck.id)">Ξ</button>
+            | <button (click)="setModalWindowHyperdeckDelete(hyperdeck.id)">✗</button>
+        </div>
+  
+    </div>
+    <!-- <div class="settings">
+          <ul>
+              <li>
+                  <label>VIDEO : </label>
+                    <select name="videoInput" size=1>
+                      <option [selected]="hyperdeck.common.videoInput=='SDI'">SDI</option>
+                      <option [selected]="hyperdeck.common.videoInput=='HDMI'">HDMI</option>
+                      <option [selected]="hyperdeck.common.videoInput=='component'">YUV</option>
+                    </select>
+                </li>
+                <li>
+                    <label>AUDIO : </label>
+                    <select name="videoInput" size=1>
+                        <option [selected]="hyperdeck.common.audioInput=='embedded'">EMBEDDED</option>
+                        <option [selected]="hyperdeck.common.audioInput=='RCA'">RCA</option>
+                        <option [selected]="hyperdeck.common.audioInput=='XLR'">XLR</option>
+                      </select>
+                 </li>
+                <li class="resolution">
+                  <label>RESOLUTION : </label> <span >{{hyperdeck.common.videoFormat}}</span>
+                </li>
+                <li>
+                  <label>CODEC : </label>
+                  <select name="fileFormat" size=1>
+                      <option [selected]="hyperdeck.common.fileFormat=='QuickTimeUncompressed'">Uncompressed</option>
+                      <option [selected]="hyperdeck.common.fileFormat=='QuickTimeProResHQ'">ProResHQ</option>
+                      <option [selected]="hyperdeck.common.fileFormat=='QuickTimeProRes'">ProRes</option>
+                      <option [selected]="hyperdeck.common.fileFormat=='QuickTimeProResLT '">ProResLT</option>
+                      <option [selected]="hyperdeck.common.fileFormat=='QuickTimeProResProxy'">ProResProxy</option>
+  
+                    </select>
+              </li>
+            </ul>
+      </div> -->
+      <div class="content">
+        <div class="left">
+            <div class="timecode">
+                {{consumer.formattedDuration}}
+                <div class="speed">
+                  <!-- x{{ hyperdeck.common.speed/100}} -->
+                </div>
+            </div>
+            <ul class="controls">
+                <!-- 
+              <li (click)="hyperdeckControl(hyperdeck.id, 'previous')">
+                  <img src="./../assets/previous.png"/>
+              </li>
+              <li (click)="hyperdeckControl(hyperdeck.id, 'fastBw')">
+                  <img *ngIf="hyperdeck.common.status != 'rewind'" src="./../assets/rewind.png"/>
+                  <img *ngIf="hyperdeck.common.status == 'rewind'" src="./../assets/rewind_active.png"/>
+              </li>
+           
+              <li (click)="hyperdeckControl(hyperdeck.id, 'play')">
+                  <img *ngIf="hyperdeck.common.status != 'play'" src="./../assets/play.png"/>
+                  <img *ngIf="hyperdeck.common.status == 'play'" src="./../assets/play_active.png"/>
+              </li>
+               -->
+           
+              <!-- <li (click)="consumerStop(consumer.casparCommon.id, consumer.id)">
+                  <img *ngIf="consumer.started" src="./../assets/stop.png"/>
+                  <img *ngIf="! consumer.started" src="./../assets/stop_active.png"/>
+              </li> -->
+               <!--
+              <li (click)="hyperdeckControl(hyperdeck.id, 'fastFw')">
+                  <img *ngIf="hyperdeck.common.status != 'forward'" src="./../assets/fast-forward.png"/>
+                  <img *ngIf="hyperdeck.common.status == 'forward'" src="./../assets/fast-forward_active.png"/>
+              </li>
+              <li (click)="hyperdeckControl(hyperdeck.id, 'next')">
+                  <img src="./../assets/next.png"/>
+              </li>
+              -->
+            </ul> 
+        </div>
+            <div class="rec" (click)="consumerStop(consumer.casparCommon.id, consumer.id)">
+                <img *ngIf="consumer.started" src="./../assets/stop.png"/>
+                <img *ngIf="! consumer.started" src="./../assets/stop_active.png"/>
+            </div>
+            <div class="rec">
+                <div (click)="consumerStart(consumer.casparCommon.id, consumer.id)">
+                    <img *ngIf="! consumer.started" src="./../assets/rec.png"/>
+                    <img *ngIf="consumer.started" src="./../assets/rec_active.png"/>
+            </div>
+          </div>
+           <!--
+          <div class="right 1">
+              <div (click)="hyperdeckControl(hyperdeck.id, 'previewEnable')" [class.active]="hyperdeck.common.previewEnable===true">
+                  PREVIEW
+              </div>
+              <div (click)="hyperdeckControl(hyperdeck.id, 'remoteEnable')" [class.active]="hyperdeck.common.remoteEnabled===true">
+                  REMOTE
+              </div>
+          </div>
+          <div class="right 2">
+              <div [class.active]="hyperdeck.common.activeSlot==1">
+                  SLOT 1
+              </div>
+              <div [class.active]="hyperdeck.common.activeSlot==2">
+                  SLOT 2
+            </div>
+          </div> -->
+    </div> 
+  
+      <footer>
+  
+      </footer>
+    </li>
+  </ul>
+
+
+
+<!-- <ul>
     <li *ngFor="let record of consumersFile.values()" class="recordBloc">
 
       <ul>
         <li >
-            <button (click)="consumerStop(record.id)">
+            <button (click)="consumerStop(record.casparCommon.id, record.id)">
                 STOP
                </button>
-               <button (click)="consumerStart(record.id)">
+               <button (click)="consumerStart(record.casparCommon.id, record.id)">
                  START
                </button>
-
-            <!-- <div class="recBtn">
-                <img *ngIf="recordersSatus.get(record.id).started" src="./../assets/rec_active.png" (click)="consumerStop(record.id)" />
-                <img *ngIf="!recordersSatus.get(record.id).started" src="./../assets/rec.png" (click)="consumerStart(record.id)"/>
-            </div> -->
-
         </li>
         <li>
             {{record.name}}
@@ -181,7 +316,7 @@
 
       </ul>
     </li>
-</ul>
+</ul> -->
 
 
 <!-- <ul class="hyperdeck" style="display: none">

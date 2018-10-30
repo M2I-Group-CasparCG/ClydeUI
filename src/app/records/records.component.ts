@@ -143,20 +143,21 @@ export class RecordsComponent implements OnInit {
     }
   }
 
-  consumerStart(id) {
-      this._apiCallService.consumerStart(this.casparId, id)
+  consumerStart(casparId, consumerId) {
+      this._apiCallService.consumerStart(casparId, consumerId)
       .subscribe(
         data => {
           console.log(JSON.stringify(data));
         });
     }
-    consumerStop(id) {
-      this._apiCallService.consumerStop(this.casparId, id)
-      .subscribe(
-        data => {
-          console.log(JSON.stringify(data));
-        });
-    }
+  consumerStop(casparId, consumerId) {
+    console.log('id !!!')
+    this._apiCallService.consumerStop(casparId, consumerId)
+    .subscribe(
+      data => {
+        console.log(JSON.stringify(data));
+      });
+  }
 
     hyperdecksGet () {
       this._apiCallService.hyperdecksGetAll()

@@ -4,20 +4,20 @@
 /**
 * COMMON
 */
-.hyperdeck {
+.recorder {
   margin : 40px;
 }
-.hyperdeck .green{
+.recorder .green{
   color : @greenNormal;
 }
-.hyperdeck .red{
+.recorder .red{
   color : @redNormal;
 }
 
 /**
 * HEADER
 */
-.hyperdeck .header{
+.recorder .header{
   position : relative;
   display: inline-block;
   width : 700px;
@@ -26,47 +26,47 @@
   border-bottom: 1px solid @brightColor;
 
 }
-.hyperdeck .header div{
+.recorder .header div{
   display: inline-block;
   margin-left : 5px;
   margin-right: 5px;
   color : @brightColor;
 
 }
-.hyperdeck .header .right{
+.recorder .header .right{
   position : absolute;
   right : 5px;
   bottom: 5px;
 }
-.hyperdeck .header .left{
+.recorder .header .left{
 
 }
-.hyperdeck .header .status{
+.recorder .header .status{
 
 }
-.hyperdeck .header .hyperdeckName{
+.recorder .header .hyperdeckName{
   border-right: 1px solid @brightColor;
   padding-right: 10px;
   font-size: 20px;
   font-weight : bold;
   padding-right : 20px;
 }
-.hyperdeck .header .clipName{
+.recorder .header .clipName{
 
 }
 /**
 * HYPERDECK settings
 */
-.hyperdeck .settings{
+.recorder .settings{
   text-align: center;
   margin-top : 10px;
   margin-bottom : 10px;
   font-size : 15px;
 }
-.hyperdeck .settings label{
+.recorder .settings label{
   font-weight: bold;
 }
-.hyperdeck .settings select{
+.recorder .settings select{
   border-radius: none;
   border:none;
   font-family: inherit;
@@ -75,12 +75,12 @@
   color : @brightColor;
   cursor: pointer;
 }
-.hyperdeck .settings select:hover{
+.recorder .settings select:hover{
   background-color: @brightColor;
   color : @darkColor;
 }
 
-.hyperdeck .settings .resolution{
+.recorder .settings .resolution{
   margin-right : 10px;
 }
 
@@ -89,10 +89,10 @@
 */
 
 // timecode
-.hyperdeck .content{
+.recorder .content{
   text-align : center;
 }
-.hyperdeck .content .left .timecode{
+.recorder .content .left .timecode{
     position: relative;
     text-align: left;
     margin : 10px;
@@ -109,7 +109,7 @@
     height : 50px;
   }
 
-  .hyperdeck .content .left .timecode .speed{
+  .recorder .content .left .timecode .speed{
     position : absolute;
     font-size : 12px;
     font-family : comfortaa;
@@ -118,47 +118,47 @@
     right : 5px;
   }
 // Controls
-.hyperdeck .content .left{
+.recorder .content .left{
   display: inline-block;
 }
-.hyperdeck .content .left .controls {
+.recorder .content .left .controls {
   margin : 10px;
 }
-.hyperdeck .content .left .controls li{
+.recorder .content .left .controls li{
   cursor : pointer;
 }
-.hyperdeck .content .left .controls li:hover{
+.recorder .content .left .controls li:hover{
   opacity: 0.7;
 }
-.hyperdeck .content .left .controls li img{
+.recorder .content .left .controls li img{
   height : 40px;
 }
 
 
 
 // rec button
-.hyperdeck .content .rec {
+.recorder .content .rec {
   margin : 10px;
   display: inline-block;
   vertical-align: top;
   cursor : pointer;
   margin-left : 0px;
 }
-.hyperdeck .content .rec:hover{
+.recorder .content .rec:hover{
   opacity: 0.7;
 }
-.hyperdeck .content .rec img{
+.recorder .content .rec img{
   height : 60px;
 
 }
 
 // additionnal buttons
-.hyperdeck  .content .right{
+.recorder  .content .right{
     margin-top : 10px;
     display: inline-block;
     vertical-align: top;
   }
-  .hyperdeck  .content .right div{
+  .recorder  .content .right div{
     background-color: @brightColor;
     color : @darkColor;
     padding : 10px;
@@ -169,10 +169,10 @@
     margin-right: 5px;
     margin-left : 5px;
   }
-  .hyperdeck  .content .right div:hover{
+  .recorder  .content .right div:hover{
     opacity : 0.7;
   }
-  .hyperdeck  .content .right .active{
+  .recorder  .content .right .active{
     background-color: rgb(0,75,130);
     color : @brightColor;
     font-weight: bold;
@@ -180,7 +180,7 @@
 
 
   // group button
-  .hyperdeck  .header .grouped div{
+  .recorder  .header .grouped div{
     background-color: @brightColor;
     color : @darkColor;
     padding : 10px;
@@ -189,7 +189,7 @@
     position :relative;
     bottom : -5px;
   }
-  .hyperdeck  .header .grouped .active{
+  .recorder  .header .grouped .active{
     background-color: @blueNormal;
     color : @brightColor;
     font-weight: bold;
