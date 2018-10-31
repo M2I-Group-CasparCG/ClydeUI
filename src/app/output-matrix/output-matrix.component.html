@@ -16,14 +16,14 @@
             </th>
           </tr>
           <tr *ngFor="let consumer of consumers.values()">
-            <td *ngFor="let channel of channels.values()" 
+            <td *ngFor="let channel of channels.values()"
                 class="cell mtxBtn"
-                (click)="consumerSetChannel(consumer.id, channel.id)" 
+                (click)="consumerSetChannel(consumer.id, channel.id)"
                 (mouseenter)="setOver(consumer.id,channel.id)"
                 (mouseleave)="setOver(null,null)"
                 [class.selected]="channel.id==consumer.channelId"
                >
-                
+
             </td>
             <td class="label vLabel" [class.selected]="consumer.id == overConsumer">
               {{ consumer.name }}
@@ -33,4 +33,3 @@
 
   </section>
 </div>
-

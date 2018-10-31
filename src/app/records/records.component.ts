@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ApiCallService } from '../api-call.service';
 import { SocketIoService } from '../socket-io.service';
+import { CasparDataService } from '../caspar-data.service';
 
 class RecorderSatus {
   id: number;
@@ -29,14 +30,17 @@ export class RecordsComponent implements OnInit {
   modalWindowHeight: number;
   modalWindowCallback: Function;
 
-  test = true;
+  test ;
 
   constructor(
     private _apiCallService: ApiCallService,
-    private _socketIoService: SocketIoService ) { }
+    private _socketIoService: SocketIoService,
+    public casparData: CasparDataService
+    ) { }
 
   ngOnInit() {
 
+    // this.test = this._CasparDataService;
     /**
      * Consumers events
      */

@@ -136,7 +136,7 @@ export class SocketIoService {
       });
     });
   }
-  channelDelete= () => {
+  channelDelete = () => {
     return Observable.create((observer) => {
       this.socket.on('channelDelete', (msg) => {
         observer.next(msg);

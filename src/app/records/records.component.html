@@ -176,7 +176,7 @@
             | <button (click)="setModalWindowHyperdeckInfos(hyperdeck.id)">Ξ</button>
             | <button (click)="setModalWindowHyperdeckDelete(hyperdeck.id)">✗</button>
         </div>
-  
+
     </div>
     <!-- <div class="settings">
           <ul>
@@ -207,7 +207,7 @@
                       <option [selected]="hyperdeck.common.fileFormat=='QuickTimeProRes'">ProRes</option>
                       <option [selected]="hyperdeck.common.fileFormat=='QuickTimeProResLT '">ProResLT</option>
                       <option [selected]="hyperdeck.common.fileFormat=='QuickTimeProResProxy'">ProResProxy</option>
-  
+
                     </select>
               </li>
             </ul>
@@ -221,7 +221,7 @@
                 </div>
             </div>
             <ul class="controls">
-                <!-- 
+                <!--
               <li (click)="hyperdeckControl(hyperdeck.id, 'previous')">
                   <img src="./../assets/previous.png"/>
               </li>
@@ -229,13 +229,13 @@
                   <img *ngIf="hyperdeck.common.status != 'rewind'" src="./../assets/rewind.png"/>
                   <img *ngIf="hyperdeck.common.status == 'rewind'" src="./../assets/rewind_active.png"/>
               </li>
-           
+
               <li (click)="hyperdeckControl(hyperdeck.id, 'play')">
                   <img *ngIf="hyperdeck.common.status != 'play'" src="./../assets/play.png"/>
                   <img *ngIf="hyperdeck.common.status == 'play'" src="./../assets/play_active.png"/>
               </li>
                -->
-           
+
               <!-- <li (click)="consumerStop(consumer.casparCommon.id, consumer.id)">
                   <img *ngIf="consumer.started" src="./../assets/stop.png"/>
                   <img *ngIf="! consumer.started" src="./../assets/stop_active.png"/>
@@ -249,7 +249,7 @@
                   <img src="./../assets/next.png"/>
               </li>
               -->
-            </ul> 
+            </ul>
         </div>
             <div class="rec" (click)="consumerStop(consumer.casparCommon.id, consumer.id)">
                 <img *ngIf="consumer.started" src="./../assets/stop.png"/>
@@ -278,10 +278,10 @@
                   SLOT 2
             </div>
           </div> -->
-    </div> 
-  
+    </div>
+
       <footer>
-  
+
       </footer>
     </li>
   </ul>

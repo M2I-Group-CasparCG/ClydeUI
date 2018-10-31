@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketIoService } from '../socket-io.service';
 import { ApiCallService } from '../api-call.service';
+import { CasparDataService } from '../caspar-data.service';
 
 @Component({
   selector: 'clydeui-output-matrix',
@@ -14,7 +15,8 @@ export class OutputMatrixComponent implements OnInit {
 
   constructor(
     private _apiCallService: ApiCallService,
-    private _socketIo: SocketIoService) {
+    private _socketIo: SocketIoService,
+    public casparData: CasparDataService ) {
      }
 
   casparId = 0;

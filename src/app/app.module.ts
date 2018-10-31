@@ -20,7 +20,7 @@ import { RecordsComponent } from './records/records.component';
 import { HyperdecksSettingsComponent } from './settings/hyperdecks-settings/hyperdecks-settings.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { SwitchBarComponent } from './switch-bar/switch-bar.component';
-
+import { CasparDataService } from './caspar-data.service';
 
 @NgModule({
   declarations: [
@@ -49,6 +49,7 @@ import { SwitchBarComponent } from './switch-bar/switch-bar.component';
   providers: [
     ApiCallService,
     SocketIoService,
+    CasparDataService
   ],
   bootstrap: [AppComponent]
 })

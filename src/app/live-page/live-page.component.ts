@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CasparDataService } from '../caspar-data.service';
 
 @Component({
   selector: 'clydeui-live-page',
@@ -11,7 +12,7 @@ export class LivePageComponent implements OnInit {
   isVisiblePlayer:boolean = true;
   isVisibleSwitchBar2d:boolean = true;
 
-  constructor() { }
+  constructor( public casparData: CasparDataService) { }
 
   ngOnInit() {
   }

@@ -1,4 +1,4 @@
-<section>
+<!-- <section>
 
         <div class="zone left">
             <div>
@@ -20,4 +20,42 @@
 
 
 </section>
+ -->
+
+_caspars
+________
+ <div *ngFor="let caspar of casparData.caspars.values()">
+   <h3>
+      {{caspar.casparCommon.name}}
+   </h3>
+
+   <ul>
+      <h4>Consumers</h4>
+      <li *ngFor="let consumer of casparData.caspars.get(caspar.id).consumers.values()">
+        {{consumer.name}}
+      </li>
+   </ul>
+
+   <ul>
+      <h4>Producers</h4>
+      <li *ngFor="let producer of casparData.caspars.get(caspar.id).producers.values()">
+        {{producer.name}}
+      </li>
+   </ul>
+
+   <ul>
+      <h4>Channels</h4>
+      <li *ngFor="let channel of casparData.caspars.get(caspar.id).channels.values()">
+        {{channel.name}}
+      </li>
+   </ul>
+
+   <ul>
+      <h4>Layers</h4>
+      <li *ngFor="let layer of casparData.caspars.get(caspar.id).layers.values()">
+        {{layer.name}}
+      </li>
+   </ul>
+
+</div>
 
