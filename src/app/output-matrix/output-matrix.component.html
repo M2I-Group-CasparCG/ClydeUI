@@ -9,26 +9,28 @@
 
   </header>
   <section>
-      <table>
+      <table class="matrix">
           <tr>
-            <td *ngFor="let channel of channels.values()" class="label vertical">
-              <div>
+            <th *ngFor="let channel of channels.values()" class="label hLabel" [class.selected]="channel.id == overChannel">
                   {{channel.name}}
-              </div>
-
-            </td>
+            </th>
           </tr>
           <tr *ngFor="let consumer of consumers.values()">
-            <td *ngFor="let channel of channels.values()" class="cell" (click)="consumerSetChannel(consumer.id, channel.id)" [class.selected]="channel.id==consumer.channelId">
-
+            <td *ngFor="let channel of channels.values()" 
+                class="cell mtxBtn"
+                (click)="consumerSetChannel(consumer.id, channel.id)" 
+                (mouseenter)="setOver(consumer.id,channel.id)"
+                (mouseleave)="setOver(null,null)"
+                [class.selected]="channel.id==consumer.channelId"
+               >
+                
             </td>
-            <td class="label horizontal">
+            <td class="label vLabel" [class.selected]="consumer.id == overConsumer">
               {{ consumer.name }}
             </td>
           </tr>
         </table>
 
   </section>
-
 </div>
 

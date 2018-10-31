@@ -125,9 +125,6 @@ export class RecordsComponent implements OnInit {
   }
 
   consumerStartStop(id) {
-    console.log('start top');
-    console.log(id);
-    console.log(this.consumersFile.get(id).started);
     if (this.consumersFile.get(id).started) {
       this._apiCallService.consumerStop(this.casparId, id)
       .subscribe(

@@ -11,7 +11,45 @@
 <div>
         <clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
 </div>
-  
+
+
+<div class="channelSettings">
+    <h3>
+        Channel Settings
+    </h3>
+    <table>
+        <tr>
+          <th>
+              NAME
+          </th>
+          <th>
+            ID
+          </th>
+          <th>
+            VIDEO MODE
+          </th>
+          <th colspan="3">
+            ACTIONS
+          </th>
+        </tr>
+        <tr *ngFor="let channel of channels.values()">
+          <td contenteditable='true' #channelName>
+              {{channel.name}}</td>
+          <td>
+              {{channel.id}}
+          </td>
+          <td>
+            {{channel.videoMode}}
+            </td>
+          <td>
+              <button (click)="editChannel(channel.id, {'name' : channelName.innerText})">
+                Edit
+              </button>
+          </td>
+        </tr>
+      </table>
+
+</div>
 
 <div class="inputSettings">
   <h3>
@@ -204,12 +242,12 @@
 
           <div *ngIf="selectedConsumerType=='file'" >
 
-              <input id="fileName" name="fileName" required  ngModel>
+              <input id="fileName" name="fileName" placeholder='myFile.mov' required  ngModel>
               <label for="fileName">: File</label>
           </div>
           <div *ngIf="selectedConsumerType=='file'" >
 
-              <input id="filePath" name="filePath"  required  ngModel>
+              <input id="filePath" name="filePath" placeholder='path/to/my/folder' required  ngModel>
               <label for="filePath">: Path</label>
           </div>
 

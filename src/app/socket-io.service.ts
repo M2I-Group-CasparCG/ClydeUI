@@ -136,6 +136,13 @@ export class SocketIoService {
       });
     });
   }
+  channelDelete= () => {
+    return Observable.create((observer) => {
+      this.socket.on('channelDelete', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
   inputSwitched = () => {
     return Observable.create((observer) => {
       this.socket.on('inputSwitched', (msg) => {

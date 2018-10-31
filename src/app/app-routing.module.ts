@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SettingsComponent } from './settings/settings.component';
 import { SwitchBar2dComponent } from './switch-bar-2d/switch-bar-2d.component';
+import { SwitchBarComponent } from './switch-bar/switch-bar.component';
 import { OutputMatrixComponent } from './output-matrix/output-matrix.component';
 import { LivePageComponent } from './live-page/live-page.component';
 import { MediaPlayerComponent } from './media-player/media-player.component';
@@ -12,7 +13,8 @@ import { RecordsComponent } from './records/records.component';
 
 const routes: Routes = [
   { path: 'settings', component: SettingsComponent },
-  { path: 'switchbar', component: SwitchBar2dComponent },
+  { path: 'switchbar2d', component: SwitchBar2dComponent },
+  { path: 'switchbar', component: SwitchBarComponent },
   { path: 'outputmatrix', component: OutputMatrixComponent },
   { path: 'live', component : LivePageComponent},
   { path: 'mediaplayer', component : MediaPlayerComponent},

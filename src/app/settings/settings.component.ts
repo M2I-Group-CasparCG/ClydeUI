@@ -12,7 +12,7 @@ export class SettingsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.page = 'ApiSettings';
+    this.page = 'IoSettings';
   }
 
   setPage(page) {

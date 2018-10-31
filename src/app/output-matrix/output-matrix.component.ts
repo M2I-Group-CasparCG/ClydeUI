@@ -19,6 +19,14 @@ export class OutputMatrixComponent implements OnInit {
 
   casparId = 0;
 
+  cellHoverX : Number;
+  cellHoverY : Number;
+  colCount : Number;
+  lineCount : Number;
+
+  overChannel : Number;
+  overConsumer : Number;
+
   ngOnInit() {
 
     this._socketIo.channelEdit()
@@ -121,5 +129,16 @@ export class OutputMatrixComponent implements OnInit {
         err => console.log(err),
         () => console.log('')
       );
+  }
+
+
+  setCellHover(posX, posY){
+    this.cellHoverX = posX;
+    this.cellHoverY = posY;
+  }
+
+  setOver(consumerId, channelId){
+    this.overChannel = channelId;
+    this.overConsumer = consumerId;
   }
 }

@@ -85,6 +85,26 @@ export class IoConfigComponent implements OnInit, AfterContentInit, AfterViewIni
       this.producers.delete(producer.id);
     });
 
+     /**
+     * Consumers events
+     */
+    this._socketIoService.channelAdd()
+      .subscribe((msg: string) => {
+        const channel = JSON.parse(msg);
+        this.channels.set(channel.id, channel);
+    });
+    this._socketIoService.channelEdit()
+    .subscribe((msg: string) => {
+      const channel = JSON.parse(msg);
+      this.channels.set(channel.id, channel);
+    });
+    this._socketIoService.channelDelete()
+    .subscribe((msg: string) => {
+      const channel = JSON.parse(msg);
+      this.channels.delete(channel.id);
+    });
+
+
     this.getCaspars();
 
   }
@@ -205,7 +225,15 @@ export class IoConfigComponent implements OnInit, AfterContentInit, AfterViewIni
        }
     );
   }
-
+  editChannel (channelId, settings){
+      console.log(JSON.stringify(settings));
+      this._apiCallService.channelEdit(this.casparId, channelId, settings)
+        .subscribe(
+          data => function() {
+            console.log(JSON.stringify(data));
+          }
+        );
+  }
 
   consumerFormSubmit(form) {
     form.channelId = parseInt(form.channelId, 10);

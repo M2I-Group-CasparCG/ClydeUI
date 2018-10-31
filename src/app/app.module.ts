@@ -19,6 +19,7 @@ import { ApiSettingsComponent } from './settings/api-settings/api-settings.compo
 import { RecordsComponent } from './records/records.component';
 import { HyperdecksSettingsComponent } from './settings/hyperdecks-settings/hyperdecks-settings.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
+import { SwitchBarComponent } from './switch-bar/switch-bar.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ModalWindowComponent } from './modal-window/modal-window.component';
     RecordsComponent,
     HyperdecksSettingsComponent,
     ModalWindowComponent,
+    SwitchBarComponent,
   ],
   imports: [
     BrowserModule,

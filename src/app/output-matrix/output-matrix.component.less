@@ -1,45 +1,60 @@
 
 @import '../style/common.less';
+@cellSize : 50px;
 
-table, th, td {
-  border-collapse: collapse;
+.matrix{
+ 
+  margin : 20px;
+  margin-top : 200px;
 }
 
-td {
-  border : 3px solid rgb(30,30,30);
-  width : 30px;
-  height : 30px;
+table {
+  border-collapse : collapse;
 }
 
-.label{
-  border : none;
-  font-weight: normal;
-
-}
-
-.label.vertical {
-  padding-bottom : 20px;
-}
-.label.vertical div{
-  transform: rotate(-90deg)
-}
-
-.label.horizontal {
-  padding-left : 20px;
-}
-
-.cell {
+.matrix .mtxBtn{
+  background-color: @brightColor;
+  transition: background-color 0.2s, color 0.2s;
   cursor : pointer;
-  background-color : rgb(100,100,100);
+  display: inline-block;
+  width : @cellSize;
+  height : @cellSize;
+  border : 2px solid @darkColor;
+}
+.matrix .mtxBtn:hover{
+  background-color: @mediumColor;
 }
 
-.cell.selected{
-  background-color: red;
+.matrix .mtxBtn.selected{
+  background-color: @blueNormal;
+}
+// .matrix .label{
+//   transition: background-color 1s, color 1s;
+// }
+.matrix .hLabel{
+  margin-bottom : 30px;
+  transform : rotate(-90deg);
+  display:inline-block;
+  width: @cellSize;
+  font-weight: bold;
+  font-size : 18px;
+  height: @cellSize;
+  border : 2px solid @darkColor;
+  transition: font-size 0.2s, color 0.7s;
+}
+.matrix .hLabel.selected{
+  font-size: 25px;
+  color : @blueHover;
 }
 
-@headerHeight  : 50px;
-.content header{
-  height : @headerHeight;
+.matrix .vLabel{
+  padding-left : 10px;
+  text-align : left;
+  font-weight: bold;
+  font-size : 18px;
+  transition: font-size 0.2s, color 0.7s;
 }
-
-
+.matrix .vLabel.selected{
+  font-size: 25px;
+  color : @blueHover;
+}
