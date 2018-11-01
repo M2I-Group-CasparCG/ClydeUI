@@ -1,10 +1,11 @@
 <label>
   Server :
 </label>
-<select (change)="selectSubmit($event)">
-    <option value="" selected disabled hidden>Choose here</option>
-    <option *ngFor="let caspar of caspars.values()" value="{{caspar.id}}" (load)="selectSubmit($event)" [(ngModel)]="selectedCasparId" [selected]="caspar.id == caspars.keys().next().value ? true : null" >
-      {{ caspar.casparCommon.name }}
-  </option>
+<select (change)="setCasparId(casparSelectForm.value)" #casparSelectForm>
+<option *ngFor="let caspar of casparData.caspars.values()"
+        value="{{caspar.id}}"
+        [selected]="caspar.id == casparId"
+        (change)="setCasparId(casparSelectForm.value)">
+  {{ caspar.casparCommon.name }}
+</option>
 </select>
-

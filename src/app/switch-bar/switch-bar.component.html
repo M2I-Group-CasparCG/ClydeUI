@@ -11,6 +11,8 @@
     <clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
   </header>
 
+  <div *ngIf="casparId">
+
   <section *ngFor="let channel of casparData.caspars.get(casparId).channels.values()">
           <!-- DSK BAR -->
     <div class="DSK" *ngFor="let layer of casparData.caspars.get(casparId).layers.values()" >
@@ -19,7 +21,7 @@
           <!-- DSK-->
           <ul class="switchBar">
             <div class="label">{{layer.name}}</div>
-            <li *ngFor="let producer of casparData.caspars.get(casparId).producers.values()" [class.active]="producer.id==casparData.caspars.get(casparId).layers.get(layer.id).selectedInput" [class.normal]="producer.id!=casparData.caspars.get(casparId).layers.get(layer.id).selectedInput" class="key" (click)="layerSetInput(producer.id, layer.id)">
+            <li *ngFor="let producer of casparData.caspars.get(casparId).producers.values()  " [class.active]="producer.id==casparData.caspars.get(casparId).layers.get(layer.id).selectedInput" [class.normal]="producer.id!=casparData.caspars.get(casparId).layers.get(layer.id).selectedInput" class="key" (click)="layerSetInput(producer.id, layer.id)">
               <div >
                 {{ producer.name }}
               </div>
@@ -106,4 +108,5 @@
 
   </section>
 
+</div>
 </div>

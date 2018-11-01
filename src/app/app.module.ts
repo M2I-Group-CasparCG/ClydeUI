@@ -21,6 +21,7 @@ import { HyperdecksSettingsComponent } from './settings/hyperdecks-settings/hype
 import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { SwitchBarComponent } from './switch-bar/switch-bar.component';
 import { CasparDataService } from './caspar-data.service';
+import { OrderByPipe } from './order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CasparDataService } from './caspar-data.service';
     HyperdecksSettingsComponent,
     ModalWindowComponent,
     SwitchBarComponent,
+    OrderByPipe,
   ],
   imports: [
     BrowserModule,

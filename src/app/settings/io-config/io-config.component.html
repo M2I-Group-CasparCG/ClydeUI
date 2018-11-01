@@ -12,7 +12,7 @@
         <clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
 </div>
 
-
+<div *ngIf="casparId">
 <div class="channelSettings">
     <h3>
         Channel Settings
@@ -32,21 +32,23 @@
             ACTIONS
           </th>
         </tr>
-        <tr *ngFor="let channel of casparData.caspars.get(casparId).channels.values()">
-          <td contenteditable='true' #channelName>
-              {{channel.name}}</td>
-          <td>
-              {{channel.id}}
-          </td>
-          <td>
-            {{channel.videoMode}}
-            </td>
-          <td>
-              <button (click)="editChannel(channel.id, {'name' : channelName.innerText})">
-                Edit
-              </button>
-          </td>
-        </tr>
+
+          <tr *ngFor="let channel of casparData.caspars.get(casparId).channels.values()">
+              <td contenteditable='true' #channelName>
+                  {{channel.name}}</td>
+              <td>
+                  {{channel.id}}
+              </td>
+              <td>
+                {{channel.videoMode}}
+                </td>
+              <td>
+                  <button (click)="editChannel(channel.id, {'name' : channelName.innerText})">
+                    Edit
+                  </button>
+              </td>
+            </tr>
+
       </table>
 
 </div>
@@ -291,3 +293,4 @@
 
 
 
+</div>

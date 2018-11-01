@@ -1,20 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CasparDataService } from '../caspar-data.service';
+
 
 @Component({
   selector: 'clydeui-live-page',
   templateUrl: './live-page.component.html',
   styleUrls: ['./live-page.component.less']
 })
-export class LivePageComponent implements OnInit {
+export class LivePageComponent {
 
   isVisibleMatrix:boolean = true;
   isVisiblePlayer:boolean = true;
   isVisibleSwitchBar2d:boolean = true;
+  casparId: Number;
 
-  constructor( public casparData: CasparDataService) { }
+  constructor( public casparData: CasparDataService) {
+    // this.setCasparId(this.casparData.caspars.keys().next().value);
+  }
 
-  ngOnInit() {
+
+  setCasparId ( id ) {
+    this.casparId = id;
+    console.log(id);
   }
 
 }

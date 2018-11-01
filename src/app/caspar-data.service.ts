@@ -125,17 +125,26 @@ export class CasparDataService {
     /**
      *  Caspars
      */
-    this._socketIoService.casparAdd().subscribe((msg: string) => {
-      const caspar = JSON.parse(msg);
+    this._socketIoService.casparAdd().subscribe((data: string) => {
+      let caspar = null;
+      caspar = data;
       this.caspars.set(caspar.id, caspar);
       this.subObjectCollect(caspar.id);
     });
-    this._socketIoService.casparEdit().subscribe((msg: string) => {
-      const caspar = JSON.parse(msg);
-      this.caspars.set(caspar.id, caspar);
+    this._socketIoService.casparEdit().subscribe((data: string) => {
+      let caspar = null;
+      caspar = data;
+      for (const key in caspar) {
+        if (caspar.hasOwnProperty(key)) {
+          if ( caspar[key] !== this.caspars.get(caspar.id)[key]) {
+            this.caspars.get(caspar.id)[key] = caspar[key];
+          }
+        }
+      }
     });
-    this._socketIoService.casparDelete().subscribe((msg: string) => {
-      const caspar = JSON.parse(msg);
+    this._socketIoService.casparDelete().subscribe((data: string) => {
+      let caspar = null;
+      caspar = data;
       this.caspars.delete(caspar.id);
     });
 
@@ -145,7 +154,6 @@ export class CasparDataService {
      */
     this._socketIoService.consumerAdd().subscribe((data: string) => {
       console.log('[CasparDataService] socketIo consumerAdd');
-
       let consumer = null;
       consumer = data;
       this.caspars.get(consumer.casparCommon.id).consumers.set(consumer.id, consumer);

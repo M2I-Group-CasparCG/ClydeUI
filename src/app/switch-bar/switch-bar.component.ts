@@ -18,7 +18,7 @@ class LayerGeometry {
 export class SwitchBarComponent implements OnInit {
 
 
-  casparId = null;
+  casparId: Number;
   // producers = new Map();
   // channels = new Map();
   // layers = new Map();

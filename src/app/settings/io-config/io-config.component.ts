@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../../api-call.service';
 import { CasparDataService } from '../../caspar-data.service';
 
@@ -8,9 +8,9 @@ import { CasparDataService } from '../../caspar-data.service';
   styleUrls: ['./io-config.component.less']
 })
 
-export class IoConfigComponent {
+export class IoConfigComponent implements OnInit{
 
-  casparId = null;
+  casparId: Number;
   caspar;
   // consumers = new Map();
   // producers = new Map();
@@ -29,7 +29,12 @@ export class IoConfigComponent {
     public casparData: CasparDataService) {
   }
 
-  async setCasparId(id) {
+
+  ngOnInit() {
+    this.getMedias();
+  }
+
+  setCasparId(id) {
 
     this.consumersType = new Map(
       [
@@ -51,16 +56,15 @@ export class IoConfigComponent {
     console.log('ID !!!!!!');
 
     // this.cards = new Map();
-    this.casparId = parseInt(id, 10);
+    this.casparId = id;
     this.caspar = null;
     this.caspar = this.casparData.caspars.get(this.casparId);
-    console.log('___________________');
-    console.log(this.caspar.casparCommon.decklinkCards.length);
+
     for (let n = 0; n < this.caspar.casparCommon.decklinkCards.length; n++) {
       this.cards.set(this.caspar.casparCommon.decklinkCards[n][0], this.caspar.casparCommon.decklinkCards[n][1]);
-      console.log('card');
     }
-    console.log('/___________________');
+
+    this.getMedias();
   }
 
   getMedias() {

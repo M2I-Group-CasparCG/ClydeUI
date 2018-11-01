@@ -21,9 +21,12 @@
 
 </section>
  -->
+<clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
+Caspar Id : {{casparId}}
 
-_caspars
-________
+
+
+
  <div *ngFor="let caspar of casparData.caspars.values()">
    <h3>
       {{caspar.casparCommon.name}}

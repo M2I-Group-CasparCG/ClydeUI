@@ -17,7 +17,7 @@ class RecorderSatus {
 export class RecordsComponent implements OnInit {
 
   hyperdecks;
-  casparId = 0;
+  casparId: Number;
   // consumersFile = new Map();
   recordersSatus = new Map();
   consumersFileLastTime = new Map();

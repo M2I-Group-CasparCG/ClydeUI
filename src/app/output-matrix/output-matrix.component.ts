@@ -17,7 +17,7 @@ export class OutputMatrixComponent {
     public casparData: CasparDataService ) {
      }
 
-  casparId = 0;
+  casparId: Number;
 
   cellHoverX:   Number;
   cellHoverY:   Number;
@@ -65,8 +65,6 @@ export class OutputMatrixComponent {
 
   setCasparId(id) {
     this.casparId = id;
-    // this.channelsGet();
-    // this.consumersGet();
   }
 
 

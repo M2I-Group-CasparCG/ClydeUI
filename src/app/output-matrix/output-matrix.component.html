@@ -6,30 +6,32 @@
       Output Routing
     </h2>
         <clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
-
   </header>
-  <section>
-      <table class="matrix">
-          <tr>
-            <th *ngFor="let channel of casparData.caspars.get(casparId).channels.values()" class="label hLabel" [class.selected]="channel.id == overChannel">
-                  {{channel.name}}
-            </th>
-          </tr>
-          <tr *ngFor="let consumer of casparData.caspars.get(casparId).consumers.values()">
-            <td *ngFor="let channel of casparData.caspars.get(casparId).channels.values()"
-                class="cell mtxBtn"
-                (click)="consumerSetChannel(consumer.id, channel.id)"
-                (mouseenter)="setOver(consumer.id,channel.id)"
-                (mouseleave)="setOver(null,null)"
-                [class.selected]="channel.id==consumer.channelId"
-               >
 
-            </td>
-            <td class="label vLabel" [class.selected]="consumer.id == overConsumer">
-              {{ consumer.name }}
-            </td>
-          </tr>
-        </table>
+  <div *ngIf="casparId">
+    <section>
+        <table class="matrix">
+            <tr>
+              <th *ngFor="let channel of casparData.caspars.get(casparId).channels.values()" class="label hLabel" [class.selected]="channel.id == overChannel">
+                    {{channel.name}}
+              </th>
+            </tr>
+            <tr *ngFor="let consumer of casparData.caspars.get(casparId).consumers.values()">
+              <td *ngFor="let channel of casparData.caspars.get(casparId).channels.values()"
+                  class="cell mtxBtn"
+                  (click)="consumerSetChannel(consumer.id, channel.id)"
+                  (mouseenter)="setOver(consumer.id,channel.id)"
+                  (mouseleave)="setOver(null,null)"
+                  [class.selected]="channel.id==consumer.channelId"
+                >
 
-  </section>
+              </td>
+              <td class="label vLabel" [class.selected]="consumer.id == overConsumer">
+                {{ consumer.name }}
+              </td>
+            </tr>
+          </table>
+
+    </section>
+  </div>
 </div>
