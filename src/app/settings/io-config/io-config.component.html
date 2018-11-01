@@ -1,9 +1,9 @@
-<!-- 
+<!--
 <header class="header">
     <h2>
       Input / Output configuration
     </h2>
-   
+
 
 </header> -->
   <!-- <clydeui-producers-settings [casparId]="casparId" ></clydeui-producers-settings>
@@ -32,7 +32,7 @@
             ACTIONS
           </th>
         </tr>
-        <tr *ngFor="let channel of channels.values()">
+        <tr *ngFor="let channel of casparData.caspars.get(casparId).channels.values()">
           <td contenteditable='true' #channelName>
               {{channel.name}}</td>
           <td>
@@ -122,7 +122,7 @@
         ACTIONS
       </th>
     </tr>
-    <tr *ngFor="let producer of producers.values()">
+    <tr *ngFor="let producer of casparData.caspars.get(casparId).producers.values()">
       <td>
           {{producer.name}}
       </td>
@@ -175,7 +175,8 @@
           ACTIONS
         </th>
       </tr>
-      <tr *ngFor="let consumer of consumers.values()">
+      <h4>Consumers</h4>
+      <tr *ngFor="let consumer of casparData.caspars.get(casparId).consumers.values()">
         <td>
             {{consumer.name}}
         </td>
@@ -228,7 +229,7 @@
           <div>
 
               <select id="channel" name="channelId"  ngModel>
-                <option *ngFor="let channel of channels.values()" value={{channel.id}}>
+                <option *ngFor="let channel of casparData.caspars.get(casparId).channels.values()" value={{channel.id}}>
                   {{channel.name}}
                 </option>
               </select>

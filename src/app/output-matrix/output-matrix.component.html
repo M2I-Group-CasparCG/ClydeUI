@@ -11,12 +11,12 @@
   <section>
       <table class="matrix">
           <tr>
-            <th *ngFor="let channel of channels.values()" class="label hLabel" [class.selected]="channel.id == overChannel">
+            <th *ngFor="let channel of casparData.caspars.get(casparId).channels.values()" class="label hLabel" [class.selected]="channel.id == overChannel">
                   {{channel.name}}
             </th>
           </tr>
-          <tr *ngFor="let consumer of consumers.values()">
-            <td *ngFor="let channel of channels.values()"
+          <tr *ngFor="let consumer of casparData.caspars.get(casparId).consumers.values()">
+            <td *ngFor="let channel of casparData.caspars.get(casparId).channels.values()"
                 class="cell mtxBtn"
                 (click)="consumerSetChannel(consumer.id, channel.id)"
                 (mouseenter)="setOver(consumer.id,channel.id)"

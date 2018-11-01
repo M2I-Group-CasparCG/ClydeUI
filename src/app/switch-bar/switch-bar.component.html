@@ -11,15 +11,15 @@
     <clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
   </header>
 
-  <section *ngFor="let channel of channels.values()">
+  <section *ngFor="let channel of casparData.caspars.get(casparId).channels.values()">
           <!-- DSK BAR -->
-    <div class="DSK" *ngFor="let layer of layers.values()" >
+    <div class="DSK" *ngFor="let layer of casparData.caspars.get(casparId).layers.values()" >
       <div *ngIf="layer.channelId == channel.id">
         <div class="switchBar1D">
           <!-- DSK-->
           <ul class="switchBar">
             <div class="label">{{layer.name}}</div>
-            <li *ngFor="let producer of producers.values()" [class.active]="producer.id==layers.get(layer.id).selectedInput" [class.normal]="producer.id!=layers.get(layer.id).selectedInput" class="key" (click)="layerSetInput(producer.id, layer.id)">
+            <li *ngFor="let producer of casparData.caspars.get(casparId).producers.values()" [class.active]="producer.id==casparData.caspars.get(casparId).layers.get(layer.id).selectedInput" [class.normal]="producer.id!=casparData.caspars.get(casparId).layers.get(layer.id).selectedInput" class="key" (click)="layerSetInput(producer.id, layer.id)">
               <div >
                 {{ producer.name }}
               </div>
@@ -92,7 +92,7 @@
           <!-- PGM -->
           <ul class="switchBar pgm">
             <div class="label">{{channel.name}}</div>
-            <li *ngFor="let producer of producers.values()" [class.active]="producer.id==channels.get(channel.id).selectedInput" [class.normal]="producer.id!=channels.get(channel.id).selectedInput" (click)="channelSetInput(producer.id, channel.id)">
+            <li *ngFor="let producer of casparData.caspars.get(casparId).producers.values()" [class.active]="producer.id==casparData.caspars.get(casparId).channels.get(channel.id).selectedInput" [class.normal]="producer.id!=casparData.caspars.get(casparId).channels.get(channel.id).selectedInput" (click)="channelSetInput(producer.id, channel.id)">
               <div >
                 {{ producer.name }}
               </div>

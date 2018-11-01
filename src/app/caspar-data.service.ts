@@ -14,17 +14,18 @@ export class CasparDataService {
     private _socketIoService: SocketIoService
   ) {
 
-    this.socketIoSubsciption();
-
     this.apiCallCollect();
 
   }
 
+
+  /**
+   * Makes the api call to collect all the availables caspar instances
+   * Stores the data in the caspar Map.
+   * Execute the subObjectCollect() method for each caspar instance received.
+   */
   async apiCallCollect () {
-
-
     this.caspars     = new Map();
-
     /**
      * Caspars
      */
@@ -32,16 +33,23 @@ export class CasparDataService {
       let element = null;
           element = data;
           element.forEach(caspar => {
-            console.log('coucou');
+
             this.caspars.set(caspar[0], caspar[1]);
             this.subObjectCollect(caspar[0]);
+
+
+            this.socketIoSubsciption();
 
         });
       }
     );
-
   }
 
+  /**
+   * Makes all the api call necessary to collect all sub-objects of a caspar istance
+   * consumers, producers, channel, layers, media
+   * Stores this informations in the caspars Map.
+   */
   subObjectCollect(id) {
      /**
            * Consumers
@@ -108,7 +116,10 @@ export class CasparDataService {
           // });
   }
 
-
+  /**
+   * Subrscribes to all socketIo events
+   * Upadates the caspars Map according to the data received
+   */
   socketIoSubsciption () {
 
     /**
@@ -128,16 +139,20 @@ export class CasparDataService {
       this.caspars.delete(caspar.id);
     });
 
+
     /**
      *  Consumers
      */
     this._socketIoService.consumerAdd().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo consumerAdd');
+
       let consumer = null;
       consumer = data;
       this.caspars.get(consumer.casparCommon.id).consumers.set(consumer.id, consumer);
     });
 
     this._socketIoService.consumerEdit().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo consumerEdit');
       let consumer = null;
       consumer = data;
       for (const key in consumer) {
@@ -151,60 +166,103 @@ export class CasparDataService {
     });
 
     this._socketIoService.consumerDelete().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo consumerDelete');
       let consumer = null;
       consumer = data;
-      console.log(consumer.id);
       this.caspars.get(consumer.casparCommon.id).consumers.delete(consumer.id);
     });
 
-  //   /**
-  //    *  Producers
-  //    */
-  //   this._socketIoService.producerAdd().subscribe((msg: string) => {
-  //     const producer = JSON.parse(msg);
-  //     this.producers.set(producer.id, producer);
-  //   });
-  //   this._socketIoService.producerEdit().subscribe((msg: string) => {
-  //     const producer = JSON.parse(msg);
-  //     this.producers.set(producer.id, producer);
 
-  //   });
-  //   this._socketIoService.producerDelete().subscribe((msg: string) => {
-  //     const producer = JSON.parse(msg);
-  //     this.producers.delete(producer.id);
-  //   });
+    /**
+     *  Producers
+     */
+    this._socketIoService.producerAdd().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo producerAdd');
+      let producer = null;
+      producer = data;
+      this.caspars.get(producer.casparCommon.id).producers.set(producer.id, producer);
+    });
 
-  //   /**
-  //    *  Channels
-  //    */
-  //   this._socketIoService.channelAdd().subscribe((msg: string) => {
-  //     const channel = JSON.parse(msg);
-  //     this.channels.set(channel.id, channel);
-  //   });
-  //   this._socketIoService.channelEdit().subscribe((msg: string) => {
-  //     const channel = JSON.parse(msg);
-  //     this.channels.set(channel.id, channel);
-  //   });
-  //   this._socketIoService.channelDelete().subscribe((msg: string) => {
-  //     const channel = JSON.parse(msg);
-  //     this.channels.delete(channel.id);
-  //   });
+    this._socketIoService.producerEdit().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo producerEdit');
+      let producer = null;
+      producer = data;
+      for (const key in producer) {
+        if (producer.hasOwnProperty(key)) {
+          const casparId = producer.casparCommon.id;
+          if ( producer[key] !== this.caspars.get(casparId).producers.get(producer.id)[key]) {
+            this.caspars.get(casparId).producers.get(producer.id)[key] = producer[key];
+          }
+        }
+      }
+    });
+    this._socketIoService.producerDelete().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo producerDelete');
+      let producer = null;
+      producer = data;
+      this.caspars.get(producer.casparCommon.id).producers.delete(producer.id);
+    });
 
-  //   /**
-  //    *  Layers
-  //    */
-  //   this._socketIoService.channelAdd().subscribe((msg: string) => {
-  //     const layer = JSON.parse(msg);
-  //     this.consumers.set(layer.id, layer);
-  //   });
-  //   this._socketIoService.channelEdit().subscribe((msg: string) => {
-  //     const layer = JSON.parse(msg);
-  //     this.layers.set(layer.id, layer);
-  //   });
-  //   this._socketIoService.channelDelete().subscribe((msg: string) => {
-  //     const layer = JSON.parse(msg);
-  //     this.layers.delete(layer.id);
-  //   });
+
+    /**
+     *  Channels
+     */
+    this._socketIoService.channelAdd().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo channelAdd');
+      let channel = null;
+      channel = data;
+      this.caspars.get(channel.casparCommon.id).channels.set(channel.id, channel);
+    });
+
+    this._socketIoService.channelEdit().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo channelEdit');
+      let channel = null;
+      channel = data;
+      for (const key in channel) {
+        if (channel.hasOwnProperty(key)) {
+          const casparId = channel.casparCommon.id;
+          if ( channel[key] !== this.caspars.get(casparId).channels.get(channel.id)[key]) {
+            this.caspars.get(casparId).channels.get(channel.id)[key] = channel[key];
+          }
+        }
+      }
+    });
+    this._socketIoService.producerDelete().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo channelDelete');
+      let channel = null;
+      channel = data;
+      this.caspars.get(channel.casparCommon.id).channels.delete(channel.id);
+    });
+
+    /**
+     *  Layers
+     */
+    this._socketIoService.layerAdd().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo layerAdd');
+      let layer = null;
+      layer = data;
+      this.caspars.get(layer.casparCommon.id).layers.set(layer.id, layer);
+    });
+
+    this._socketIoService.layerEdit().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo layerEdit');
+      let layer = null;
+      layer = data;
+      for (const key in layer) {
+        if (layer.hasOwnProperty(key)) {
+          const casparId = layer.casparCommon.id;
+          if ( layer[key] !== this.caspars.get(casparId).layers.get(layer.id)[key]) {
+            this.caspars.get(casparId).layers.get(layer.id)[key] = layer[key];
+          }
+        }
+      }
+    });
+    this._socketIoService.layerDelete().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo layerDelete');
+      let layer = null;
+      layer = data;
+      this.caspars.get(layer.casparCommon.id).layers.delete(layer.id);
+    });
   }
 
 

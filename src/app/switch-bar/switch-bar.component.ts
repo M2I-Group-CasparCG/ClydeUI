@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../api-call.service';
 import { SocketIoService } from '../socket-io.service';
-import { NUMBER_TYPE } from '@angular/compiler/src/output/output_ast';
-import { isNumber } from 'util';
+import { CasparDataService } from '../caspar-data.service';
 
 class LayerGeometry {
   scale: number;
@@ -18,11 +17,11 @@ class LayerGeometry {
 
 export class SwitchBarComponent implements OnInit {
 
-  
+
   casparId = null;
-  producers = new Map();
-  channels = new Map();
-  layers = new Map();
+  // producers = new Map();
+  // channels = new Map();
+  // layers = new Map();
 
   selectedChannel = 1;
   selectedProducer = 0;
@@ -31,7 +30,7 @@ export class SwitchBarComponent implements OnInit {
   geometryGap = 0.01;
 
   constructor(  private _apiCallService: ApiCallService,
-                private _socketIo: SocketIoService ) { }
+                public casparData: CasparDataService ) { }
 
   ngOnInit() {
 
@@ -39,124 +38,121 @@ export class SwitchBarComponent implements OnInit {
      * Observers subscriptions
      */
 
-    this._socketIo.producerAdd()
-    .subscribe((msg: string) => {
-      const producer = JSON.parse(msg);
-      this.producers.set(producer.id, producer);
-    });
+    // this._socketIo.producerAdd()
+    // .subscribe((msg: string) => {
+    //   const producer = JSON.parse(msg);
+    //   this.producers.set(producer.id, producer);
+    // });
 
-    this._socketIo.producerEdit()
-    .subscribe((msg: string) => {
-      const producer = JSON.parse(msg);
-      this.producers.set(producer.id, producer);
-    });
+    // this._socketIo.producerEdit()
+    // .subscribe((msg: string) => {
+    //   const producer = JSON.parse(msg);
+    //   this.producers.set(producer.id, producer);
+    // });
 
-    this._socketIo.producerDelete()
-      .subscribe((msg: string) => {
-        const producer = JSON.parse(msg);
-        this.producers.delete(producer.id);
-    });
+    // this._socketIo.producerDelete()
+    //   .subscribe((msg: string) => {
+    //     const producer = JSON.parse(msg);
+    //     this.producers.delete(producer.id);
+    // });
 
-    this._socketIo.channelEdit()
-    .subscribe((msg: string) => {
-      console.log('layerAdd');
-      const channel = JSON.parse(msg);
-      this.channels.set(channel.id, channel);
-      if (channel.id === this.selectedChannel ) {
-        this.selectedProducer = this.channels.get(channel.id).selectedInput;
-      }
-    });
+    // this._socketIo.channelEdit()
+    // .subscribe((msg: string) => {
+    //   console.log('layerAdd');
+    //   const channel = JSON.parse(msg);
+    //   this.channels.set(channel.id, channel);
+    //   if (channel.id === this.selectedChannel ) {
+    //     this.selectedProducer = this.channels.get(channel.id).selectedInput;
+    //   }
+    // });
 
-    this._socketIo.layerAdd()
-    .subscribe((msg: string) => {
-      const layer = JSON.parse(msg);
-      this.layers.set(layer.id, layer);
-      console.log(msg);
-    });
+    // this._socketIo.layerAdd()
+    // .subscribe((msg: string) => {
+    //   const layer = JSON.parse(msg);
+    //   this.layers.set(layer.id, layer);
+    //   console.log(msg);
+    // });
 
-    this._socketIo.layerEdit()
-      .subscribe((msg: string) => {
-        console.log(JSON.stringify(msg));
-        const layer = JSON.parse(msg);
-        this.layers.set(layer.id, layer);
-      });
+    // this._socketIo.layerEdit()
+    //   .subscribe((msg: string) => {
+    //     console.log(JSON.stringify(msg));
+    //     const layer = JSON.parse(msg);
+    //     this.layers.set(layer.id, layer);
+    //   });
 
-      this._socketIo.layerDelete()
-      .subscribe((msg: string) => {
-        const layer = JSON.parse(msg);
-        this.layers.delete(layer.id);
-      });
+    //   this._socketIo.layerDelete()
+    //   .subscribe((msg: string) => {
+    //     const layer = JSON.parse(msg);
+    //     this.layers.delete(layer.id);
+    //   });
       // todo : add channels sockets
 
   }
 
   setCasparId(id) {
     this.casparId = id;
-    this.producersGet();
-    this.channelsGet();
-    this.layersGet();
   }
 
 
   /**
    * API call to get all producers of a caspar instance
    */
-  producersGet() {
-    this._apiCallService.producerGetAll(this.casparId)
-      .subscribe(
-        data => {
-          this.producers = new Map();
-          let result;
-          result = data;
-          result.forEach(element => { // 0 : producerId, 1 producer instance
-            this.producers.set(element[0], element[1]);
-          });
-        },
-        err => console.log(err),
-        () => console.log('')
-      );
-  }
+  // producersGet() {
+  //   this._apiCallService.producerGetAll(this.casparId)
+  //     .subscribe(
+  //       data => {
+  //         this.producers = new Map();
+  //         let result;
+  //         result = data;
+  //         result.forEach(element => { // 0 : producerId, 1 producer instance
+  //           this.producers.set(element[0], element[1]);
+  //         });
+  //       },
+  //       err => console.log(err),
+  //       () => console.log('')
+  //     );
+  // }
 
-   /**
-   * API call to get all channels of a caspar instance
-   */
-  channelsGet() {
-    console.log('channelsGet ' + this.casparId);
-    this._apiCallService.channelGetAll(this.casparId)
-      .subscribe(
-        data => {
-          this.channels = new Map();
-          let result;
-          result = data;
-          result.forEach(element => { // 0 : producerId, 1 producer instance
-            this.channels.set(element[0], element[1]);
-          });
-        },
-        err => console.log(err),
-        () => console.log('')
-      );
-  }
+  //  /**
+  //  * API call to get all channels of a caspar instance
+  //  */
+  // channelsGet() {
+  //   console.log('channelsGet ' + this.casparId);
+  //   this._apiCallService.channelGetAll(this.casparId)
+  //     .subscribe(
+  //       data => {
+  //         this.channels = new Map();
+  //         let result;
+  //         result = data;
+  //         result.forEach(element => { // 0 : producerId, 1 producer instance
+  //           this.channels.set(element[0], element[1]);
+  //         });
+  //       },
+  //       err => console.log(err),
+  //       () => console.log('')
+  //     );
+  // }
 
-  layersGet() {
-    console.log('layersGet ' + this.casparId);
-    this._apiCallService.layerGetAll(this.casparId)
-      .subscribe(
-        data => {
-          this.layers = new Map();
-          let result;
-          result = data;
-          result.forEach(element => { // 0 : producerId, 1 producer instance
-            this.layers.set(element[0], element[1]);
-          });
-        },
-        err => console.log(err),
-        () => console.log('')
-      );
-  }
+  // layersGet() {
+  //   console.log('layersGet ' + this.casparId);
+  //   this._apiCallService.layerGetAll(this.casparId)
+  //     .subscribe(
+  //       data => {
+  //         this.layers = new Map();
+  //         let result;
+  //         result = data;
+  //         result.forEach(element => { // 0 : producerId, 1 producer instance
+  //           this.layers.set(element[0], element[1]);
+  //         });
+  //       },
+  //       err => console.log(err),
+  //       () => console.log('')
+  //     );
+  // }
 
   channelSelect(channelId) {
     this.selectedChannel = channelId;
-    this.selectedProducer = this.channels.get(this.selectedChannel).selectedInput;
+    this.selectedProducer = this.casparData.caspars.get(this.casparId).channels.get(this.selectedChannel).selectedInput;
     console.log(this.selectedProducer);
   }
 
@@ -179,7 +175,7 @@ export class SwitchBarComponent implements OnInit {
    */
   layerAdd(channelId) {
     const settings = new Object();
-    settings['name'] = 'DSK' + (this.layers.size + 1);
+    settings['name'] = 'DSK' + (this.casparData.caspars.get(this.casparId).layers.size + 1);
     settings['channelId'] = channelId;
     this._apiCallService.layerAdd(this.casparId, settings)
     .subscribe(
@@ -238,7 +234,9 @@ export class SwitchBarComponent implements OnInit {
   }
 
   layerToggle(layerId) {
-    if (this.layers.get(layerId).started) {
+    console.log('layer Toogle');
+
+    if (this.casparData.caspars.get(this.casparId).layers.get(layerId).started) {
       this.layerStop(layerId);
     } else {
       this.layerStart(layerId);
@@ -265,7 +263,7 @@ export class SwitchBarComponent implements OnInit {
 
   layerGeometryUpdate(layerId, valueName, value) {
 
-    const layer = this.layers.get(layerId);
+    const layer = this.casparData.caspars.get(this.casparId).layers.get(layerId);
 
     const settings = new Object();
 
@@ -321,8 +319,8 @@ export class SwitchBarComponent implements OnInit {
     }
   autoTransition() {
 
-    const crtPgm = this.channels.get(2).selectedInput;
-    const crtPvw = this.channels.get(3).selectedInput;
+    const crtPgm = this.casparData.caspars.get(this.casparId).channels.get(2).selectedInput;
+    const crtPvw = this.casparData.caspars.get(this.casparId).channels.get(3).selectedInput;
 
     this._apiCallService.channelSetInput(this.casparId, 2, crtPvw)
       .subscribe(

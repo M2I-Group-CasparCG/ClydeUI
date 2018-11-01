@@ -96,6 +96,7 @@ export class SocketIoService {
   consumerAdd = () => {
     return Observable.create((observer) => {
       this.socket.on('consumerAdd', (msg) => {
+        console.log('[SocketIoService] consumerAdd');
         console.log(JSON.stringify(msg));
         observer.next(msg);
       });
@@ -105,6 +106,8 @@ export class SocketIoService {
   consumerEdit = () => {
     return Observable.create((observer) => {
       this.socket.on('consumerEdit', (msg) => {
+        console.log('[SocketIoService] consumerEdit');
+        console.log(JSON.stringify(msg));
         observer.next(msg);
       });
     });
@@ -113,6 +116,8 @@ export class SocketIoService {
   consumerDelete = () => {
     return Observable.create((observer) => {
       this.socket.on('consumerDelete', (msg) => {
+        console.log('[SocketIoService] consumerDelete');
+        console.log(JSON.stringify(msg));
         observer.next(msg);
       });
     });

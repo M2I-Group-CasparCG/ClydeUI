@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketIoService } from '../../socket-io.service';
 import { ApiCallService } from '../../api-call.service';
-
+import { CasparDataService } from '../../caspar-data.service';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class CasparsSettingsComponent implements OnInit {
 
   constructor(
     private _apiCallService: ApiCallService,
-    private _socketIo: SocketIoService ) { }
+    public casparData: CasparDataService ) { }
 
   ngOnInit() {
 
@@ -25,26 +25,26 @@ export class CasparsSettingsComponent implements OnInit {
      * Observers subscriptions
      */
 
-      this._socketIo.casparAdd()
-        .subscribe((msg: string) => {
-          const caspar = JSON.parse(msg);
-          this.caspars.set(caspar.id, caspar);
-      });
+      // this._socketIo.casparAdd()
+      //   .subscribe((msg: string) => {
+      //     const caspar = JSON.parse(msg);
+      //     this.caspars.set(caspar.id, caspar);
+      // });
 
-      this._socketIo.casparEdit()
-      .subscribe((msg: string) => {
-        const caspar = JSON.parse(msg);
-        this.caspars.set(caspar.id, caspar);
-      });
+      // this._socketIo.casparEdit()
+      // .subscribe((msg: string) => {
+      //   const caspar = JSON.parse(msg);
+      //   this.caspars.set(caspar.id, caspar);
+      // });
 
-      this._socketIo.casparDelete()
-        .subscribe((msg: string) => {
-          const caspar = JSON.parse(msg);
-          this.caspars.delete(caspar.id);
-      });
+      // this._socketIo.casparDelete()
+      //   .subscribe((msg: string) => {
+      //     const caspar = JSON.parse(msg);
+      //     this.caspars.delete(caspar.id);
+      // });
 
     // first casparsGet :
-    this.casparsGet();
+    // this.casparsGet();
 
   }
 
@@ -52,24 +52,24 @@ export class CasparsSettingsComponent implements OnInit {
    * API call to get the caspars instaces
    * store the result in the caspars Map
    */
-  casparsGet() {
-    this._apiCallService.casparGetAll()
-    .subscribe(
-      data => {
-        console.log('data received from casparGet API request');
-        console.log(JSON.stringify(data));
-        this.caspars = new Map();
-        let result;
-            result = data;
-            result.forEach(element => {   // 0 = id, 1= casparInstance
-              this.caspars.set(element[0], element[1]);
-            });
-      },
-      err => console.log('error received from casparGet API request'),
-        // console.log(err);
-      () => console.log('')
-    );
-  }
+  // casparsGet() {
+  //   this._apiCallService.casparGetAll()
+  //   .subscribe(
+  //     data => {
+  //       console.log('data received from casparGet API request');
+  //       console.log(JSON.stringify(data));
+  //       this.caspars = new Map();
+  //       let result;
+  //           result = data;
+  //           result.forEach(element => {   // 0 = id, 1= casparInstance
+  //             this.caspars.set(element[0], element[1]);
+  //           });
+  //     },
+  //     err => console.log('error received from casparGet API request'),
+  //       // console.log(err);
+  //     () => console.log('')
+  //   );
+  // }
 
   /**
    * API call to add a caspar instance

@@ -148,7 +148,8 @@
 
 
 <ul class="casparRecords recorder">
-    <li *ngFor="let consumer of consumersFile.values()">
+    <li *ngFor="let consumer of casparData.caspars.get(casparId).consumers.values()">
+      <div *ngIf="consumer.type == 'FILE'">
       <div class="header">
         <div class="left">
           <div class="status">
@@ -173,8 +174,8 @@
                 </div>
             </div> -->
             {{ consumer.casparCommon.ipAddr }}
-            | <button (click)="setModalWindowHyperdeckInfos(hyperdeck.id)">Ξ</button>
-            | <button (click)="setModalWindowHyperdeckDelete(hyperdeck.id)">✗</button>
+            | <button >Ξ</button>
+            | <button >✗</button>
         </div>
 
     </div>
@@ -283,6 +284,7 @@
       <footer>
 
       </footer>
+      </div>
     </li>
   </ul>
 

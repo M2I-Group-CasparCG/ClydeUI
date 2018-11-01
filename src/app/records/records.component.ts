@@ -18,7 +18,7 @@ export class RecordsComponent implements OnInit {
 
   hyperdecks;
   casparId = 0;
-  consumersFile = new Map();
+  // consumersFile = new Map();
   recordersSatus = new Map();
   consumersFileLastTime = new Map();
 
@@ -44,36 +44,36 @@ export class RecordsComponent implements OnInit {
     /**
      * Consumers events
      */
-    this._socketIoService.consumerAdd()
-      .subscribe((msg: string) => {
-        const consumer = JSON.parse(msg);
-        if (consumer.type === 'FILE') {
-          this.consumersFile.set(consumer.id, consumer);
-        }
-    });
-    this._socketIoService.consumerEdit()
-    .subscribe((msg: string) => {
-      const consumer = JSON.parse(msg);
-      if (consumer.type === 'FILE') {
-        this.consumersFile.set(consumer.id, consumer);
-      }
-    });
-    this._socketIoService.consumerDelete()
-    .subscribe((msg: string) => {
-      const consumer = JSON.parse(msg);
-      if (consumer.type === 'FILE') {
-        this.consumersFile.delete(consumer.id);
-      }
-    });
+    // this._socketIoService.consumerAdd()
+    //   .subscribe((msg: string) => {
+    //     const consumer = JSON.parse(msg);
+    //     if (consumer.type === 'FILE') {
+    //       this.consumersFile.set(consumer.id, consumer);
+    //     }
+    // });
+    // this._socketIoService.consumerEdit()
+    // .subscribe((msg: string) => {
+    //   const consumer = JSON.parse(msg);
+    //   if (consumer.type === 'FILE') {
+    //     this.consumersFile.set(consumer.id, consumer);
+    //   }
+    // });
+    // this._socketIoService.consumerDelete()
+    // .subscribe((msg: string) => {
+    //   const consumer = JSON.parse(msg);
+    //   if (consumer.type === 'FILE') {
+    //     this.consumersFile.delete(consumer.id);
+    //   }
+    // });
 
     /**
      * RecorderEdvent
      */
-    this._socketIoService.recorderEdit()
-    .subscribe((msg: string) => {
-      const recorder = JSON.parse(msg);
-      this.consumersFile.set(recorder.id, recorder);
-    });
+    // this._socketIoService.recorderEdit()
+    // .subscribe((msg: string) => {
+    //   const recorder = JSON.parse(msg);
+    //   this.consumersFile.set(recorder.id, recorder);
+    // });
 
 
     /**
@@ -106,30 +106,30 @@ export class RecordsComponent implements OnInit {
   }
 
 
-  getConsumersFile() {
-    this._apiCallService.consumerGetAll(this.casparId)
-    .subscribe(
-       data => {
-        this.consumersFile = new Map();
-        let element = null;
-           element = data;
-           element.forEach(consumer => {
-             if (consumer[1].type === 'FILE') {
-              this.consumersFile.set(consumer[0], consumer[1]);
-              this.recordersSatus.set(consumer[0], new RecorderSatus());
-             }
-           });
-       }
-    );
-  }
+  // getConsumersFile() {
+  //   this._apiCallService.consumerGetAll(this.casparId)
+  //   .subscribe(
+  //      data => {
+  //       this.consumersFile = new Map();
+  //       let element = null;
+  //          element = data;
+  //          element.forEach(consumer => {
+  //            if (consumer[1].type === 'FILE') {
+  //             this.consumersFile.set(consumer[0], consumer[1]);
+  //             this.recordersSatus.set(consumer[0], new RecorderSatus());
+  //            }
+  //          });
+  //      }
+  //   );
+  // }
 
   setCasparId(id) {
     this.casparId = id;
-    this.getConsumersFile();
+    // this.getConsumersFile();
   }
 
   consumerStartStop(id) {
-    if (this.consumersFile.get(id).started) {
+    if (this.casparData.caspars.get(this.casparId).consumers.get(id).started) {
       this._apiCallService.consumerStop(this.casparId, id)
       .subscribe(
         data => {
@@ -152,7 +152,7 @@ export class RecordsComponent implements OnInit {
         });
     }
   consumerStop(casparId, consumerId) {
-    console.log('id !!!')
+    console.log('id !!!');
     this._apiCallService.consumerStop(casparId, consumerId)
     .subscribe(
       data => {

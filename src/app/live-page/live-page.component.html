@@ -31,30 +31,66 @@ ________
 
    <ul>
       <h4>Consumers</h4>
-      <li *ngFor="let consumer of casparData.caspars.get(caspar.id).consumers.values()">
-        {{consumer.name}}
-      </li>
+      <table>
+        <tr>
+          <th>Name</th><th>ID</th><th>Type</th><th>Channel Id</th><th>Is Started</th>
+        </tr>
+        <tr *ngFor="let consumer of casparData.caspars.get(caspar.id).consumers.values()">
+          <td>{{consumer.name}}</td>
+          <td>{{consumer.id}}</td>
+          <td>{{consumer.type}}</td>
+          <td>{{consumer.channelId}}</td>
+          <td>{{consumer.started}}</td>
+        </tr>
+      </table>
    </ul>
 
    <ul>
       <h4>Producers</h4>
-      <li *ngFor="let producer of casparData.caspars.get(caspar.id).producers.values()">
-        {{producer.name}}
-      </li>
+      <table>
+        <tr>
+          <th>Name</th><th>ID</th><th>Type</th><th>Is Started</th>
+        </tr>
+        <tr *ngFor="let producer of casparData.caspars.get(caspar.id).producers.values()">
+          <td>{{producer.name}}</td>
+          <td>{{producer.id}}</td>
+          <td>{{producer.type}}</td>
+          <td>{{producer.started}}</td>
+        </tr>
+      </table>
    </ul>
 
    <ul>
       <h4>Channels</h4>
-      <li *ngFor="let channel of casparData.caspars.get(caspar.id).channels.values()">
-        {{channel.name}}
-      </li>
+      <table>
+          <tr>
+            <th>Name</th><th>ID</th><th>Type</th><th>Video Mode</th><th>Select Input</th>
+          </tr>
+          <tr *ngFor="let channel of casparData.caspars.get(caspar.id).channels.values()">
+            <td>{{channel.name}}</td>
+            <td>{{channel.id}}</td>
+            <td>{{channel.object}}</td>
+            <td>{{channel.videoMode}}</td>
+            <td>{{channel.selectedInput}}</td>
+          </tr>
+        </table>
    </ul>
 
    <ul>
       <h4>Layers</h4>
-      <li *ngFor="let layer of casparData.caspars.get(caspar.id).layers.values()">
-        {{layer.name}}
-      </li>
+      <table>
+        <tr>
+          <th>Name</th><th>ID</th><th>Is Started</th><th>Layer ID</th><th>Channel ID</th><th>Selected Input</th>
+        </tr>
+        <tr *ngFor="let layer of casparData.caspars.get(caspar.id).layers.values()">
+          <td>{{layer.name}}</td>
+          <td>{{layer.id}}</td>
+          <td>{{layer.started}}</td>
+          <td>{{layer.layerId}}</td>
+          <td>{{layer.channelId}}</td>
+          <td>{{layer.selectedInput}}</td>
+        </tr>
+      </table>
    </ul>
 
 </div>
