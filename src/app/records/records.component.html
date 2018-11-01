@@ -146,11 +146,11 @@
   </li>
 </ul>
 
-<div *ngIf="casparId">
+<div *ngIf="casparId"  class="casparRecords">
 
-<ul class="casparRecords ">
-    <div *ngFor="let consumer of casparData.caspars.get(casparId).consumers.values()">
-    <li  *ngIf="consumer.type == 'FILE'" class="recorder caspar">
+<ul>
+    <div *ngFor="let consumer of casparData.caspars.get(casparId).consumers.values()" class="caspar">
+    <li  *ngIf="consumer.type == 'FILE'" class="recorder">
 
       <div class="header">
         <div class="left">

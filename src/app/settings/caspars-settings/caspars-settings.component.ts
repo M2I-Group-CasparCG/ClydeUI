@@ -80,7 +80,6 @@ export class CasparsSettingsComponent implements OnInit {
         .subscribe(
           data => {
             console.log('data received from casparAdd API request');
-            console.log(JSON.stringify(data));
             /**
              * TO DO : analyze the response and update the interface
              */
