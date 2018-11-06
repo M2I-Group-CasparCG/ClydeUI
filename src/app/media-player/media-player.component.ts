@@ -1,23 +1,24 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ApiCallService } from '../api-call.service';
 import { SocketIoService } from '../socket-io.service';
+import { CasparDataService } from '../caspar-data.service';
 
-class MediaPlayer {
-  paused: boolean;
-  playlistLoop: boolean;
-  autoPlay: boolean;
-  currentTime: String;
-  remainingTime: String;
-  currentIndex: Number;
-  totalFrame: number;
-  mediaList: Array<Object>;
-  barWidth: Number;
-  playlistId: Number;
-}
+// class MediaPlayer {
+//   paused: boolean;
+//   playlistLoop: boolean;
+//   autoPlay: boolean;
+//   currentTime: String;
+//   remainingTime: String;
+//   currentIndex: Number;
+//   totalFrame: number;
+//   mediaList: Array<Object>;
+//   barWidth: Number;
+//   playlistId: Number;
+// }
 
-class Media {
-  fullPath: string;
-}
+// class Media {
+//   fullPath: string;
+// }
 
 @Component({
   selector: 'clydeui-media-player',
@@ -28,34 +29,38 @@ class Media {
 })
 export class MediaPlayerComponent implements OnInit {
 
-  casparId = -1;
-  mediaPlayerId = -1;
-  mediaPlayers = new Map();
-  currentMediaPlayer;
-  playlist = null;
-  playlistIndex = -1;
-  mediaList = new Map();
+  casparId: Number;
+  // mediaPlayerId = -1;
+  // mediaPlayers = new Map();
+  // currentMediaPlayer;
+  // playlist = null;
+  // playlistIndex = -1;
+  // mediaList = new Map();
 
-  // html variables
+  // // html variables
 
-  currentMedia = new Object();
-  currentIndex;
-  currentMediaPath = '';
-  currentTime = '';
-  remainingTime = '';
-  barWidth = 1;
+  // currentMedia = new Object();
+  // currentIndex;
+  // currentMediaPath = '';
+  // currentTime = '';
+  // remainingTime = '';
+  // barWidth = 1;
 
-  paused = true;
-  playlistLoop = false;
-  playlistAutoPlay = false;
+  // paused = true;
+  // playlistLoop = false;
+  // playlistAutoPlay = false;
 
-  mediaPlayer = new MediaPlayer();
+  // mediaPlayer = new MediaPlayer();
 
   constructor(
     private _apiCallService: ApiCallService,
-    private _socketIo: SocketIoService) { }
+    private _socketIo: SocketIoService,
+    public casparData: CasparDataService) { }
 
   ngOnInit() {
+
+
+
     this.currentMediaPlayer = new Object();
     this.currentMediaPlayer['currentMedia'] = new Object();
     this.mediaPlayer.paused = true;
@@ -101,39 +106,39 @@ export class MediaPlayerComponent implements OnInit {
 
     }
 
-  mediaPlayersGet() {
-    this._apiCallService.producerGetAll(this.casparId)
-      .subscribe(
-        data => {
-          this.mediaPlayers = new Map();
-          let result;
-          result = data;
-          result.forEach(element => {
-            if (element[1].type === 'DDR') {
-              this.mediaPlayers.set(element[0], element[1]);
-            }
-          });
-          if (this.mediaPlayers.size > 0) {
-            this.setMediaPlayerId(this.mediaPlayers.keys().next().value);
+  // mediaPlayersGet() {
+  //   this._apiCallService.producerGetAll(this.casparId)
+  //     .subscribe(
+  //       data => {
+  //         this.mediaPlayers = new Map();
+  //         let result;
+  //         result = data;
+  //         result.forEach(element => {
+  //           if (element[1].type === 'DDR') {
+  //             this.mediaPlayers.set(element[0], element[1]);
+  //           }
+  //         });
+  //         if (this.mediaPlayers.size > 0) {
+  //           this.setMediaPlayerId(this.mediaPlayers.keys().next().value);
 
-          }
-        }
-      );
-  }
+  //         }
+  //       }
+  //     );
+  // }
 
-  mediaListGet() {
-    this._apiCallService.casparGetMedias(this.casparId)
-    .subscribe(
-      data => {
-        this.mediaList = new Map();
-        let result;
-        result = data;
-        result.forEach(element => {
-          this.mediaList.set(element[0], element[1]);
-        });
-      }
-    );
-  }
+  // mediaListGet() {
+  //   this._apiCallService.casparGetMedias(this.casparId)
+  //   .subscribe(
+  //     data => {
+  //       this.mediaList = new Map();
+  //       let result;
+  //       result = data;
+  //       result.forEach(element => {
+  //         this.mediaList.set(element[0], element[1]);
+  //       });
+  //     }
+  //   );
+  // }
 
   async mediasGet() {
     await this._apiCallService.mediaPlayerGetPlaylist(this.casparId, this.mediaPlayerId)
@@ -243,8 +248,9 @@ export class MediaPlayerComponent implements OnInit {
 
   async setCasparId(id) {
     this.casparId = id;
-    this.mediaPlayersGet();
-    this.mediaListGet();
+    console.log('_________________');
+    // console.log(JSON.stringify(this.casparData.caspars.get(this.casparId)));
+    console.log('_________________');
   }
 
   async setMediaPlayerId(id) {

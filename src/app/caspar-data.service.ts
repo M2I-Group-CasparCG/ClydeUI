@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { ApiCallService } from './api-call.service';
 import { SocketIoService } from './socket-io.service';
-import { mapChildrenIntoArray } from '@angular/router/src/url_tree';
 
 @Injectable()
 export class CasparDataService {
@@ -106,14 +104,15 @@ export class CasparDataService {
           /**
            * Medias
            */
-          // this._apiCallService.medias(id).subscribe(data_ => {
-          //   const medias = new Map();
-          //   let element_ = null;
-          //       element_ = data_;
-          //       element_.forEach(layer => {
-          //         this.medias.set(layer[0], layer[1]);
-          //   });
-          // });
+          this._apiCallService.mediasGetAll(id).subscribe(data_ => {
+            const medias = new Map();
+            let element_ = null;
+                element_ = data_;
+                element_.forEach(media => {
+                  medias.set(media[0], media[1]);
+                });
+            this.caspars.get(id)['medias'] = medias;
+          });
   }
 
   /**

@@ -93,11 +93,16 @@ export class ApiCallService {
     return this.http.get(url);
   }
 
+  /**
+   * to be deleted
+   * @param casparId
+   */
   casparScanMedias (casparId) {
     const body = '';
     const url = `${this.apiSettings.url}/caspars/${casparId}/medias/`;
     return this.http.post(url, body, httpOptions);
   }
+
   /**
    * Producers
    */
@@ -309,6 +314,15 @@ export class ApiCallService {
   playlistRemoveMedia(casparId, playlistId, mediaIndex) {
     const url = `${ this.apiSettings.url}/caspars/${casparId}/playlists/${playlistId}/index/${mediaIndex}`;
     return this.http.delete(url, httpOptions);
+  }
+
+  /**
+   * MEDIAS
+   */
+  mediasGetAll (casparId) {
+    const body = '';
+    const url = `${this.apiSettings.url}/caspars/${casparId}/medias/`;
+    return this.http.post(url, body, httpOptions);
   }
 
   /**

@@ -1,9 +1,26 @@
 
 
 <div class="content">
+  <h2>
+      Media Player {{casparId}}
+  </h2>
+  <clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
+
+</div>
+
+<div *ngIf="casparId">
+    <span *ngFor="let producer of casparData.caspars.get(casparId).producers.values()">
+        coucou
+      </span>
+</div>
+
+<!-- <div class="content">
   <header >
     <h2>
-      Media Player
+      Media Player {{casparId}}
+      <div *ngFor="let producer of casparData.caspars.get(casparId).producers.values()">
+        coucou
+      </div>
     </h2>
     <div>
       <clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
@@ -13,9 +30,13 @@
           </label>
           <select (change)="setMediaPlayerId(mediaPlayerSelect.value)" #mediaPlayerSelect>
               <option value="" selected disabled hidden>Choose here</option>
-              <option *ngFor="let mediaPlayer of mediaPlayers.values()" value={{mediaPlayer.id}} (load)="setMediaPlayerId($event)" [(ngModel)]="mediaPlayerId" [selected]="mediaPlayer.id == mediaPlayers.keys().next().value ? true : null" >
-                {{ mediaPlayer.name }}
+              <span *ngFor="let producer of casparData.caspars.get(casparId).producers.values()">
+                <option  *ngIf="producer.type == 'DDR'" value={{producer.id}} (load)="setMediaPlayerId($event)" [(ngModel)]="mediaPlayerId" [selected]="producer.id == mediaPlayers.keys().next().value ? true : null" >
+
+                {{ producer.name }}
             </option>
+          </span>
+
           </select>
           Add Media :
           <select #selectedMedia>
@@ -102,8 +123,8 @@
     <div class="playlist" >
 
       <ul>
-        <!-- <li *ngFor="let media of mediaPlayer.mediaList.values(); let i = index" value={{i+1-1}} [class.active]="playlistMedia.value === mediaPlayer.currentIndex" #playlistMedia (click)="mediaPlayerPlayId(playlistMedia.value)"> -->
-            <li *ngFor="let media of mediaPlayer.mediaList; let i = index" value={{i+1-1}} [class.active]="playlistMedia.value === mediaPlayer.currentIndex" #playlistMedia (click)="mediaPlayerPlayId(playlistMedia.value)">
+
+            <li *ngFor="let media of casparData.caspars.get(casparId).medias.values(); let i = index" value={{i+1-1}} [class.active]="playlistMedia.value === mediaPlayer.currentIndex" #playlistMedia (click)="mediaPlayerPlayId(playlistMedia.value)">
 
           <div class="label">
             {{ media.label }}
@@ -156,12 +177,8 @@
       </p>
 
       <button routerLink="/settings" routerLinkActive="active">Go to the settings</button>
-  </section>
-  <!-- <section *ngIf="mediaPlayers == null">
-
-    Not media player seems to be configured ! You can add one in the Settings page.
   </section> -->
 
-</div>
+<!-- </div> -->
 
 
