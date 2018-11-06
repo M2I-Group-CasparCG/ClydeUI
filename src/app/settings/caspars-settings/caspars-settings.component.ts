@@ -11,15 +11,16 @@ import { CasparDataService } from '../../caspar-data.service';
 })
 export class CasparsSettingsComponent implements OnInit {
 
-  caspars;
+  caspars: Map<Number, Object>;
 
   constructor(
     private _apiCallService: ApiCallService,
-    public casparData: CasparDataService ) { }
+    public casparData: CasparDataService, ) { 
+    }
 
   ngOnInit() {
 
-    this.caspars = new Map();
+    // this.caspars = new Map();
 
     /**
      * Observers subscriptions
@@ -56,8 +57,6 @@ export class CasparsSettingsComponent implements OnInit {
   //   this._apiCallService.casparGetAll()
   //   .subscribe(
   //     data => {
-  //       console.log('data received from casparGet API request');
-  //       console.log(JSON.stringify(data));
   //       this.caspars = new Map();
   //       let result;
   //           result = data;
@@ -80,7 +79,6 @@ export class CasparsSettingsComponent implements OnInit {
         .subscribe(
           data => {
             console.log('data received from casparAdd API request');
-            console.log(JSON.stringify(data));
             /**
              * TO DO : analyze the response and update the interface
              */

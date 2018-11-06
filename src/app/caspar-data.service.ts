@@ -11,8 +11,14 @@ export class CasparDataService {
     private _apiCallService: ApiCallService,
     private _socketIoService: SocketIoService
   ) {
+    
+    setTimeout(
+      () => {
+        this.apiCallCollect();
+        this.socketIoSubsciption();
+      }, 1000
+    )
 
-    this.apiCallCollect();
 
   }
 
@@ -31,13 +37,8 @@ export class CasparDataService {
       let element = null;
           element = data;
           element.forEach(caspar => {
-
             this.caspars.set(caspar[0], caspar[1]);
             this.subObjectCollect(caspar[0]);
-
-
-            this.socketIoSubsciption();
-
         });
       }
     );

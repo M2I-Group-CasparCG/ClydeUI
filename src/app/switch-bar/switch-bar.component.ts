@@ -161,8 +161,8 @@ export class SwitchBarComponent implements OnInit {
     this._apiCallService.channelSetInput(this.casparId, channelId, inputId)
       .subscribe(
         data => {
-          console.log('setInput result received');
-          console.log(JSON.stringify(data));
+          // console.log('setInput result received');
+          // console.log(JSON.stringify(data));
         },
         err => console.log(err),
         () => console.log('')
@@ -180,8 +180,8 @@ export class SwitchBarComponent implements OnInit {
     this._apiCallService.layerAdd(this.casparId, settings)
     .subscribe(
       data => {
-        console.log('data received from consumerAdd API request');
-        console.log(JSON.stringify(data));
+        // console.log('data received from consumerAdd API request');
+        // console.log(JSON.stringify(data));
         /**
          * TO DO : analyze the response and update the interface
          */
@@ -199,8 +199,8 @@ export class SwitchBarComponent implements OnInit {
     this._apiCallService.layerSetInput(this.casparId, layerId, inputId)
       .subscribe(
         data => {
-          console.log('setInput result received');
-          console.log(JSON.stringify(data));
+          // console.log('setInput result received');
+          // console.log(JSON.stringify(data));
         },
         err => console.log(err),
         () => console.log('')
@@ -212,8 +212,8 @@ export class SwitchBarComponent implements OnInit {
     this._apiCallService.layerStart(this.casparId, layerId)
     .subscribe(
       data => {
-        console.log('layerStart response received');
-        console.log(JSON.stringify(data));
+        // console.log('layerStart response received');
+        // console.log(JSON.stringify(data));
       },
       err => console.log(err),
       () => console.log('')
@@ -225,8 +225,8 @@ export class SwitchBarComponent implements OnInit {
     this._apiCallService.layerStop(this.casparId, layerId)
     .subscribe(
       data => {
-        console.log('layerStop response received');
-        console.log(JSON.stringify(data));
+        // console.log('layerStop response received');
+        // console.log(JSON.stringify(data));
       },
       err => console.log(err),
       () => console.log('')
@@ -248,8 +248,8 @@ export class SwitchBarComponent implements OnInit {
     this._apiCallService.layerDelete(this.casparId, layerId)
     .subscribe(
       data => {
-        console.log('layerDelete response received');
-        console.log(JSON.stringify(data));
+        // console.log('layerDelete response received');
+        // console.log(JSON.stringify(data));
       },
       err => console.log(err),
       () => console.log('')
@@ -282,8 +282,8 @@ export class SwitchBarComponent implements OnInit {
       this._apiCallService.layerEdit(this.casparId, layerId, settings)
       .subscribe(
         data => {
-          console.log('setInput result received');
-          console.log(JSON.stringify(data));
+          // console.log('setInput result received');
+          // console.log(JSON.stringify(data));
         },
         err => console.log(err),
         () => console.log('')
@@ -306,8 +306,8 @@ export class SwitchBarComponent implements OnInit {
       this._apiCallService.layerEdit(this.casparId, layerId, settings)
       .subscribe(
         data => {
-          console.log('setInput result received');
-          console.log(JSON.stringify(data));
+          // console.log('setInput result received');
+          // console.log(JSON.stringify(data));
 
           this.layerGeometry.horizontal = 0;
           this.layerGeometry.vertical = 0;
@@ -325,8 +325,8 @@ export class SwitchBarComponent implements OnInit {
     this._apiCallService.channelSetInput(this.casparId, 2, crtPvw)
       .subscribe(
         data => {
-          console.log('setInput result received');
-          console.log(JSON.stringify(data));
+          // console.log('setInput result received');
+          // console.log(JSON.stringify(data));
         },
         err => console.log(err),
         () => console.log('')
@@ -336,8 +336,8 @@ export class SwitchBarComponent implements OnInit {
     this._apiCallService.channelSetInput(this.casparId, 3, crtPgm)
       .subscribe(
         data => {
-          console.log('setInput result received');
-          console.log(JSON.stringify(data));
+          // console.log('setInput result received');
+          // console.log(JSON.stringify(data));
         },
         err => console.log(err),
         () => console.log('')

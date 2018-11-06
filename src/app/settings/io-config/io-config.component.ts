@@ -61,7 +61,7 @@ export class IoConfigComponent implements OnInit{
     this.caspar = this.casparData.caspars.get(this.casparId);
 
     for (let n = 0; n < this.caspar.casparCommon.decklinkCards.length; n++) {
-      this.cards.set(this.caspar.casparCommon.decklinkCards[n][0], this.caspar.casparCommon.decklinkCards[n][1]);
+      this.cards.set(this.casparData.caspars.get(this.casparId).casparCommon.decklinkCards[n][0], this.casparData.caspars.get(this.casparId).casparCommon.decklinkCards[n][1]);
     }
 
     this.getMedias();
@@ -83,34 +83,30 @@ export class IoConfigComponent implements OnInit{
 
 
   editChannel (channelId, settings) {
-      console.log(JSON.stringify(settings));
+      // console.log(JSON.stringify(settings));
       this._apiCallService.channelEdit(this.casparId, channelId, settings)
         .subscribe(
           data => function() {
-            console.log(JSON.stringify(data));
+            // console.log(JSON.stringify(data));
           }
         );
   }
 
   consumerFormSubmit(form) {
     form.channelId = parseInt(form.channelId, 10);
-
-    console.log(form);
-    console.log(JSON.stringify(form));
     this._apiCallService.consumerAdd(this.casparId, this.selectedConsumerType, form)
       .subscribe(
         data => function() {
-          console.log(JSON.stringify(data));
+          // console.log(JSON.stringify(data));
         }
       );
   }
 
   producerFormSubmit(form) {
-    console.log(JSON.stringify(form));
     this._apiCallService.producerAdd(this.casparId, this.selectedProducerType, form)
       .subscribe(
         data => function() {
-          console.log(JSON.stringify(data));
+          // console.log(JSON.stringify(data));
         }
       );
   }
@@ -123,7 +119,7 @@ export class IoConfigComponent implements OnInit{
         this._apiCallService.producerStart(this.casparId, elementId)
           .subscribe(
             data => function() {
-              console.log(JSON.stringify(data));
+              // console.log(JSON.stringify(data));
             }
           );
       } break;
@@ -131,7 +127,7 @@ export class IoConfigComponent implements OnInit{
         this._apiCallService.consumerStart(this.casparId, elementId)
           .subscribe(
             data => function() {
-              console.log(JSON.stringify(data));
+              // console.log(JSON.stringify(data));
             }
           );
       } break;
@@ -145,7 +141,7 @@ export class IoConfigComponent implements OnInit{
         this._apiCallService.producerStop(this.casparId, elementId)
           .subscribe(
             data => function() {
-              console.log(JSON.stringify(data));
+              // console.log(JSON.stringify(data));
             }
           );
       } break;
@@ -153,7 +149,7 @@ export class IoConfigComponent implements OnInit{
         this._apiCallService.consumerStop(this.casparId, elementId)
           .subscribe(
             data => function() {
-              console.log(JSON.stringify(data));
+              // console.log(JSON.stringify(data));
             }
           );
       } break;
@@ -167,7 +163,7 @@ export class IoConfigComponent implements OnInit{
         this._apiCallService.producerDelete(this.casparId, elementId)
           .subscribe(
             data => function() {
-              console.log(JSON.stringify(data));
+              // console.log(JSON.stringify(data));
             }
           );
       } break;
@@ -175,7 +171,7 @@ export class IoConfigComponent implements OnInit{
         this._apiCallService.consumerDelete(this.casparId, elementId)
           .subscribe(
             data => function() {
-              console.log(JSON.stringify(data));
+              // console.log(JSON.stringify(data));
             }
           );
       } break;
