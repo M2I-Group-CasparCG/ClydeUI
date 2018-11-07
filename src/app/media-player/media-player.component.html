@@ -9,47 +9,35 @@
 </div>
 
 <div *ngIf="casparId">
-    <span *ngFor="let producer of casparData.caspars.get(casparId).producers.values()">
-        coucou
-      </span>
-</div>
 
-<!-- <div class="content">
-  <header >
-    <h2>
-      Media Player {{casparId}}
-      <div *ngFor="let producer of casparData.caspars.get(casparId).producers.values()">
-        coucou
-      </div>
-    </h2>
-    <div>
-      <clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
-      <div class="selectBtn">
-          <label>
-              MediaPlayer :
-          </label>
-          <select (change)="setMediaPlayerId(mediaPlayerSelect.value)" #mediaPlayerSelect>
-              <option value="" selected disabled hidden>Choose here</option>
-              <span *ngFor="let producer of casparData.caspars.get(casparId).producers.values()">
-                <option  *ngIf="producer.type == 'DDR'" value={{producer.id}} (load)="setMediaPlayerId($event)" [(ngModel)]="mediaPlayerId" [selected]="producer.id == mediaPlayers.keys().next().value ? true : null" >
+    <header>
+        <label>
+            MediaPlayer :
+        </label>
+        <select (change)="setMediaPlayerId(mediaPlayerSelectForm.value)" #mediaPlayerSelectForm>
+            <ng-container *ngFor="let producer of casparData.caspars.get(casparId).producers.values()" >
+                <option *ngIf="producer.type == 'DDR'"
+                    value="{{producer.id}}"
+                    [selected]="producer.id == producerId"
+                    (change)="setMediaPlayerId(casparSelectForm.value)"> 
+                    {{producer.name}} 
+                </option>
+            </ng-container>
+        </select>
+        <label>
+                Add Media :
+        </label>
+        <select #selectedMedia>
+            <option *ngFor="let media of casparData.caspars.get(casparId).medias.values()"  value="{{media.id}}"> {{media.label}} </option>
+        </select>
+        <button (click)="addMedia(selectedMedia.value)">
+            ADD
+        </button>
+    </header>
 
-                {{ producer.name }}
-            </option>
-          </span>
+    <ng-container *ngIf="mediaPlayer" >
 
-          </select>
-          Add Media :
-          <select #selectedMedia>
-
-            <option *ngFor="let media of mediaList.values()"  value="{{media.id}}"> {{media.label}} </option>
-          </select>
-          <button (click)="addMedia(selectedMedia.value)">
-              ADD
-          </button>
-      </div>
-    </div>
-  </header>
-  <section *ngIf="mediaPlayers.size > 0 ">
+  
     <div class="control">
       <ul class="transport">
         <li>
@@ -105,6 +93,8 @@
       </ul>
     </div>
 
+   
+
     <div class="progressBar" (click)="seekMedia($event)" id="progressBar">
       <div class="bar" [style.width]="mediaPlayer.barWidth+'%'">
       </div>
@@ -116,22 +106,15 @@
             Remaining : {{ mediaPlayer.remainingTime }}
         </div>
       </div>
-
-
     </div>
 
     <div class="playlist" >
-
       <ul>
-
-            <li *ngFor="let media of casparData.caspars.get(casparId).medias.values(); let i = index" value={{i+1-1}} [class.active]="playlistMedia.value === mediaPlayer.currentIndex" #playlistMedia (click)="mediaPlayerPlayId(playlistMedia.value)">
-
+        <li *ngFor="let media of mediaPlayer.playlist.list; let i = index" value={{i+1-1}} [class.active]="playlistMedia.value === mediaPlayer.currentIndex" #playlistMedia (click)="mediaPlayerPlayId(playlistMedia.value)">
           <div class="label">
             {{ media.label }}
-
           </div>
-
-          <ul>
+        <ul>
             <li>
                 <div  class="size">
                     {{ media.formattedSize }}
@@ -158,27 +141,10 @@
                 </button>
             </li>
           </ul>
-
-
-
-
         </li>
       </ul>
     </div>
-  </section>
-  <section *ngIf="mediaPlayer.mediaList.length == 0 ">
-      <p>
-        Not media found in the player. You can add medias with dropdown list in the header
-      </p>
-  </section>
-  <section *ngIf="mediaPlayers.size == 0 ">
-      <p>
-        Not media player seems to be configured ! You can add one in the Settings page.
-      </p>
 
-      <button routerLink="/settings" routerLinkActive="active">Go to the settings</button>
-  </section> -->
+    </ng-container>
 
-<!-- </div> -->
-
-
+</div>

@@ -25,44 +25,82 @@
 @headerHeight : 20px;
 
 
-@titleFont : Comfortaa-Regular;
+@titleFont : Comfortaa;
+@bodyFont : Nunito;
 
-/* polices */
+/**
+* Comfortaa
+*/
 @font-face {
-  font-family: "Comfortaa-Regular";
-  src: url('../style/fonts/Comfortaa-Regular.ttf');
+  font-family: "Comfortaa";
+  src: url('../style/fonts/Comfortaa/Comfortaa-Regular.ttf');
   font-weight :	normal;
 }
 @font-face {
-  font-family: "Comfortaa-Regular";
-  src: url('../style/fonts/Comfortaa-Light.ttf');
+  font-family: "Comfortaa";
+  src: url('../style/fonts/Comfortaa/Comfortaa-Light.ttf');
   font-weight :	lighter;
 }
 @font-face {
-  font-family: "Comfortaa-Regular";
-  src: url('../style/fonts/Comfortaa-Bold.ttf');
+  font-family: "Comfortaa";
+  src: url('../style/fonts/Comfortaa/Comfortaa-Bold.ttf');
   font-weight :	bold;
 }
 
+/**
+* Ds-Digi
+*/
 @font-face {
   font-family: "Ds-Digi";
-  src: url('../style/fonts/DS-DIGI.TTF');
+  src: url('../style/fonts/DS-Digi/DS-DIGI.TTF');
+  font-weight :	normal;
+}
+
+/**
+* Lato
+*/
+
+@font-face {
+  font-family: "Lato";
+  src: url('../style/fonts/Lato2OFL/Lato-Regular.ttf');
   font-weight :	normal;
 }
 @font-face {
-  font-family: "Comfortaa-Regular";
-  src: url('../style/fonts/Comfortaa-Light.ttf');
+  font-family: "Lato";
+  src: url('../style/fonts/Lato2OFL/Lato-Light.ttf');
   font-weight :	lighter;
 }
 @font-face {
-  font-family: "Comfortaa-Regular";
-  src: url('../style/fonts/Comfortaa-Bold.ttf');
+  font-family: "Lato";
+  src: url('../style/fonts/Lato2OFL/Lato-Bold.ttf');
+  font-weight :	bold;
+}
+
+/**
+* Nunito
+*/
+
+@font-face {
+  font-family: "Nunito";
+  src: url('../style/fonts/Nunito/Nunito-Regular.ttf');
+  font-weight :	normal;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url('../style/fonts/Nunito/Nunito-Light.ttf');
+  font-weight :	lighter;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url('../style/fonts/Nunito/Nunito-Bold.ttf');
   font-weight :	bold;
 }
 
 
 :host{
-  font-family: @titleFont;
+  font-family: @bodyFont;
+  font-weight: normal;
+  font-size : 20px;
 }
 
 h1{
@@ -79,6 +117,10 @@ h4{
 }
 h5{
   font-family: @titleFont;
+}
+
+section{
+  font-family: @bodyFont;
 }
 
 .addLayerBtn{

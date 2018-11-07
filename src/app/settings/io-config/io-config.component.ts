@@ -31,7 +31,7 @@ export class IoConfigComponent implements OnInit{
 
 
   ngOnInit() {
-    this.getMedias();
+    // this.getMedias();
   }
 
   setCasparId(id) {
@@ -64,22 +64,22 @@ export class IoConfigComponent implements OnInit{
       this.cards.set(this.casparData.caspars.get(this.casparId).casparCommon.decklinkCards[n][0], this.casparData.caspars.get(this.casparId).casparCommon.decklinkCards[n][1]);
     }
 
-    this.getMedias();
+    // this.getMedias();
   }
 
-  getMedias() {
-    this._apiCallService.casparGetMedias(this.casparId)
-    .subscribe(
-       data => {
-         this.medias = new Map();
-         let element = null;
-            element = data;
-            element.forEach(media => {
-              this.medias.set(media[0], media[1]);
-            });
-       }
-    );
-  }
+  // getMedias() {
+  //   this._apiCallService.casparGetMedias(this.casparId)
+  //   .subscribe(
+  //      data => {
+  //        this.medias = new Map();
+  //        let element = null;
+  //           element = data;
+  //           element.forEach(media => {
+  //             this.medias.set(media[0], media[1]);
+  //           });
+  //      }
+  //   );
+  // }
 
 
   editChannel (channelId, settings) {

@@ -81,7 +81,7 @@
         <div *ngIf="selectedProducerType=='file'" >
             <label for="media">Media :</label>
             <select id="media" name="fileName" ngModel>
-              <option *ngFor="let media of medias.values()" value={{media.fullPath}}>
+              <option *ngFor="let media of casparData.caspars.get(casparId).medias.values()" value={{media.fullPath}}>
                 {{media.name}}
               </option>
             </select>

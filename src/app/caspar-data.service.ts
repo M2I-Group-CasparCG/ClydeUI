@@ -12,14 +12,12 @@ export class CasparDataService {
     private _socketIoService: SocketIoService
   ) {
     
-    setTimeout(
-      () => {
-        this.apiCallCollect();
+    // setTimeout(
+    //   () => {
         this.socketIoSubsciption();
-      }, 1000
-    )
-
-
+        this.apiCallCollect();
+    //   }, 1000
+    // )
   }
 
 
