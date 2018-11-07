@@ -205,10 +205,23 @@ export class SocketIoService {
   /**
    * Playlist
    */
-
+  playlistAdd = () => {
+    return Observable.create((observer) => {
+      this.socket.on('playlistAdd', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
   playlistEdit = () => {
     return Observable.create((observer) => {
       this.socket.on('playlistEdit', (msg) => {
+        observer.next(msg);
+      });
+    });
+  }
+  playlistDelete = () => {
+    return Observable.create((observer) => {
+      this.socket.on('playlistDelete', (msg) => {
         observer.next(msg);
       });
     });

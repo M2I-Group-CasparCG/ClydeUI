@@ -18,9 +18,9 @@
             <ng-container *ngFor="let producer of casparData.caspars.get(casparId).producers.values()" >
                 <option *ngIf="producer.type == 'DDR'"
                     value="{{producer.id}}"
-                    [selected]="producer.id == producerId"
-                    (change)="setMediaPlayerId(casparSelectForm.value)"> 
-                    {{producer.name}} 
+                    [selected]="producer.id == mediaPlayerId"
+                    (change)="setMediaPlayerId(mediaPlayerSelectForm.value)">
+                    {{producer.name}}
                 </option>
             </ng-container>
         </select>
@@ -37,7 +37,7 @@
 
     <ng-container *ngIf="mediaPlayer" >
 
-  
+
     <div class="control">
       <ul class="transport">
         <li>
@@ -93,24 +93,24 @@
       </ul>
     </div>
 
-   
+
 
     <div class="progressBar" (click)="seekMedia($event)" id="progressBar">
-      <div class="bar" [style.width]="mediaPlayer.barWidth+'%'">
+      <div class="bar" [style.width]="(mediaPlayer.fileTime / mediaPlayer.currentMedia.duration * 100)+'%'">
       </div>
       <div class="time">
         <div class="current">
-            Current : {{ mediaPlayer.currentTime }}
+            Current : {{ mediaPlayer.formattedFileTime }}
         </div>
         <div class="remaining">
-            Remaining : {{ mediaPlayer.remainingTime }}
+            Remaining : {{ mediaPlayer.formattedRemainingTime }}
         </div>
       </div>
     </div>
 
     <div class="playlist" >
       <ul>
-        <li *ngFor="let media of mediaPlayer.playlist.list; let i = index" value={{i+1-1}} [class.active]="playlistMedia.value === mediaPlayer.currentIndex" #playlistMedia (click)="mediaPlayerPlayId(playlistMedia.value)">
+        <li *ngFor="let media of mediaPlayer.playlist.list; let i = index" value={{i+1-1}} [class.active]="i === mediaPlayer.currentIndex" #playlistMedia (click)="mediaPlayerPlayId(playlistMedia.value)">
           <div class="label">
             {{ media.label }}
           </div>

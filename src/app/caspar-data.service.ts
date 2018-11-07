@@ -11,7 +11,7 @@ export class CasparDataService {
     private _apiCallService: ApiCallService,
     private _socketIoService: SocketIoService
   ) {
-    
+
     // setTimeout(
     //   () => {
         this.socketIoSubsciption();
@@ -111,6 +111,19 @@ export class CasparDataService {
                   medias.set(media[0], media[1]);
                 });
             this.caspars.get(id)['medias'] = medias;
+          });
+
+          /**
+           * Playlists
+           */
+          this._apiCallService.playlistGetAll(id).subscribe(data_ => {
+            const playlists = new Map();
+            let element_ = null;
+                element_ = data_;
+                element_.forEach(playlist => {
+                  playlists.set(playlist[0], playlist[1]);
+                });
+            this.caspars.get(id)['playlists'] = playlists;
           });
   }
 
@@ -249,7 +262,6 @@ export class CasparDataService {
       layer = data;
       this.caspars.get(layer.casparCommon.id).layers.set(layer.id, layer);
     });
-
     this._socketIoService.layerEdit().subscribe((data: string) => {
       console.log('[CasparDataService] socketIo layerEdit');
       let layer = null;
@@ -269,9 +281,35 @@ export class CasparDataService {
       layer = data;
       this.caspars.get(layer.casparCommon.id).layers.delete(layer.id);
     });
+
+    /**
+     *  Playlists
+     */
+    this._socketIoService.playlistAdd().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo playlistAdd');
+      let playlist = null;
+      playlist = data;
+      this.caspars.get(playlist.casparCommon.id).playlists.set(playlist.id, playlist);
+    });
+    this._socketIoService.playlistEdit().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo playlistEdit');
+      let playlist = null;
+      playlist = data;
+      for (const key in playlist) {
+        if (playlist.hasOwnProperty(key)) {
+          const casparId = playlist.casparCommon.id;
+          if ( playlist[key] !== this.caspars.get(casparId).playlists.get(playlist.id)[key]) {
+            this.caspars.get(casparId).playlists.get(playlist.id)[key] = playlist[key];
+          }
+        }
+      }
+    });
+    this._socketIoService.playlistDelete().subscribe((data: string) => {
+      console.log('[CasparDataService] socketIo playlistDelete');
+      let playlist = null;
+      playlist = data;
+      this.caspars.get(playlist.casparCommon.id).playlists.delete(playlist.id);
+    });
+
   }
-
-
-
-
 }

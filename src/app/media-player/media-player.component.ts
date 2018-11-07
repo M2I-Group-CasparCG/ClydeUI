@@ -225,7 +225,7 @@ export class MediaPlayerComponent implements OnInit {
   }
 
   seekMedia(event) {
-    const seekedFrame = Math.floor(event.offsetX / document.getElementById('progressBar').offsetWidth * this.mediaPlayer.totalFrame);
+    const seekedFrame = Math.floor(event.offsetX / document.getElementById('progressBar').offsetWidth * this.mediaPlayer.totalFileFrame);
     this._apiCallService.mediaPlayerSeek(this.casparId, this.mediaPlayerId, seekedFrame)
     .subscribe(
         data => {
@@ -235,16 +235,16 @@ export class MediaPlayerComponent implements OnInit {
   }
 
   setCasparId(id) {
-    this.casparId = id;    
+    this.casparId = id;
 
-    if(this.casparId){
-      let firstId = this.casparData.caspars.get(this.casparId).producers.keys().next().value;
+    if (this.casparId) {
+      const firstId = this.casparData.caspars.get(this.casparId).producers.keys().next().value;
       this.setMediaPlayerId(firstId.toString());
     }
   }
 
   setMediaPlayerId (id) {
-    this.mediaPlayerId = parseInt(id);
+    this.mediaPlayerId = parseInt(id, 10);
     this.mediaPlayer = this.casparData.caspars.get(this.casparId).producers.get(this.mediaPlayerId);
   }
 
@@ -263,9 +263,7 @@ export class MediaPlayerComponent implements OnInit {
   // }
 
   addMedia(mediaId) {
-
-    console.log('coucou');
-    console.log(this.mediaPlayer);
+    console.log(this.mediaPlayer.playlist.id);
     this._apiCallService.playlistAddMedia(this.casparId, this.mediaPlayer.playlist.id, mediaId)
       .subscribe(
           data => {
@@ -274,7 +272,7 @@ export class MediaPlayerComponent implements OnInit {
         );
   }
   removeMedia(mediaIndex) {
-    this._apiCallService.playlistRemoveMedia(this.casparId, this.mediaPlayer.playlistId, mediaIndex)
+    this._apiCallService.playlistRemoveMedia(this.casparId, this.mediaPlayer.playlist.id, mediaIndex)
     .subscribe(
         data => {
           console.log(JSON.stringify(data));

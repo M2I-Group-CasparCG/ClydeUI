@@ -211,8 +211,6 @@ export class ApiCallService {
    */
 
   layerAdd (casparId, settings) {
-    console.log('coucou');
-    console.log(JSON.stringify(settings));
     const body = settings;
     const url = `${ this.apiSettings.url}/caspars/${casparId}/layers/`;
     return this.http.post(url, body, httpOptions);
@@ -306,6 +304,30 @@ export class ApiCallService {
   /**
    * PLAYLIST
    */
+
+  playlistGetAll(casparId) {
+    const url = `${this.apiSettings.url}/caspars/${casparId}/playlists/`;
+    return this.http.get(url, httpOptions);
+  }
+  playlistAdd(casparId, settings) {
+    const body = settings;
+    const url = `${ this.apiSettings.url}/caspars/${casparId}/playlists/`;
+    return this.http.post(url, body, httpOptions);
+  }
+  playlistGet(casparId, playlistId) {
+    const url = `${ this.apiSettings.url}/caspars/${casparId}/playlists/${playlistId}`;
+    return this.http.get(url, httpOptions);
+  }
+  playlistEdit(casparId, playlistId, settings) {
+    const body = settings;
+    const url = `${ this.apiSettings.url}/caspars/${casparId}/playlists/${playlistId}`;
+    return this.http.put(url, body, httpOptions);
+  }
+  playlistDelete(casparId, playlistId) {
+    const url = `${this.apiSettings.url}/caspars/${casparId}/playlists/${playlistId}`;
+    return this.http.delete(url, httpOptions);
+  }
+
   playlistAddMedia(casparId, playlistId, mediaId) {
     const body = '';
     const url = `${ this.apiSettings.url}/caspars/${casparId}/playlists/${playlistId}/files/${mediaId}`;
@@ -316,13 +338,13 @@ export class ApiCallService {
     return this.http.delete(url, httpOptions);
   }
 
+
   /**
    * MEDIAS
    */
   mediasGetAll (casparId) {
-    const body = '';
-    const url = `${this.apiSettings.url}/caspars/${casparId}/medias/`;
-    return this.http.post(url, body, httpOptions);
+    const url = `${this.apiSettings.url}/caspars/${casparId}/medias`;
+    return this.http.get(url, httpOptions);
   }
 
   /**

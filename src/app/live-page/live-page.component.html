@@ -1,37 +1,32 @@
-<!-- <section>
-
-        <div class="zone left">
-            <div>
-                <button (click)="isVisibleMatrix = !isVisibleMatrix"> Hide </button>
-                <clydeui-output-matrix *ngIf="isVisibleMatrix" class="component outputMatrix" ></clydeui-output-matrix>
-            </div>
-            <div>
-                <button (click)="isVisiblePlayer = !isVisiblePlayer"> Hide </button>
-                <clydeui-media-player *ngIf="isVisiblePlayer" class="component mediaPlayer" ></clydeui-media-player>
-            </div>
-        </div>
-        <div class="zone right">
-            <div>
-                <button (click)="isVisibleSwitchBar2d = !isVisibleSwitchBar2d"> Hide </button>
-                <clydeui-switch-bar-2d *ngIf="isVisibleSwitchBar2d" class="component switchBar2d" ></clydeui-switch-bar-2d>
-            </div>
-        </div>
-
-
-
-</section>
- -->
 <clydeui-caspar-select (select)="setCasparId($event)" class="selectBtn"></clydeui-caspar-select>
 Caspar Id : {{casparId}}
 
 
 
-
- <div *ngFor="let caspar of casparData.caspars.values()">
-   <h3>
-      {{caspar.casparCommon.name}}
-   </h3>
-
+    <div *ngFor="let caspar of casparData.caspars.values()">
+        <h3>
+            {{caspar.casparCommon.name}}
+        </h3>
+            <table>
+                <tr>
+                    <th>Name</th><th>ID</th><th>IP addr</th><th>AMCP port</th><th>mediaPath</th><th>logPath</th>
+                    <th>templatePath</th><th>thumbnailsPath</th><th>online</th><th>casparVersion</th><th>casparPath</th><th>channelNb</th>
+                </tr>
+                <tr>
+                    <td>{{caspar.casparCommon.name}}</td>
+                    <td>{{caspar.casparCommon.id}}</td>
+                    <td>{{caspar.casparCommon.ipAddr}}</td>
+                    <td>{{caspar.casparCommon.amcpPort}}</td>
+                    <td>{{caspar.casparCommon.mediaPath}}</td>
+                    <td>{{caspar.casparCommon.logPath}}</td>
+                    <td>{{caspar.casparCommon.templatePath}}</td>
+                    <td>{{caspar.casparCommon.thumbnailsPath}}</td>
+                    <td>{{caspar.casparCommon.online}}</td>
+                    <td>{{caspar.casparCommon.casparVersion}}</td>
+                    <td>{{caspar.casparCommon.casparPath}}</td>
+                    <td>{{caspar.casparCommon.channelsNb}}</td>
+                </tr>
+            </table>
    <ul>
       <h4>Consumers</h4>
       <table>
@@ -95,6 +90,37 @@ Caspar Id : {{casparId}}
         </tr>
       </table>
    </ul>
+
+   <ul>
+    <h4>Playlists</h4>
+    <table>
+      <tr>
+        <th>Name</th><th>ID</th>
+      </tr>
+      <tr *ngFor="let playlist of casparData.caspars.get(caspar.id).playlists.values()">
+        <td>{{playlist.name}}</td>
+        <td>{{playlist.id}}</td>
+      </tr>
+    </table>
+  </ul>
+
+  <ul>
+    <h4>Medias</h4>
+    <table>
+      <tr>
+        <th>Name</th><th>ID</th><th>Media Type</th><th>Path</th><th>Size</th><th>Duration</th><th>Frame Rate</th>
+      </tr>
+      <tr *ngFor="let media of casparData.caspars.get(caspar.id).medias.values()">
+        <td>{{media.name}}</td>
+        <td>{{media.id}}</td>
+        <td>{{media.mediaType}}</td>
+        <td>{{media.fullPath}}</td>
+        <td>{{media.formattedSize}}</td>
+        <td>{{media.formattedDuration}}</td>
+        <td>{{media.frameRate}}</td>
+      </tr>
+    </table>
+  </ul>
 
 </div>
 
