@@ -95,14 +95,35 @@ Caspar Id : {{casparId}}
     <h4>Playlists</h4>
     <table>
       <tr>
-        <th>Name</th><th>ID</th>
+        <th>Name</th><th>ID</th><th colspan="7">Medias</th>
       </tr>
-      <tr *ngFor="let playlist of casparData.caspars.get(caspar.id).playlists.values()">
+      <tr>
+        <th colspan="2"></th><th>Name</th><th>ID</th><th>Media Type</th><th>Path</th><th>Size</th><th>Duration</th><th>Frame Rate</th>
+      </tr>
+      <ng-container *ngFor="let playlist of casparData.caspars.get(caspar.id).playlists.values()">
+     
+      <tr>
         <td>{{playlist.name}}</td>
         <td>{{playlist.id}}</td>
+        <td colspan="7">Medias</td>
+      </tr> 
+      <tr *ngFor="let media of casparData.caspars.get(caspar.id).playlists.get(playlist.id).list; let id = index">
+          <td colspan="2"></td>
+          <td>{{media.name}}</td>
+          <td>{{media.id}}</td>
+          <td>{{media.mediaType}}</td>
+          <td>{{media.fullPath}}</td>
+          <td>{{media.formattedSize}}</td>
+          <td>{{media.formattedDuration}}</td>
+          <td>{{media.frameRate}}</td>
       </tr>
+       
+      
+    </ng-container>
     </table>
   </ul>
+
+  
 
   <ul>
     <h4>Medias</h4>
