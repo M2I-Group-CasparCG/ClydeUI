@@ -1,13 +1,103 @@
-<div class="content">
+
+<!-- capsarId : {{casparId}} -->
+<!-- {{test}} -->
+
+<div class="caspar">
+  
+    <div class="header" (click)="toggle()">
+        <div class="left">
+          <span *ngIf="casparData.caspars.get(casparId).casparCommon.online" class="green status">
+            ✓
+          </span>
+          <span *ngIf="! casparData.caspars.get(casparId).casparCommon.online" class="red status">
+            ✗
+          </span>
+          <h3>
+            {{casparData.caspars.get(casparId).casparCommon.name}}          
+          </h3>
+        </div>
+        <div class="center">          
+          {{casparData.caspars.get(casparId).casparCommon.ipAddr}}
+        </div>
+        <div class="right">
+            | <button>Ξ</button>
+            | <button>✗</button>
+        </div>
+    </div>
+    <div  [@showHide]="isHidden ? 'hide' : 'show'" class="content">
+      <ul>
+        <li>
+          <label>ID : </label>
+          <span>{{casparData.caspars.get(casparId).casparCommon.id}}</span>
+        </li>
+        <li>
+          <label>AMCP Port : </label>
+          <span>{{casparData.caspars.get(casparId).casparCommon.amcpPort}}</span>
+        </li>
+        <li>
+          <label>Version : </label>
+          <span>{{casparData.caspars.get(casparId).casparCommon.casparVersion}}</span>
+        </li>
+        <li>
+          <label>Decklink Cards : </label>
+          <span>{{casparData.caspars.get(casparId).casparCommon.decklinkCards.length}}</span>
+        </li>     
+      </ul>
+      <ul>
+          <li>
+            <label>Installation Path : </label>
+            <span>{{casparData.caspars.get(casparId).casparCommon.casparPath}}</span>
+          </li>
+          <li>
+            <label>Media Dath : </label>
+            <span>{{casparData.caspars.get(casparId).casparCommon.mediaPath}}</span>
+          </li>
+          <li>
+            <label>Template Paths : </label>
+            <span>{{casparData.caspars.get(casparId).casparCommon.templatePath}}</span>
+          </li>
+          <li>
+              <label>Thumbnails Paths : </label>
+              <span>{{casparData.caspars.get(casparId).casparCommon.thumbnailsPath}}</span>
+            </li>   
+        </ul>
+        
+        <div class="buttons">
+            <button (click)="casparRestart(casparId)">
+                RESTART
+              </button>
+           
+              <button (click)="casparIni(casparId)">
+                RE-INIT
+              </button>
+          
+              <button (click)="casparScanMedias(casparId)">
+                SCAN MEDIAS
+              </button>
+           
+                <button (click)="casparDelete(casparId)">
+                  DELETE
+                </button>
+        </div>
+           
+    
+    </div>
+    <!-- <div class="footer">
+      <span >
+      </span>
+    </div> -->
+</div>
 
 
+
+<!-- <div class="content"> -->
   <!-- <header class="header">
     <h2>
       CasparCG Settings
     </h2>
   </header> -->
 
-  <div class="add">
+  <!-- <div class="add">
 
       <h4>
           Add a CasparCG server
@@ -86,4 +176,4 @@
     </tr>
 
   </table>
-</div>
+</div> -->

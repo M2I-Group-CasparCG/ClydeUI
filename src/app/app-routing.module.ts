@@ -10,6 +10,7 @@ import { IoConfigComponent } from './settings/io-config/io-config.component';
 import { CasparsSettingsComponent } from './settings/caspars-settings/caspars-settings.component';
 import { ApiSettingsComponent } from './settings/api-settings/api-settings.component';
 import { RecordsComponent } from './records/records.component';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   { path: 'settings', component: SettingsComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'io-settings', component : IoConfigComponent },
   { path: 'caspars-settings', component : CasparsSettingsComponent },
   { path: 'api-settings', component : ApiSettingsComponent },
-  { path: 'records', component : RecordsComponent }
+  { path: 'records', component : RecordsComponent },
+  { path: 'test', component : TestComponent }
 ];
 
 @NgModule({

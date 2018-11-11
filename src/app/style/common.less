@@ -137,17 +137,18 @@ button{
   border-radius: 0px;
   border : none;
   background: none;
-  background-color : @mediumColor;
+  background-color : @blueNormal;
+  color: @brightColor;
 }
 button:hover{
-  background-color : @brightColor;
+  background-color : @blueHover;
   color : @darkColor
 }
 button:active{
   border:none;
   padding : 0px;
   outline: none;
-  background-color : @mediumColor;
+  background-color : @blueActive;
 }
 button:focus{
   outline: none;
@@ -236,6 +237,11 @@ a{
   font-size : 30px;
 }
 
+div{
+
+  vertical-align: top;
+}
+
 
 
 
@@ -244,3 +250,7 @@ select {
   text-indent: 0.01px;
   text-overflow: '';
 }
+
+.red { color : @redNormal; }
+
+.green { color : @greenNormal; }

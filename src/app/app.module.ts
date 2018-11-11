@@ -22,6 +22,9 @@ import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { SwitchBarComponent } from './switch-bar/switch-bar.component';
 import { CasparDataService } from './caspar-data.service';
 import { OrderByPipe } from './order-by.pipe';
+import { TestComponent } from './test/test.component';
+// import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -40,13 +43,15 @@ import { OrderByPipe } from './order-by.pipe';
     ModalWindowComponent,
     SwitchBarComponent,
     OrderByPipe,
+    TestComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     ApiCallService,

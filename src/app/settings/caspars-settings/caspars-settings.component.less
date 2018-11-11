@@ -1,82 +1,158 @@
-
 @import '../../style/common.less';
 
-.content{
-  padding-left : 50px;
-}
-
-// .header{
-//   position : relative;
-//   top: -20px;
-//   left : 100px;
-//   width : 600px;
-//   border-top : 2px solid @darkColor;
-//   margin-bottom : 40px;
-// }
-
-.add{
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 40px;
-}
-
-.add h4{
-  border-bottom : 1px solid @brightColor;
-  margin-top : 0px;
-  padding : 10px;
-  padding-bottom : 20px;
-  padding-top : 0px;
-  text-align: right;
-}
-
-label{
-  display: inline-block;
-  width : 120px;
-  text-align : right;
-  vertical-align: middle;
-}
-
-form div {
+.caspar {
   margin : 10px;
-}
-
-form button{
-  margin : 3px;
-  padding : 10px;
-  // position : absolute;;
-  // bottom : 20px;
-  width : 190px;
-}
-
-table, th, td, tr{
-  border : 1px solid @brightColor;
-  padding : 5px;
-  border-collapse: collapse;
-  text-align: left;
-}
-table{
-  text-align: left;
   display: inline-block;
-  border : none;
-  vertical-align: top;
-  margin : 0px;
-  padding : 0px;
 }
-th{
-  color : @darkColor;
+
+.header {
+  border-bottom : 1px solid @brightColor;
+  cursor : pointer;
+  position: relative;
   background-color: @brightColor;
+  color : @darkColor;
 }
-td, th{
-  padding : 10px;
+.header .right,.center,.left{
+  display: inline-block;
+  vertical-align: top;
+  padding-left : 10px;
+  padding-right: 10px;
 }
-
-tr{
-  margin-top : 10px;
-  margin-bottom : 10px;
-}
-
-table button{
-  padding : 15px;
+.header .center,.right{
   padding-top : 10px;
   padding-bottom : 10px;
 }
+.header .right{
+  position: absolute;
+  right : 0px;
+}
+.header .left{
+  text-align: center;
+  padding-left : 10px;
+  
+}
+.header .status{
+  font-weight: bold;
+  font-size: inherit;
+  font-size : 30px;
+}
+.header h3 {
+  display : inline-block;
+  vertical-align: top;
+  padding : 0px;
+  margin : 0px;
+  margin-top : 10px;
+  padding-right : 20px;
+  border-right: 1px solid @darkColor;
+}
+
+.content{
+  display : inline-block;
+  padding-top : 10px;
+  padding-bottom : 10px;
+  position: relative;
+  top : 0px;
+  height : 0px;
+  overflow: hidden;
+}
+.content li{
+  display : block;
+}
+.content ul label{
+  text-align: right;
+  display: inline-block;
+  width : 150px;
+  margin-right: 10px;
+}
+.content .buttons{
+  margin : 10px;
+  display: inline-block;
+  width : 100%;
+  text-align: center; 
+  // background-color:red; 
+}
+.content .buttons button{
+  margin : 5px;
+  display : inline;
+  padding : 10px;
+  padding-top : 5px; padding-bottom : 5px;
+}
+// .content{
+//   padding-left : 50px;
+// }
+
+// // .header{
+// //   position : relative;
+// //   top: -20px;
+// //   left : 100px;
+// //   width : 600px;
+// //   border-top : 2px solid @darkColor;
+// //   margin-bottom : 40px;
+// // }
+
+// .add{
+//   display: inline-block;
+//   vertical-align: top;
+//   margin-right: 40px;
+// }
+
+// .add h4{
+//   border-bottom : 1px solid @brightColor;
+//   margin-top : 0px;
+//   padding : 10px;
+//   padding-bottom : 20px;
+//   padding-top : 0px;
+//   text-align: right;
+// }
+
+// label{
+//   display: inline-block;
+//   width : 120px;
+//   text-align : right;
+//   vertical-align: middle;
+// }
+
+// form div {
+//   margin : 10px;
+// }
+
+// form button{
+//   margin : 3px;
+//   padding : 10px;
+//   // position : absolute;;
+//   // bottom : 20px;
+//   width : 190px;
+// }
+
+// table, th, td, tr{
+//   border : 1px solid @brightColor;
+//   padding : 5px;
+//   border-collapse: collapse;
+//   text-align: left;
+// }
+// table{
+//   text-align: left;
+//   display: inline-block;
+//   border : none;
+//   vertical-align: top;
+//   margin : 0px;
+//   padding : 0px;
+// }
+// th{
+//   color : @darkColor;
+//   background-color: @brightColor;
+// }
+// td, th{
+//   padding : 10px;
+// }
+
+// tr{
+//   margin-top : 10px;
+//   margin-bottom : 10px;
+// }
+
+// table button{
+//   padding : 15px;
+//   padding-top : 10px;
+//   padding-bottom : 10px;
+// }
