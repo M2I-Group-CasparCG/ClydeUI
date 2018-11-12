@@ -1,7 +1,10 @@
 @import '../style/common.less';
 
-@casparWidth        : 30%;
+@casparWidth        : 450px;
 @subObjectsWidth    : 60%;
+
+
+
 
 .containers{
     position: absolute;
@@ -14,9 +17,19 @@
 .caspars{
     width: @casparWidth;
     margin : 0px;
-    padding : 0px;    
+    padding : 0px;
     position: relative;
     overflow: hidden;
+}
+
+.caspars .resizeBar{
+  position: absolute;
+  right : 0px;
+  top : 0px;
+  bottom : 0px;
+  width : 2px;
+  // cursor:col-resize;
+  z-index : 30;
 }
 
 @casparAddHeight : 180px;
@@ -29,7 +42,14 @@
     padding-bottom : 20px;
 }
 .caspars .casparAdd h2{
-    
+  height: 66px;
+  line-height: 66px;
+  vertical-align: middle;
+  margin : 0px;
+  margin-top : 10px;
+}
+.caspars .casparAdd h2 img{
+  width : 50px;
 }
 .caspars .casparAdd div{
     display: inline-block;
@@ -46,7 +66,7 @@
     border : none;
 }
 .caspars .casparAdd .name input{
-    width : 200px;
+    width : 100px;
 
 }
 .caspars .casparAdd .ipAddr input{
@@ -56,7 +76,7 @@
     width : 80px;
 }
 .caspars .casparList {
-    position: absolute; 
+    position: absolute;
     top : @casparAddHeight;
     bottom : 0px;
     right : 0px; left : 0px;

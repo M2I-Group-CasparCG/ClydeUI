@@ -39,7 +39,7 @@ export class TestComponent implements OnInit {
 
   casparId: Number;
   appear:   boolean = true;
-  constructor( 
+  constructor(
     private _apiCallService : ApiCallService,
     public casparData: CasparDataService ) { }
 
@@ -60,7 +60,7 @@ export class TestComponent implements OnInit {
       this.appear = true;
       this.casparId = null;
     }
-    
+
   }
 
   casparAdd(settings) {
@@ -88,6 +88,11 @@ export class TestComponent implements OnInit {
 
   editFormShow(id){
 
+  }
+
+  resize(e){
+    console.log(e.currentTarget);
+    e.currentTarget.style.right = e.clientX;
   }
 
 }

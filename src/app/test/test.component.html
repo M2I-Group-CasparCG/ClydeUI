@@ -1,8 +1,15 @@
 
     <div class="caspars containers">
-        <div class="casparAdd">
+      <div class="resizeBar" (mousemove)="resize($event)">
+
+      </div>
+      <div class="casparAdd">
             <h2>
-              Caspar Configuration
+                <img src="../../assets/caspar.png"/>
+                <div>
+                    Caspar Configuration
+                </div>
+
             </h2>
             <form (ngSubmit)="casparAdd(casparAddForm.value)" #casparAddForm="ngForm">
                 <div class="name">
@@ -19,21 +26,24 @@
                 </div>
                 <div>
                   <label></label>
-                  <button type="submit">Add Server</button>
-        
+                  <button type="submit">ADD</button>
+
                 </div>
             </form>
-        </div>
-        <div class="casparList">
+      </div>
+      <div class="casparList">
             <clydeui-caspars-settings
           *ngFor="let caspar of casparData.caspars.values()"
           (selected)="setCasparId($event)"
           [casparId]="caspar.id"
           [isHidden]="casparId != caspar.id">
         </clydeui-caspars-settings>
-        </div>
       </div>
-      <div class="subObjects containers">
+    </div>
+    <div class="subObjects containers">
+
+
+
         <ng-container  *ngIf="casparId">
           <div [@appear]="appear ? 'ini' : 'run'">
               <ul>
@@ -51,7 +61,7 @@
                     </tr>
                   </table>
                </ul>
-            
+
                <ul>
                   <h4>Producers</h4>
                   <table>
@@ -66,7 +76,7 @@
                     </tr>
                   </table>
                </ul>
-            
+
                <ul>
                   <h4>Channels</h4>
                   <table>
@@ -82,7 +92,7 @@
                       </tr>
                     </table>
                </ul>
-            
+
                <ul>
                   <h4>Layers</h4>
                   <table>
@@ -99,7 +109,7 @@
                     </tr>
                   </table>
                </ul>
-            
+
                <ul>
                 <h4>Playlists</h4>
                 <table>
@@ -110,12 +120,12 @@
                     <th colspan="2"></th><th>Name</th><th>ID</th><th>Media Type</th><th>Path</th><th>Size</th><th>Duration</th><th>Frame Rate</th>
                   </tr>
                   <ng-container *ngFor="let playlist of casparData.caspars.get(casparId).playlists.values()">
-                 
+
                   <tr>
                     <td>{{playlist.name}}</td>
                     <td>{{playlist.id}}</td>
                     <td colspan="7">Medias</td>
-                  </tr> 
+                  </tr>
                   <tr *ngFor="let media of casparData.caspars.get(casparId).playlists.get(playlist.id).list; let id = index">
                       <td colspan="2"></td>
                       <td>{{media.name}}</td>
@@ -148,8 +158,8 @@
                   </tr>
                 </table>
               </ul>
-          </div>      
+          </div>
         </ng-container>
-         
-      </div>
+
+    </div>
 

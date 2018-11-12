@@ -21,7 +21,7 @@ import {
     trigger('showHide', [
       // ...
       state('show', style({
-        height: "380px"
+        height: "420px"
       })),
       state('hide', style({
         height: '0px',
@@ -44,7 +44,7 @@ export class CasparsSettingsComponent implements OnInit {
   casparId: number = 0;
   @Input()
   isHidden: boolean = true;
-  @Output() 
+  @Output()
   selected: EventEmitter<any> = new EventEmitter();
   @Output()
   edit: EventEmitter<any> = new EventEmitter();
@@ -60,7 +60,7 @@ export class CasparsSettingsComponent implements OnInit {
     this.isHidden = ! this.isHidden;
     this.selected.emit(this.casparId);
   }
-  
+
   ngOnInit() {
     // this.casparId = 2;
     // this.caspars = new Map();
@@ -106,9 +106,9 @@ export class CasparsSettingsComponent implements OnInit {
     }else{
       content.style.display = 'none';
     }
-  
 
-  
+
+
   /**
    * API call to get the caspars instaces
    * store the result in the caspars Map
@@ -195,7 +195,17 @@ export class CasparsSettingsComponent implements OnInit {
 
   casparEdit(settings) {
     console.log('edit');
+    settings.amcpPort = parseInt(settings.amcpPort, 10);
     console.log(JSON.stringify(settings));
+    let object = this;
+    this._apiCallService.casparEdit(this.casparId, settings)
+    .subscribe(
+      data => {
+        console.log(JSON.stringify(data));
+        object.editMode = false;
+      }
+    );
+
   }
 
   setEditMode(boolean){

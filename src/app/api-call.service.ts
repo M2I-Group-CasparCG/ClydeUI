@@ -76,9 +76,9 @@ export class ApiCallService {
     return this.http.get(url);
   }
 
-  casparEdit (casparId) {
-    const body = '';
-    const url = `${ this.apiSettings.url}/caspars/${casparId}`;
+  casparEdit (casparId, settings) {
+    const body = settings;
+    const url = `${this.apiSettings.url}/caspars/${casparId}`;
     return this.http.put(url, body, httpOptions);
   }
 
