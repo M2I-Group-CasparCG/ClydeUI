@@ -1,29 +1,72 @@
+@import '../style/common.less';
 
-section{
-    position: absolute;
-    top : 0px;
-    bottom : 0px;
-    left : 0px;
-    right : 0px;
-    // background-color : red;
-}
+@casparWidth        : 30%;
+@subObjectsWidth    : 60%;
 
 .containers{
-    position: relative;
+    position: absolute;
     display: inline-block;
     vertical-align: top;
-    // background-color: blue;
-
+    height: 100%;
+    overflow: hidden;
 }
 
 .caspars{
-    // position: fixed;
-    max-width: 30%;
+    width: @casparWidth;
+    margin : 0px;
+    padding : 0px;    
+    position: relative;
+    overflow: hidden;
+}
+
+@casparAddHeight : 180px;
+.caspars .casparAdd {
+    top : 0px;
+    height : @casparAddHeight;
+    z-index: 10;
+    text-align: center;
+    padding-top : 10px;
+    padding-bottom : 20px;
+}
+.caspars .casparAdd h2{
+    
+}
+.caspars .casparAdd div{
+    display: inline-block;
+    margin : 5px;
+}
+.caspars .casparAdd div label{
+    display: block;
+    text-align: left;
+    height : 30px;
+    font-weight: bold;
+}
+.caspars input{
+    padding : 5px;
+    border : none;
+}
+.caspars .casparAdd .name input{
+    width : 200px;
+
+}
+.caspars .casparAdd .ipAddr input{
+    width : 110px;
+}
+.caspars .casparAdd .amcpPort input{
+    width : 80px;
+}
+.caspars .casparList {
+    position: absolute; 
+    top : @casparAddHeight;
+    bottom : 0px;
+    right : 0px; left : 0px;
+    overflow-y : scroll;
 }
 
 .subObjects{
-    max-width: 60%;
-    overflow: hidden;
+    left : @casparWidth;
+    right : 0px;
+    overflow-y : scroll;
 }
 
 .subObjects div{

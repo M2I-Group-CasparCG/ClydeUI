@@ -1,14 +1,38 @@
 
-<section>
     <div class="caspars containers">
-        <clydeui-caspars-settings
+        <div class="casparAdd">
+            <h2>
+              Caspar Configuration
+            </h2>
+            <form (ngSubmit)="casparAdd(casparAddForm.value)" #casparAddForm="ngForm">
+                <div class="name">
+                    <label for="casparName">Name </label>
+                    <input id="caparName" name="name" required ngModel>
+                </div>
+                <div class="ipAddr">
+                  <label for="casparIp">IP Address </label>
+                  <input id="casparIp" name="ipAddr" placeholder="127.0.0.1" required ngModel>
+                </div>
+                <div class="amcpPort">
+                  <label for="casparPort">AMCP Port </label>
+                  <input id="casparPort" type="number" name="amcpPort" value="5250" placeholder=5250 required ngModel>
+                </div>
+                <div>
+                  <label></label>
+                  <button type="submit">Add Server</button>
+        
+                </div>
+            </form>
+        </div>
+        <div class="casparList">
+            <clydeui-caspars-settings
           *ngFor="let caspar of casparData.caspars.values()"
           (selected)="setCasparId($event)"
           [casparId]="caspar.id"
           [isHidden]="casparId != caspar.id">
         </clydeui-caspars-settings>
+        </div>
       </div>
-      
       <div class="subObjects containers">
         <ng-container  *ngIf="casparId">
           <div [@appear]="appear ? 'ini' : 'run'">
@@ -102,14 +126,11 @@
                       <td>{{media.formattedDuration}}</td>
                       <td>{{media.frameRate}}</td>
                   </tr>
-                   
-                  
+
                 </ng-container>
                 </table>
               </ul>
-            
-              
-            
+
               <ul>
                 <h4>Medias</h4>
                 <table>
@@ -127,12 +148,8 @@
                   </tr>
                 </table>
               </ul>
-          </div>
-          
-          
-      
+          </div>      
         </ng-container>
          
       </div>
-</section>
 

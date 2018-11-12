@@ -1,20 +1,5 @@
 @import './style/common.less';
 
-// @headerHeight : 20px;
-
-section{
-  background-color: rgb(30,30,30);
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  color : rgb(210,210,210);
-  position : absolute;
-  top : @headerHeight;
-  bottom : 0px;
-  right : 0px;
-  left  : 0px;
-  font-size : 16px;
-  overflow-y: scroll;
-}
-
 nav{
   z-index : 0;
   background-color : @blueNormal;
@@ -45,6 +30,10 @@ nav{
  nav div:focus{
   border : 0px solid black;
 }
+nav div:hover{
+  background-color : @brightColor;
+  color : @darkColor;
+}
 
  nav div.active{
   background-color: @brightColor;
@@ -52,3 +41,12 @@ nav{
   padding-bottom : 15px;
 }
 
+#mainSec{
+  position: absolute;
+  top : 30px ;
+  left : 0px;
+  bottom : 0px;
+  overflow: hidden;
+  background-color: @backgroundColor;
+  color : @brightColor;
+}

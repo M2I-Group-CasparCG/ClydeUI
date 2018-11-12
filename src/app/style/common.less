@@ -12,6 +12,7 @@
 // @blueHover    : rgb(150,150,200);
 // @blueActive   : rgb(100,100,200);
 // @blueNormal   : rgb(70, 70, 140);
+@blueDark     : rgb(0,22,39);
 @blueNormal   : rgb(0,75,130);
 @blueActive   : rgb(0,120,180);
 @blueHover    : rgb(104,172,206);
@@ -23,9 +24,9 @@
 
 
 @headerHeight : 20px;
+@backgroundColor : @blueDark;
 
-
-@titleFont : Comfortaa;
+@titleFont : Nunito;
 @bodyFont : Nunito;
 
 /**
@@ -81,7 +82,10 @@
 */
 
 @font-face {
-  font-family: "Nunito";
+  font-family: "Nunito";:host{
+    font-family: @bodyFont;
+    font-weight: normal;
+  }
   src: url('../style/fonts/Nunito/Nunito-Regular.ttf');
   font-weight :	normal;
 }
@@ -139,6 +143,7 @@ button{
   background: none;
   background-color : @blueNormal;
   color: @brightColor;
+  padding : 5px;
 }
 button:hover{
   background-color : @blueHover;
@@ -146,7 +151,6 @@ button:hover{
 }
 button:active{
   border:none;
-  padding : 0px;
   outline: none;
   background-color : @blueActive;
 }
@@ -210,9 +214,9 @@ li{
   }
 
 section{
-  position : relative;
-  display : inline-block;
-  margin-top : 20px;
+  // position : relative;
+  // display : inline-block;
+  margin-top : 10px;
   width : 100%;
 }
 
@@ -254,3 +258,9 @@ select {
 .red { color : @redNormal; }
 
 .green { color : @greenNormal; }
+
+
+input{
+  padding : 5px;
+  border : none;
+}

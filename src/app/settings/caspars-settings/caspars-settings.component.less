@@ -1,8 +1,8 @@
 @import '../../style/common.less';
 
 .caspar {
-  margin : 10px;
-  display: inline-block;
+  display: block;
+  padding : 0px;
 }
 
 .header {
@@ -11,6 +11,7 @@
   position: relative;
   background-color: @brightColor;
   color : @darkColor;
+  margin : 0px;
 }
 .header .right,.center,.left{
   display: inline-block;
@@ -47,13 +48,34 @@
 }
 
 .content{
-  display : inline-block;
+  display : block;
+  padding : 0px;
   padding-top : 10px;
   padding-bottom : 10px;
   position: relative;
   top : 0px;
   height : 0px;
   overflow: hidden;
+  margin: 0px;
+  text-align: center;;
+}
+.content .userInfo div{
+  display:inline-block;
+
+}
+.content .userInfo div li{
+  margin : 2px;
+}
+.content .userInfo div button{
+  display:block;
+}
+.content ul{
+  margin-left : 10px;
+  margin-right : 10px;
+  padding : 10px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom : 1px solid @brightColor;
 }
 .content li{
   display : block;
@@ -63,13 +85,18 @@
   display: inline-block;
   width : 150px;
   margin-right: 10px;
+  font-weight: bold;
+  vertical-align: top;
+}
+.content ul span{
+  display: inline-block;
+  width : 190px;
 }
 .content .buttons{
-  margin : 10px;
   display: inline-block;
-  width : 100%;
+  // width : 100%;
   text-align: center; 
-  // background-color:red; 
+  padding : 10px;
 }
 .content .buttons button{
   margin : 5px;
@@ -77,9 +104,6 @@
   padding : 10px;
   padding-top : 5px; padding-bottom : 5px;
 }
-// .content{
-//   padding-left : 50px;
-// }
 
 // // .header{
 // //   position : relative;
@@ -149,6 +173,7 @@
 // tr{
 //   margin-top : 10px;
 //   margin-bottom : 10px;
+  // margin-top : 10px;
 // }
 
 // table button{

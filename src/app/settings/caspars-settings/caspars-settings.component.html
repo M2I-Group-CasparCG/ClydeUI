@@ -20,20 +20,65 @@
           {{casparData.caspars.get(casparId).casparCommon.ipAddr}}
         </div>
         <div class="right">
-            | <button>Ξ</button>
-            | <button>✗</button>
+          
         </div>
     </div>
+    
     <div  [@showHide]="isHidden ? 'hide' : 'show'" class="content">
+      <ul class="userInfo">
+          <form (ngSubmit)="casparEdit(casparEditForm.value)" #casparEditForm="ngForm">
+        <div>
+           
+                <li>
+                    <label>Name : </label>
+                    <span *ngIf="! editMode">{{casparData.caspars.get(casparId).casparCommon.name}}</span>
+                    <input 
+                      *ngIf="editMode" 
+                      name="name"
+                      ngModel="{{casparData.caspars.get(casparId).casparCommon.name}}" />
+                  </li>
+                  <li>
+                    <label>IP address : </label>
+                    <span *ngIf="! editMode">{{casparData.caspars.get(casparId).casparCommon.name}}</span>
+                    <input 
+                      *ngIf="editMode" 
+                      name="ipAddr" 
+                      ngModel="{{casparData.caspars.get(casparId).casparCommon.ipAddr}}">
+                  </li>
+                  <li>
+                    <label>AMCP Port : </label>
+                    <span *ngIf="! editMode">{{casparData.caspars.get(casparId).casparCommon.amcpPort}}</span>
+                    <input 
+                      *ngIf="editMode" 
+                      name="amcpPort" 
+                      type="number"
+                      value="casparData.caspars.get(casparId).casparCommon.amcpPort" 
+                      ngModel={{casparData.caspars.get(casparId).casparCommon.amcpPort}}>
+                  </li>
+            
+        </div>
+        <div *ngIf="! editMode">
+          <button (click)="setEditMode(true)">
+            EDIT
+          </button>
+        </div>
+        <div *ngIf="editMode">
+          <button type="submit">
+            APPLY
+          </button>
+          <button (click)="setEditMode(false)">
+              CANCEL
+            </button>
+        </div>
+      </form>
+      </ul>
+     
       <ul>
         <li>
           <label>ID : </label>
           <span>{{casparData.caspars.get(casparId).casparCommon.id}}</span>
         </li>
-        <li>
-          <label>AMCP Port : </label>
-          <span>{{casparData.caspars.get(casparId).casparCommon.amcpPort}}</span>
-        </li>
+        
         <li>
           <label>Version : </label>
           <span>{{casparData.caspars.get(casparId).casparCommon.casparVersion}}</span>
@@ -62,23 +107,20 @@
             </li>   
         </ul>
         
-        <div class="buttons">
-            <button (click)="casparRestart(casparId)">
-                RESTART
-              </button>
-           
-              <button (click)="casparIni(casparId)">
-                RE-INIT
-              </button>
-          
-              <button (click)="casparScanMedias(casparId)">
-                SCAN MEDIAS
-              </button>
-           
-                <button (click)="casparDelete(casparId)">
-                  DELETE
-                </button>
-        </div>
+       <div class="buttons">
+            <button (click)="casparRestart()">
+              RESTART
+            </button>
+            <button (click)="casparIni()">
+              RE-INIT
+            </button>
+            <button (click)="casparScanMedias()">
+              SCAN MEDIAS
+            </button>
+            <button (click)="casparDelete()">
+              DELETE
+            </button>
+        </div> 
            
     
     </div>

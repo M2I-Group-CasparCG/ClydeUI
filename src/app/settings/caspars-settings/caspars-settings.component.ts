@@ -21,7 +21,7 @@ import {
     trigger('showHide', [
       // ...
       state('show', style({
-        height: "240px"
+        height: "380px"
       })),
       state('hide', style({
         height: '0px',
@@ -46,8 +46,10 @@ export class CasparsSettingsComponent implements OnInit {
   isHidden: boolean = true;
   @Output() 
   selected: EventEmitter<any> = new EventEmitter();
+  @Output()
+  edit: EventEmitter<any> = new EventEmitter();
 
-
+  editMode = false;
 
   constructor(
     private _apiCallService: ApiCallService,
@@ -130,27 +132,7 @@ export class CasparsSettingsComponent implements OnInit {
 
   //
 }/**
-  //  * API call to add a caspar instance
-  //  * @param settings  settings for the caspar instance
-  //  */
-  // casparAdd(settings) {
-  //   this._apiCallService.casparAdd(settings)
-  //       .subscribe(
-  //         data => {
-  //           console.log('data received from casparAdd API request');
-  //           /**
-  //            * TO DO : analyze the response and update the interface
-  //            */
-  //         },
-  //         err => {
-  //           console.log('error received from casparAdd API request');
-  //           err.forEach(element => {
-  //             console.log(element);
-  //           });
-  //         },
-  //         () => console.log('casparAdd error')
-  //       );
-  // }
+
 
   // /**
   //  * API call to edit a caspar instance
@@ -166,20 +148,24 @@ export class CasparsSettingsComponent implements OnInit {
   //  * @param casparId id of the instance
   //  */
 
-  casparDelete(casparId) {
+  casparDelete() {
     console.log("delete");
-    this._apiCallService.casparDelete(casparId)
+    const object = this;
+    this.selected.emit(null);
+    this._apiCallService.casparDelete(this.casparId)
     .subscribe(
-      data => {},
+      data => {
+        console.log('null emitted');
+      },
       err => {},
       () => console.log('casparDeldete error')
     );
   }
 
 
-  casparRestart(casparId) {
+  casparRestart() {
     console.log("restart");
-    this._apiCallService.casparRestart(casparId)
+    this._apiCallService.casparRestart(this.casparId)
       .subscribe(
         data => {
           console.log(data);
@@ -187,9 +173,9 @@ export class CasparsSettingsComponent implements OnInit {
       );
   }
 
-  casparIni(casparId) {
+  casparIni() {
     console.log("ini");
-    this._apiCallService.casparIni(casparId)
+    this._apiCallService.casparIni(this.casparId)
     .subscribe(
       data => {
         console.log(data);
@@ -197,13 +183,23 @@ export class CasparsSettingsComponent implements OnInit {
     );
   }
 
-  casparScanMedias(casparId) {
+  casparScanMedias() {
     console.log("scan");
-    this._apiCallService.casparScanMedias(casparId)
+    this._apiCallService.casparScanMedias(this.casparId)
     .subscribe(
       data => {
         console.log(data);
       }
     );
+  }
+
+  casparEdit(settings) {
+    console.log('edit');
+    console.log(JSON.stringify(settings));
+  }
+
+  setEditMode(boolean){
+    console.log('setEditMode');
+    this.editMode = boolean;
   }
 }
