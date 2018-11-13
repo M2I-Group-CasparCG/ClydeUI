@@ -1,15 +1,12 @@
 
     <div class="caspars containers">
-      <div class="resizeBar" (mousemove)="resize($event)">
-
-      </div>
-      <div class="casparAdd">
+        <div class="casparAdd">
             <h2>
                 <img src="../../assets/caspar.png"/>
                 <div>
-                    Caspar Configuration
-                </div>
-
+                   Caspar Configuration
+                </div>  
+             
             </h2>
             <form (ngSubmit)="casparAdd(casparAddForm.value)" #casparAddForm="ngForm">
                 <div class="name">
@@ -27,59 +24,93 @@
                 <div>
                   <label></label>
                   <button type="submit">ADD</button>
-
+        
                 </div>
             </form>
-      </div>
-      <div class="casparList">
+        </div>
+        <div class="casparList">
             <clydeui-caspars-settings
           *ngFor="let caspar of casparData.caspars.values()"
           (selected)="setCasparId($event)"
           [casparId]="caspar.id"
           [isHidden]="casparId != caspar.id">
         </clydeui-caspars-settings>
+        </div>
       </div>
-    </div>
-    <div class="subObjects containers">
-
-
-
+      <div class="subObjects containers">
         <ng-container  *ngIf="casparId">
           <div [@appear]="appear ? 'ini' : 'run'">
-              <ul>
-                  <h4>Consumers</h4>
-                  <table>
-                    <tr>
-                      <th>Name</th><th>ID</th><th>Type</th><th>Channel Id</th><th>Is Started</th>
-                    </tr>
-                    <tr *ngFor="let consumer of casparData.caspars.get(casparId).consumers.values()">
-                      <td>{{consumer.name}}</td>
-                      <td>{{consumer.id}}</td>
-                      <td>{{consumer.type}}</td>
-                      <td>{{consumer.channelId}}</td>
-                      <td>{{consumer.started}}</td>
-                    </tr>
-                  </table>
-               </ul>
-
-               <ul>
+            <section>
+               
+                
+              <header (click)="show('producers')">
+                <div class="left">
+                  <h3>
+                    Producers
+                  </h3>
+                </div>
+              <div class="center"></div>
+              <div class="right"></div>
+              </header>
+              <div  [@showHide]="producersHidden ? 'hide' : 'show'" style="display:block;">
+                <ul>
                   <h4>Producers</h4>
-                  <table>
-                    <tr>
-                      <th>Name</th><th>ID</th><th>Type</th><th>Is Started</th>
-                    </tr>
-                    <tr *ngFor="let producer of casparData.caspars.get(casparId).producers.values()">
-                      <td>{{producer.name}}</td>
-                      <td>{{producer.id}}</td>
-                      <td>{{producer.type}}</td>
-                      <td>{{producer.started}}</td>
-                    </tr>
-                  </table>
-               </ul>
+                    <table>
+                      <tr>
+                        <th>Name</th><th>ID</th><th>Type</th><th>Is Started</th>
+                      </tr>
+                      <tr *ngFor="let producer of casparData.caspars.get(casparId).producers.values()">
+                        <td>{{producer.name}}</td>
+                        <td>{{producer.id}}</td>
+                        <td>{{producer.type}}</td>
+                        <td>{{producer.started}}</td>
+                      </tr>
+                    </table>
+                  </ul>
+                </div>
 
-               <ul>
-                  <h4>Channels</h4>
-                  <table>
+
+                <header (click)="show('consumers')">
+                  <div class="left">
+                    <h3>
+                      Consumers
+                    </h3>
+                  </div>
+                <div class="center"></div>
+                <div class="right"></div>
+                </header>
+                <div  [@showHide]="consumersHidden ? 'hide' : 'show'" style="display:block;">
+                  <ul>
+                    <h4>Consumers</h4>
+                    <table>
+                      <tr>
+                        <th>Name</th><th>ID</th><th>Type</th><th>Channel Id</th><th>Is Started</th>
+                      </tr>
+                      <tr *ngFor="let consumer of casparData.caspars.get(casparId).consumers.values()">
+                        <td>{{consumer.name}}</td>
+                        <td>{{consumer.id}}</td>
+                        <td>{{consumer.type}}</td>
+                        <td>{{consumer.channelId}}</td>
+                        <td>{{consumer.started}}</td>
+                      </tr>
+                    </table>
+                  </ul>
+                </div>
+
+
+                <header (click)="show('channels')">
+                  <div class="left">
+                    <h3>
+                      Channels
+                    </h3>
+                  </div>
+                <div class="center"></div>
+                <div class="right"></div>
+                </header>
+                <div  [@showHide]="channelsHidden ? 'hide' : 'show'" style="display:block;">
+                  <ul>
+                    <h4>Channels</h4>
+                    <table>
                       <tr>
                         <th>Name</th><th>ID</th><th>Type</th><th>Video Mode</th><th>Select Input</th>
                       </tr>
@@ -91,75 +122,130 @@
                         <td>{{channel.selectedInput}}</td>
                       </tr>
                     </table>
-               </ul>
+                  </ul>
+                </div>
 
-               <ul>
-                  <h4>Layers</h4>
-                  <table>
-                    <tr>
-                      <th>Name</th><th>ID</th><th>Is Started</th><th>Layer ID</th><th>Channel ID</th><th>Selected Input</th>
-                    </tr>
-                    <tr *ngFor="let layer of casparData.caspars.get(casparId).layers.values()">
-                      <td>{{layer.name}}</td>
-                      <td>{{layer.id}}</td>
-                      <td>{{layer.started}}</td>
-                      <td>{{layer.layerId}}</td>
-                      <td>{{layer.channelId}}</td>
-                      <td>{{layer.selectedInput}}</td>
-                    </tr>
-                  </table>
-               </ul>
+                <header (click)="show('layers')">
+                  <div class="left">
+                    <h3>
+                      Layers
+                    </h3>
+                  </div>
+                  <div class="center"></div>
+                  <div class="right"></div>
+                </header>
+                <div  [@showHide]="layersHidden ? 'hide' : 'show'" style="display:block;">
+                  <ul>
+                    <h4>Layers</h4>
+                    <table>
+                      <tr>
+                        <th>Name</th><th>ID</th><th>Is Started</th><th>Layer ID</th><th>Channel ID</th><th>Selected Input</th>
+                      </tr>
+                      <tr *ngFor="let layer of casparData.caspars.get(casparId).layers.values()">
+                        <td>{{layer.name}}</td>
+                        <td>{{layer.id}}</td>
+                        <td>{{layer.started}}</td>
+                        <td>{{layer.layerId}}</td>
+                        <td>{{layer.channelId}}</td>
+                        <td>{{layer.selectedInput}}</td>
+                      </tr>
+                    </table>
+                  </ul>
+                </div>
 
-               <ul>
-                <h4>Playlists</h4>
-                <table>
-                  <tr>
-                    <th>Name</th><th>ID</th><th colspan="7">Medias</th>
-                  </tr>
-                  <tr>
-                    <th colspan="2"></th><th>Name</th><th>ID</th><th>Media Type</th><th>Path</th><th>Size</th><th>Duration</th><th>Frame Rate</th>
-                  </tr>
-                  <ng-container *ngFor="let playlist of casparData.caspars.get(casparId).playlists.values()">
 
-                  <tr>
-                    <td>{{playlist.name}}</td>
-                    <td>{{playlist.id}}</td>
-                    <td colspan="7">Medias</td>
-                  </tr>
-                  <tr *ngFor="let media of casparData.caspars.get(casparId).playlists.get(playlist.id).list; let id = index">
-                      <td colspan="2"></td>
-                      <td>{{media.name}}</td>
-                      <td>{{media.id}}</td>
-                      <td>{{media.mediaType}}</td>
-                      <td>{{media.fullPath}}</td>
-                      <td>{{media.formattedSize}}</td>
-                      <td>{{media.formattedDuration}}</td>
-                      <td>{{media.frameRate}}</td>
-                  </tr>
+                <header (click)="show('playlists')">
+                  <div class="left">
+                    <h3>
+                      Playlists
+                    </h3>
+                  </div>
+                  <div class="center"></div>
+                  <div class="right"></div>
+                </header>
+                <div  [@showHide]="playlistsHidden ? 'hide' : 'show'" style="display:block;">
+                  <ul>
+                      <h4>Playlists</h4>
+                      <table>
+                        <tr>
+                          <th>Name</th><th>ID</th><th colspan="7">Medias</th>
+                        </tr>
+                        <tr>
+                          <th colspan="2"></th><th>Name</th><th>ID</th><th>Media Type</th><th>Path</th><th>Size</th><th>Duration</th><th>Frame Rate</th>
+                        </tr>
+                        <ng-container *ngFor="let playlist of casparData.caspars.get(casparId).playlists.values()">
+                          <tr>
+                            <td>{{playlist.name}}</td>
+                            <td>{{playlist.id}}</td>
+                            <td colspan="7">Medias</td>
+                          </tr> 
+                          <tr *ngFor="let media of casparData.caspars.get(casparId).playlists.get(playlist.id).list; let id = index">
+                              <td colspan="2"></td>
+                              <td>{{media.name}}</td>
+                              <td>{{media.id}}</td>
+                              <td>{{media.mediaType}}</td>
+                              <td>{{media.fullPath}}</td>
+                              <td>{{media.formattedSize}}</td>
+                              <td>{{media.formattedDuration}}</td>
+                              <td>{{media.frameRate}}</td>
+                          </tr>
+                        </ng-container>
+                      </table>
+                    </ul>
+                </div>
 
-                </ng-container>
-                </table>
-              </ul>
 
-              <ul>
-                <h4>Medias</h4>
-                <table>
-                  <tr>
-                    <th>Name</th><th>ID</th><th>Media Type</th><th>Path</th><th>Size</th><th>Duration</th><th>Frame Rate</th>
-                  </tr>
-                  <tr *ngFor="let media of casparData.caspars.get(casparId).medias.values()">
-                    <td>{{media.name}}</td>
-                    <td>{{media.id}}</td>
-                    <td>{{media.mediaType}}</td>
-                    <td>{{media.fullPath}}</td>
-                    <td>{{media.formattedSize}}</td>
-                    <td>{{media.formattedDuration}}</td>
-                    <td>{{media.frameRate}}</td>
-                  </tr>
-                </table>
-              </ul>
-          </div>
+
+                <header (click)="show('medias')">
+                  <div class="left">
+                    <h3>
+                      Medias
+                    </h3>
+                  </div>
+                <div class="center"></div>
+                <div class="right"></div>
+                </header>
+                <div  [@showHide]="mediasHidden ? 'hide' : 'show'" style="display:block;">
+                  <ul>
+                    <h4>Medias</h4>
+                    <table>
+                      <tr>
+                        <th>Name</th><th>ID</th><th>Media Type</th><th>Path</th><th>Size</th><th>Duration</th><th>Frame Rate</th>
+                      </tr>
+                      <tr *ngFor="let media of casparData.caspars.get(casparId).medias.values()">
+                        <td>{{media.name}}</td>
+                        <td>{{media.id}}</td>
+                        <td>{{media.mediaType}}</td>
+                        <td>{{media.fullPath}}</td>
+                        <td>{{media.formattedSize}}</td>
+                        <td>{{media.formattedDuration}}</td>
+                        <td>{{media.frameRate}}</td>
+                      </tr>
+                    </table>
+                  </ul>
+                </div>
+
+
+            </section>
+            <section>
+
+            </section>
+
+               
+    
+
+            
+            
+            
+              
+            
+            
+            
+              
+
+              
+          </div>      
         </ng-container>
-
-    </div>
+         
+      </div>
 

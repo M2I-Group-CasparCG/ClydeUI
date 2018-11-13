@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SocketIoService } from '../../socket-io.service';
 import { ApiCallService } from '../../api-call.service';
 import { CasparDataService } from '../../caspar-data.service';
+import { showHide } from '../../style/animations'
 
 import {
   trigger,
@@ -18,23 +19,7 @@ import {
   templateUrl: './caspars-settings.component.html',
   styleUrls: ['./caspars-settings.component.less'],
   animations: [
-    trigger('showHide', [
-      // ...
-      state('show', style({
-        height: "420px"
-      })),
-      state('hide', style({
-        height: '0px',
-        padding: '0px',
-        margin : '0px'
-      })),
-      transition('show => hide', [
-        animate('0.1s')
-      ]),
-      transition('hide => show', [
-        animate('0.1s')
-      ]),
-    ]),
+    showHide
   ]
 })
 export class CasparsSettingsComponent implements OnInit {
@@ -46,8 +31,6 @@ export class CasparsSettingsComponent implements OnInit {
   isHidden: boolean = true;
   @Output()
   selected: EventEmitter<any> = new EventEmitter();
-  @Output()
-  edit: EventEmitter<any> = new EventEmitter();
 
   editMode = false;
 
