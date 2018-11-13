@@ -28,7 +28,7 @@ export class CasparsSettingsComponent implements OnInit {
   @Input()
   casparId: number = 0;
   @Input()
-  isHidden: boolean = true;
+  isHidden: boolean = false;
   @Output()
   selected: EventEmitter<any> = new EventEmitter();
 

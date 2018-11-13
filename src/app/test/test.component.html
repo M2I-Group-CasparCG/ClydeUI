@@ -5,13 +5,13 @@
                 <img src="../../assets/caspar.png"/>
                 <div>
                    Caspar Configuration
-                </div>  
-             
+                </div>
+
             </h2>
             <form (ngSubmit)="casparAdd(casparAddForm.value)" #casparAddForm="ngForm">
                 <div class="name">
                     <label for="casparName">Name </label>
-                    <input id="caparName" name="name" required ngModel>
+                    <input id="caparName" name="name"  required ngModel>
                 </div>
                 <div class="ipAddr">
                   <label for="casparIp">IP Address </label>
@@ -24,7 +24,7 @@
                 <div>
                   <label></label>
                   <button type="submit">ADD</button>
-        
+
                 </div>
             </form>
         </div>
@@ -41,45 +41,159 @@
         <ng-container  *ngIf="casparId">
           <div [@appear]="appear ? 'ini' : 'run'">
             <section>
-               
-                
-              <header (click)="show('producers')">
+
+
+              <div (click)="show('producers')" class="header">
                 <div class="left">
                   <h3>
                     Producers
                   </h3>
                 </div>
-              <div class="center"></div>
-              <div class="right"></div>
-              </header>
-              <div  [@showHide]="producersHidden ? 'hide' : 'show'" style="display:block;">
-                <ul>
-                  <h4>Producers</h4>
-                    <table>
-                      <tr>
-                        <th>Name</th><th>ID</th><th>Type</th><th>Is Started</th>
-                      </tr>
-                      <tr *ngFor="let producer of casparData.caspars.get(casparId).producers.values()">
-                        <td>{{producer.name}}</td>
-                        <td>{{producer.id}}</td>
-                        <td>{{producer.type}}</td>
-                        <td>{{producer.started}}</td>
-                      </tr>
-                    </table>
-                  </ul>
+                <div class="center"></div>
+                <div class="right"></div>
+              </div>
+              <div  [@showHide]="producersHidden ? 'hide' : 'show'" class="content">
+                  <div class="add">
+                    <div class="form">
+                      <div>
+                        <label for="producerType">
+                            Add
+                        </label>
+                        <select  [(ngModel)]="selectedProducerType" id="producerType" #producerTypeSelect>
+                          <option *ngFor="let element of producersType.entries()" value={{element[0]}} >
+                            {{element[1]}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <form (ngSubmit)="producerFormSubmit(producerForm.value)" class="form" #producerForm="ngForm">
+                      <div>
+                          <label for="producerName">Name</label>
+                          <input id="producerName" name="name" placeholder="producer name" required ngModel>
+                      </div>
+                      <div *ngIf="selectedProducerType=='file'" >
+                          <label for="media">Media</label>
+                          <select id="media" name="fileName" ngModel>
+                            <option *ngFor="let media of casparData.caspars.get(casparId).medias.values()" value={{media.fullPath}}>
+                              {{media.name}}
+                            </option>
+                          </select>
+                          <input type="hidden" value="LOOP" name="playMode" ngModel>
+                      </div>
+                      <div *ngIf="selectedProducerType=='decklink'">
+                          <label for="cardId">Card</label>
+                          <select id="cardId" name="decklinkId" ngModel>
+                              <option *ngFor="let card of cards.entries()" value={{card[0]}}>
+                                {{card[1]}}
+                              </option>
+                          </select>
+                      </div>
+                      <div *ngIf="selectedProducerType=='stream'" >
+                          <label for="url">Url </label>
+                          <input if="url" name="url" placeholder="rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov" required ngModel>
+                      </div>
+                      <div>
+                          <label></label>
+                          <button type="submit">Add Producer</button>
+                        </div>
+                    </form>
+                    <div class="buttons">
+                      <div *ngIf="selectedProducers.length == 0">
+                        Select producers to see availables actions
+                      </div>
+                      <div *ngIf="selectedProducers.length>0">
+                        <button>START</button>
+                        <button>STOP</button>
+                        <button>EDIT</button>
+                        <button (click)="deleteProducers()">DELETE</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="list">
+                    <ul>
+                      <form>
+                        <table>
+                          <tr>
+                            <th>Name</th><th>ID</th><th>Type</th><th>Status</th><th>Additionnal Info</th><th>Select</th>
+                          </tr>
+                          <tr *ngFor="let producer of casparData.caspars.get(casparId).producers.values()"
+                              [class.selected]="selectedProducers.includes(producer.id)"
+                              (click)="producerSelect(producer.id)"
+                              class="line">
+                            <td>{{producer.name}}</td>
+                            <td>{{producer.id}}</td>
+                            <td>{{producer.type}}</td>
+                            <td>{{producer.started}}</td>
+                            <td>
+                              <ng-container *ngIf="producer.type == 'FILE'">
+                                <div>
+                                  <label>File Name :</label>{{producer.fileName}}
+                                </div>
+                                <div>
+                                  <label>Play Mode :</label>{{producer.playMode}}
+                                </div>
+                                <div>
+                                  <label> Length :</label>{{producer.length}}
+                                </div>
+                              </ng-container>
+                              <ng-container *ngIf="producer.type == 'DDR'">
+                                <div>
+                                  <label>Auto Play :</label>{{producer.autoPlay}}
+                                </div>
+                                <div>
+                                  <label>Paused :</label>{{producer.paused}}
+                                </div>
+                                <div>
+                                  <label> Playlist :</label>{{producer.playlist.name}}
+                                </div>
+                              </ng-container>
+                              <ng-container *ngIf="producer.type == 'NET'">
+                                <div>
+                                  <label>Url :</label>{{producer.url}}
+                                </div>
+                              </ng-container>
+                              <ng-container *ngIf="producer.type == 'DECKLINK'">
+                                <div>
+                                  <label>Card ID :</label>{{producer.decklinkId}}
+                                </div>
+                                <div>
+                                  <label>Embedded Audio :</label>{{producer.embeddedAudio}}
+                                </div>
+                                <div>
+                                    <label>Latency :</label>{{producer.latency}}
+                                  </div>
+                                  <div>
+                                      <label>Buffer Depth :</label>{{producer.bufferDepth}}
+                                    </div>
+                              </ng-container>
+                            </td>
+                            <td>
+                              <input type="checkbox" value="{{producer.id}}" [checked]="selectedProducers.includes(producer.id)"/>
+                            </td>
+                          </tr>
+                        </table>
+                      </form>
+                    </ul>
+                    <div>
+                      <button (click)="selectAllProducers()">Select All</button>
+                      <button (click)="unselectAllProducers()">Unselect All</button>
+                    </div>
+                  </div>
                 </div>
 
 
-                <header (click)="show('consumers')">
+
+                <div (click)="show('consumers')" class="header">
                   <div class="left">
                     <h3>
                       Consumers
                     </h3>
                   </div>
-                <div class="center"></div>
-                <div class="right"></div>
-                </header>
-                <div  [@showHide]="consumersHidden ? 'hide' : 'show'" style="display:block;">
+                  <div class="center"></div>
+                  <div class="right"></div>
+                </div>
+                <div  [@showHide]="consumersHidden ? 'hide' : 'show'" class="content">
                   <ul>
                     <h4>Consumers</h4>
                     <table>
@@ -98,16 +212,16 @@
                 </div>
 
 
-                <header (click)="show('channels')">
+                <div (click)="show('channels')" class="header">
                   <div class="left">
                     <h3>
                       Channels
                     </h3>
                   </div>
-                <div class="center"></div>
-                <div class="right"></div>
-                </header>
-                <div  [@showHide]="channelsHidden ? 'hide' : 'show'" style="display:block;">
+                  <div class="center"></div>
+                  <div class="right"></div>
+                </div>
+                <div  [@showHide]="channelsHidden ? 'hide' : 'show'" class="content">
                   <ul>
                     <h4>Channels</h4>
                     <table>
@@ -125,7 +239,7 @@
                   </ul>
                 </div>
 
-                <header (click)="show('layers')">
+                <div (click)="show('layers')" class="header">
                   <div class="left">
                     <h3>
                       Layers
@@ -133,8 +247,8 @@
                   </div>
                   <div class="center"></div>
                   <div class="right"></div>
-                </header>
-                <div  [@showHide]="layersHidden ? 'hide' : 'show'" style="display:block;">
+                </div>
+                <div  [@showHide]="layersHidden ? 'hide' : 'show'" class="content">
                   <ul>
                     <h4>Layers</h4>
                     <table>
@@ -154,7 +268,7 @@
                 </div>
 
 
-                <header (click)="show('playlists')">
+                <div (click)="show('playlists')" class="header">
                   <div class="left">
                     <h3>
                       Playlists
@@ -162,8 +276,8 @@
                   </div>
                   <div class="center"></div>
                   <div class="right"></div>
-                </header>
-                <div  [@showHide]="playlistsHidden ? 'hide' : 'show'" style="display:block;">
+                </div>
+                <div  [@showHide]="playlistsHidden ? 'hide' : 'show'" class="content">
                   <ul>
                       <h4>Playlists</h4>
                       <table>
@@ -178,7 +292,7 @@
                             <td>{{playlist.name}}</td>
                             <td>{{playlist.id}}</td>
                             <td colspan="7">Medias</td>
-                          </tr> 
+                          </tr>
                           <tr *ngFor="let media of casparData.caspars.get(casparId).playlists.get(playlist.id).list; let id = index">
                               <td colspan="2"></td>
                               <td>{{media.name}}</td>
@@ -196,16 +310,16 @@
 
 
 
-                <header (click)="show('medias')">
+                <div (click)="show('medias')" class="header">
                   <div class="left">
                     <h3>
                       Medias
                     </h3>
                   </div>
-                <div class="center"></div>
-                <div class="right"></div>
-                </header>
-                <div  [@showHide]="mediasHidden ? 'hide' : 'show'" style="display:block;">
+                  <div class="center"></div>
+                  <div class="right"></div>
+                </div>
+                <div  [@showHide]="mediasHidden ? 'hide' : 'show'" class="content">
                   <ul>
                     <h4>Medias</h4>
                     <table>
@@ -231,21 +345,21 @@
 
             </section>
 
-               
-    
 
-            
-            
-            
-              
-            
-            
-            
-              
 
-              
-          </div>      
+
+
+
+
+
+
+
+
+
+
+
+          </div>
         </ng-container>
-         
+
       </div>
 

@@ -6,25 +6,27 @@ import {
     transition,
     // ...
   } from '@angular/animations';
-  
+
 
 export const showHide = trigger('showHide', [
     // ...fi
     state('show', style({
-      height: "480px",
+      height: "auto",
+      maxHeight: "600px",
       overflow: "hidden"
     //   display : "block"
     })),
     state('hide', style({
-      height: '0px',
+      height: "auto",
+      maxHeight: "0",
       overflow: "hidden"
     //   display : "block"
     })),
     transition('show => hide', [
-      animate('0.1s')
+      animate('0.2s')
     ]),
     transition('hide => show', [
-      animate('0.1s')
+      animate('0.2s')
     ]),
   ]);
 

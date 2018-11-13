@@ -4,15 +4,6 @@ import { CasparDataService } from '../caspar-data.service';
 import { ApiCallService } from './../api-call.service';
 import { appear, showHide } from './../style/animations'
 
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-  // ...
-} from '@angular/animations';
-
 
 @Component({
   selector: 'clydeui-test',
@@ -24,17 +15,41 @@ import {
 })
 export class TestComponent implements OnInit {
 
-  casparId: Number;
-  appear:   boolean = true;settings
+  casparId: Number = 1;       // valeur à enlever.
+  appear:   boolean = false; // à repasser à true
 
-  producersHidden   = true;
+  producersHidden   = false;
   consumersHidden   = true;
   channelsHidden    = true;
   layersHidden      = true;
   playlistsHidden   = true;
   mediasHidden      = true;
 
-  constructor( 
+  selectedProducerType = 'file';
+  consumersType = new Map(
+    [
+      ['screen', 'Host Screen'],
+      ['file', 'Record'],
+      ['stream', 'Stream'],
+      ['decklink', 'Video Card']
+    ]
+  );
+
+  selectedConsumerType = 'screen';
+  producersType = new Map(
+    [
+      ['file', 'Media'],
+      ['ddr', 'Media Player'],
+      ['stream', 'Stream'],
+      ['decklink', 'Video Card']
+    ]
+  );
+
+  cards = new Map();
+
+  selectedProducers = [];
+
+  constructor(
     private _apiCallService : ApiCallService,
     public casparData: CasparDataService ) { }
 
@@ -51,11 +66,14 @@ export class TestComponent implements OnInit {
           object.appear = false;
         }, 1
       )
+      for (let n = 0; n < this.casparData.caspars.get(this.casparId).casparCommon.decklinkCards.length; n++) {
+        this.cards.set(this.casparData.caspars.get(this.casparId).casparCommon.decklinkCards[n][0], this.casparData.caspars.get(this.casparId).casparCommon.decklinkCards[n][1]);
+      }
     }else{
       this.appear = true;
       this.casparId = null;
     }
-    
+
   }
 
   casparAdd(settings) {
@@ -114,5 +132,46 @@ export class TestComponent implements OnInit {
       }break;
     }
   }
+
+
+  producerFormSubmit(form) {
+    this._apiCallService.producerAdd(this.casparId, this.selectedProducerType, form)
+      .subscribe(
+        data => function() {
+          // console.log(JSON.stringify(data));
+        }
+      );
+  }
+  producerSelect(id){
+    if (this.selectedProducers.includes(id)){
+      this.selectedProducers.splice(this.selectedProducers.indexOf(id),1);
+    }else{
+      this.selectedProducers.push(id);
+    }
+
+  }
+
+  selectAllProducers(){
+    this.selectedProducers = new Array();
+    this.casparData.caspars.get(this.casparId).producers.forEach((value, key, map) => {
+      this.selectedProducers.push(key);
+    });
+  }
+
+  unselectAllProducers(){
+    this.selectedProducers = new Array();
+  }
+
+  deleteProducers(){
+    this.selectedProducers.forEach(id => {
+      this._apiCallService.producerDelete(this.casparId, id)
+      .subscribe(
+        data => function() {
+        }
+      );
+    });
+    this.selectedProducers = new Array();
+  }
+
 
 }
